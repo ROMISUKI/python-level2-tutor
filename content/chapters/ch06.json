@@ -1,0 +1,151 @@
+{
+  "id": "ch06",
+  "module": "m3",
+  "order": 6,
+  "title": "列表与元组",
+  "subtitle": "有序序列的增删改查与遍历",
+  "minutes": 55,
+  "objectives": [
+    "掌握列表的创建、索引和切片赋值",
+    "熟练使用 append、extend、insert、pop、remove、sort 等方法",
+    "理解 sort() 与 sorted() 的区别",
+    "掌握列表推导式的写法",
+    "理解别名、浅拷贝与元组的不可变性"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "6.1 列表的创建与访问",
+      "html": "<p>列表用方括号 <code>[]</code> 表示，元素之间用逗号分隔。列表可以存放任意类型的数据，也可以嵌套。列表是<strong>可变、有序</strong>的序列，支持索引和切片。</p><p>索引从 0 开始，-1 表示最后一个元素。<code>len(lst)</code> 返回元素个数，<code>in</code> 判断元素是否存在。</p>"
+    },
+    {
+      "type": "code",
+      "title": "创建与索引",
+      "code": "scores = [88, 92, 79, 95]\nprint(scores[0], scores[-1])    # 88 95\nprint(scores[1:3])              # [92, 79]\nprint(scores[::-1])             # [95, 79, 92, 88]\nprint(len(scores), 92 in scores)  # 4 True\n\nmixed = [1, \"two\", 3.0, [4, 5]]\nprint(mixed[3][1])              # 5\n",
+      "note": "嵌套列表用连续的下标访问，mixed[3] 是内层列表，再取 [1] 得到 5。"
+    },
+    {
+      "type": "text",
+      "title": "6.2 列表的修改与切片赋值",
+      "html": "<p>列表可以通过下标直接修改元素：<code>lst[0] = 100</code>。也可以给切片赋值，一次替换多个元素，甚至改变列表长度。使用 <code>del</code> 删除元素或切片。</p>"
+    },
+    {
+      "type": "code",
+      "title": "修改、切片赋值与删除",
+      "code": "lst = [10, 20, 30, 40]\nlst[1] = 25\nprint(lst)              # [10, 25, 30, 40]\n\nlst[1:3] = [1, 2, 3]\nprint(lst)              # [10, 1, 2, 3, 40]\n\ndel lst[0]\nprint(lst)              # [1, 2, 3, 40]\n",
+      "note": "切片赋值把右侧序列的元素依次填入切片位置，元素个数可以不同。"
+    },
+    {
+      "type": "text",
+      "title": "6.3 列表的常用方法",
+      "html": "<p>列表方法直接作用于原列表（原地修改），多数返回 <code>None</code>。这是与字符串方法最大的区别——字符串方法返回新字符串。</p>"
+    },
+    {
+      "type": "table",
+      "title": "列表高频方法",
+      "head": ["方法", "作用", "示例", "结果"],
+      "rows": [
+        ["append(x)", "在末尾追加一个元素", "[1,2].append(3)", "[1, 2, 3]"],
+        ["extend(seq)", "把序列中的元素逐个追加", "[1].extend([2,3])", "[1, 2, 3]"],
+        ["insert(i,x)", "在下标 i 前插入 x", "[1,3].insert(1,2)", "[1, 2, 3]"],
+        ["pop()", "删除并返回最后一个元素", "[1,2].pop()", "返回 2，列表变 [1]"],
+        ["pop(i)", "删除并返回下标 i 的元素", "[1,2].pop(0)", "返回 1，列表变 [2]"],
+        ["remove(x)", "删除第一个值为 x 的元素", "[1,2,1].remove(1)", "[2, 1]"],
+        ["index(x)", "返回 x 第一次出现的下标", "[1,2].index(2)", "1"],
+        ["count(x)", "统计 x 出现的次数", "[1,2,1].count(1)", "2"],
+        ["reverse()", "原地反转", "[1,2].reverse()", "[2, 1]"],
+        ["sort()", "原地升序排序", "[3,1].sort()", "[1, 3]"],
+        ["copy()", "浅拷贝", "a.copy()", "新列表"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "增删改查方法演示",
+      "code": "lst = [3, 1, 2]\nlst.append(4)\nprint(lst)             # [3, 1, 2, 4]\n\nlst.extend([5, 6])\nprint(lst)             # [3, 1, 2, 4, 5, 6]\n\nlst.insert(0, 9)\nprint(lst)             # [9, 3, 1, 2, 4, 5, 6]\n\nprint(lst.pop())       # 6\nprint(lst.pop(0))      # 9\nlst.remove(2)\nprint(lst)             # [3, 1, 4, 5]\n\nlst.sort()\nprint(lst)             # [1, 3, 4, 5]\nlst.sort(reverse=True)\nprint(lst)             # [5, 4, 3, 1]\n",
+      "note": "append 的参数是一个整体对象；extend 的参数是可迭代对象，会把元素逐个加入。"
+    },
+    {
+      "type": "warn",
+      "title": "排序方法返回 None",
+      "html": "<p><code>lst.sort()</code> 是原地排序，返回值是 <code>None</code>。写成 <code>lst = lst.sort()</code> 会让 lst 变成 None。若想得到新列表，应使用 <code>sorted(lst)</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "6.4 列表相关内置函数",
+      "html": "<p><code>len()</code> 求长度，<code>max()</code>、<code>min()</code> 求最大值和最小值，<code>sum()</code> 求和（元素必须是数字），<code>sorted()</code> 返回排序后的新列表，<code>list()</code> 把其他可迭代对象转成列表。</p>"
+    },
+    {
+      "type": "code",
+      "title": "内置函数与 sorted",
+      "code": "nums = [3, 1, 4, 2]\nprint(len(nums), max(nums), min(nums), sum(nums))  # 4 4 1 10\n\nnew = sorted(nums, reverse=True)\nprint(new, nums)       # [4, 3, 2, 1] [3, 1, 4, 2]\nprint(list(\"abc\"))     # ['a', 'b', 'c']\n",
+      "note": "sorted 不改变原列表，sort 才改变原列表。"
+    },
+    {
+      "type": "text",
+      "title": "6.5 列表推导式",
+      "html": "<p>列表推导式用一行代码生成列表，语法为 <code>[表达式 for 变量 in 序列 if 条件]</code>。条件可以省略；可以嵌套多个 for，但考试中一般只考单层。</p>"
+    },
+    {
+      "type": "code",
+      "title": "列表推导式",
+      "code": "print([x * x for x in range(1, 6)])          # [1, 4, 9, 16, 25]\nprint([x for x in range(10) if x % 2 == 0]) # [0, 2, 4, 6, 8]\nwords = [\"a\", \"bb\", \"ccc\"]\nprint([len(w) for w in words])              # [1, 2, 3]\nprint([[i, j] for i in range(2) for j in range(2)])\n",
+      "note": "推导式的结果是一个新列表，不会修改原序列。"
+    },
+    {
+      "type": "text",
+      "title": "6.6 别名与拷贝",
+      "html": "<p><code>b = a</code> 只是让 b 指向同一个列表，称为<strong>别名</strong>，修改 b 会影响 a。<code>b = a[:]</code> 或 <code>b = a.copy()</code> 创建<strong>浅拷贝</strong>，修改顶层元素互不影响；但如果列表中还嵌套着列表，内层对象仍然是共享的，需要 <code>copy.deepcopy()</code> 才能完全独立。</p>"
+    },
+    {
+      "type": "code",
+      "title": "别名与浅拷贝",
+      "code": "a = [1, 2]\nb = a\nb.append(3)\nprint(a, b)        # [1, 2, 3] [1, 2, 3]\n\nc = a[:]\nc.append(4)\nprint(a, c)        # [1, 2, 3] [1, 2, 3, 4]\n\nnested = [[1], [2]]\nd = nested[:]\nd[0].append(9)\nprint(nested)      # [[1, 9], [2]]，内层仍共享\n",
+      "note": "考试常考的“复制后修改是否影响原列表”，要先看是别名还是拷贝，再看是否嵌套。"
+    },
+    {
+      "type": "text",
+      "title": "6.7 元组",
+      "html": "<p>元组用圆括号表示，是<strong>不可变</strong>的有序序列。创建单元素元组时必须加逗号：<code>t = (1,)</code>，否则 <code>(1)</code> 只是整数 1。元组支持索引、切片、解包，可以作为字典的键。</p>"
+    },
+    {
+      "type": "code",
+      "title": "元组与解包",
+      "code": "t = (1, 2, 3)\nprint(t[0], t[-1], t[1:])   # 1 3 (2, 3)\nprint(type((1)))            # <class 'int'>\nprint(type((1,)))           # <class 'tuple'>\n\na, b, c = t\nprint(a, b, c)              # 1 2 3\n\nx, *rest = (10, 20, 30, 40)\nprint(x, rest)              # 10 [20, 30, 40]\n",
+      "note": "解包时变量个数要与元素个数一致，除非使用 *rest 收集剩余元素。"
+    },
+    {
+      "type": "text",
+      "title": "6.8 enumerate 与 zip",
+      "html": "<p><code>enumerate(seq, start=0)</code> 在遍历时同时给出下标和元素；<code>zip(a, b)</code> 把多个序列对应位置的元素打包成元组，长度以最短的序列为准。</p>"
+    },
+    {
+      "type": "code",
+      "title": "同时遍历下标与元素",
+      "code": "names = [\"小明\", \"小红\"]\nfor i, name in enumerate(names, start=1):\n    print(i, name)\n\nfor name, score in zip(names, [92, 88]):\n    print(name, score)\n",
+      "note": "enumerate 的 start 参数只影响编号，不改变原序列。"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0607"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0613"
+    }
+  ],
+  "keypoints": [
+    "append 加一个对象，extend 加多个元素",
+    "sort() 原地排序返回 None，sorted() 返回新列表",
+    "列表推导式生成新列表",
+    "b = a 是别名，b = a[:] 是浅拷贝",
+    "单元素元组必须写成 (x,)",
+    "元组不可变，但可包含可变对象"
+  ],
+  "pitfalls": [
+    "把 lst = lst.sort() 写成赋值，结果得到 None",
+    "认为 remove 会删除所有匹配元素（只删除第一个）",
+    "把 (1) 当成元组",
+    "拷贝嵌套列表后以为内层也独立"
+  ],
+  "summary": "列表是操作题中使用最多的容器。掌握“增删改查 + 排序 + 推导式”，再理解别名与拷贝的区别，就能应对绝大多数列表题。"
+}

@@ -1,0 +1,142 @@
+{
+  "id": "ch07",
+  "module": "m3",
+  "order": 7,
+  "title": "字典与集合",
+  "subtitle": "键值映射、去重与集合运算",
+  "minutes": 50,
+  "objectives": [
+    "掌握字典的创建、访问和修改",
+    "熟练使用 get、keys、values、items、update 等方法",
+    "理解字典键必须可哈希的限制",
+    "掌握集合的创建、去重和交并差运算",
+    "能根据场景选择列表、字典或集合"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "7.1 字典的创建与访问",
+      "html": "<p>字典用花括号表示，存放<strong>键值对</strong>，格式为 <code>{键: 值, ...}</code>。键必须是不可变且可哈希的对象，通常是字符串或数字；值可以是任意类型。</p><p>通过键访问值：<code>d[\"name\"]</code>。如果键不存在，会抛出 <code>KeyError</code>。使用 <code>d.get(key, 默认值)</code> 可以安全访问，键不存在时返回默认值而不报错。</p>"
+    },
+    {
+      "type": "code",
+      "title": "创建、访问与修改",
+      "code": "student = {\"name\": \"小明\", \"age\": 18, \"score\": 92}\nprint(student[\"name\"])          # 小明\nprint(student.get(\"age\"))        # 18\nprint(student.get(\"city\", \"未知\"))  # 未知\n\nstudent[\"age\"] = 19             # 修改\nstudent[\"city\"] = \"北京\"         # 新增\nprint(student)\n\nprint(\"name\" in student)         # True，判断的是键\n",
+      "note": "in 运算符对字典判断的是键是否存在，不是值。"
+    },
+    {
+      "type": "text",
+      "title": "7.2 字典的常用方法",
+      "html": "<p><code>keys()</code> 返回所有键，<code>values()</code> 返回所有值，<code>items()</code> 返回键值对。它们返回的是视图对象，通常用 <code>list()</code> 转换后查看。<code>update()</code> 用另一个字典更新当前字典，<code>pop()</code> 删除并返回指定键的值，<code>setdefault()</code> 在键不存在时设置默认值。</p>"
+    },
+    {
+      "type": "table",
+      "title": "字典高频方法",
+      "head": ["方法", "作用", "说明"],
+      "rows": [
+        ["d.get(k, default)", "安全取值", "键不存在返回 default，不报错"],
+        ["d.keys()", "返回所有键", "可遍历，可转 list"],
+        ["d.values()", "返回所有值", "可遍历，可转 list"],
+        ["d.items()", "返回键值对", "遍历得到 (键, 值) 元组"],
+        ["d.update(d2)", "合并字典", "同名键被 d2 覆盖"],
+        ["d.pop(k)", "删除并返回", "键不存在会报 KeyError"],
+        ["d.setdefault(k, v)", "键不存在时设置", "返回键对应的值"],
+        ["d.clear()", "清空字典", "原地修改"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "字典方法演示",
+      "code": "d = {\"a\": 1, \"b\": 2}\nprint(list(d.keys()))     # ['a', 'b']\nprint(list(d.values()))   # [1, 2]\nprint(list(d.items()))    # [('a', 1), ('b', 2)]\n\nd.update({\"b\": 20, \"c\": 3})\nprint(d)                  # {'a': 1, 'b': 20, 'c': 3}\nprint(d.pop(\"a\"))         # 1\nprint(d)                  # {'b': 20, 'c': 3}\nprint(d.setdefault(\"d\", 4))  # 4\nprint(d)                  # {'b': 20, 'c': 3, 'd': 4}\n",
+      "note": "setdefault 若键已存在，直接返回旧值，不会覆盖。"
+    },
+    {
+      "type": "text",
+      "title": "7.3 遍历字典",
+      "html": "<p>直接 <code>for k in d</code> 遍历的是键；要同时拿到键和值，使用 <code>for k, v in d.items()</code>。Python 3.7 及以后，字典会保持键的插入顺序，但考试中不应依赖“按下标访问”，字典没有数字下标。</p>"
+    },
+    {
+      "type": "code",
+      "title": "遍历与统计",
+      "code": "scores = {\"语文\": 88, \"数学\": 95, \"英语\": 79}\nfor subject, score in scores.items():\n    print(subject, score)\n\ntotal = sum(scores.values())\nprint(\"平均分：\", total / len(scores))   # 87.333...\n\ncount = {}\nfor ch in \"banana\":\n    count[ch] = count.get(ch, 0) + 1\nprint(count)   # {'b': 1, 'a': 3, 'n': 2}\n",
+      "note": "count.get(ch, 0) + 1 是统计词频的标准写法。"
+    },
+    {
+      "type": "text",
+      "title": "7.4 字典推导式",
+      "html": "<p>字典推导式语法为 <code>{键表达式: 值表达式 for 变量 in 序列 if 条件}</code>，可以快速由序列生成字典，也可以交换原有字典的键和值。</p>"
+    },
+    {
+      "type": "code",
+      "title": "字典推导式",
+      "code": "print({x: x * x for x in range(1, 5)})     # {1: 1, 2: 4, 3: 9, 4: 16}\nprint({v: k for k, v in {\"a\": 1, \"b\": 2}.items()})  # {1: 'a', 2: 'b'}\n",
+      "note": "如果值重复，后面的键值对会覆盖前面的。"
+    },
+    {
+      "type": "warn",
+      "title": "哪些对象能作为字典的键",
+      "html": "<p>键必须是<strong>可哈希</strong>的不可变对象，如整数、字符串、元组。列表、字典、集合是可变对象，不能作为键，否则会抛出 <code>TypeError: unhashable type</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "7.5 集合的创建与特点",
+      "html": "<p>集合用花括号表示，元素之间用逗号分隔。集合有三个特点：<strong>无序、元素不重复、不支持下标访问</strong>。创建空集合必须用 <code>set()</code>，因为 <code>{}</code> 创建的是空字典。</p><p>集合最常见的用途是<strong>去重</strong>：<code>set([1, 2, 2, 3])</code> 得到 <code>{1, 2, 3}</code>。</p>"
+    },
+    {
+      "type": "code",
+      "title": "集合去重与元素访问",
+      "code": "nums = [1, 2, 2, 3, 3, 3]\nunique = set(nums)\nprint(unique)              # {1, 2, 3}\nprint(len(unique))         # 3\nprint(2 in unique)         # True\n\nempty = set()\nprint(type(empty), empty)  # <class 'set'> set()\nprint(type({}))            # <class 'dict'>\n",
+      "note": "集合不能用 unique[0] 访问元素，需要先转成列表或直接遍历。"
+    },
+    {
+      "type": "text",
+      "title": "7.6 集合运算",
+      "html": "<p>集合支持数学中的交、并、差、对称差：</p><ul><li><code>a | b</code> 并集，包含两个集合的所有元素；</li><li><code>a &amp; b</code> 交集，同时属于两个集合；</li><li><code>a - b</code> 差集，属于 a 但不属于 b；</li><li><code>a ^ b</code> 对称差，只属于其中一个集合。</li></ul><p>对应的方法为 <code>union()</code>、<code>intersection()</code>、<code>difference()</code>、<code>symmetric_difference()</code>。</p>"
+    },
+    {
+      "type": "code",
+      "title": "集合运算",
+      "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(a | b)   # {1, 2, 3, 4, 5}\nprint(a & b)   # {3, 4}\nprint(a - b)   # {1, 2}\nprint(a ^ b)   # {1, 2, 5}\n",
+      "note": "集合运算的结果仍是集合，输出顺序不保证稳定。"
+    },
+    {
+      "type": "text",
+      "title": "7.7 集合的常用方法",
+      "html": "<p><code>add(x)</code> 添加元素，<code>remove(x)</code> 删除元素（不存在会报 KeyError），<code>discard(x)</code> 删除元素（不存在也不报错），<code>pop()</code> 随机删除并返回一个元素，<code>clear()</code> 清空。</p>"
+    },
+    {
+      "type": "code",
+      "title": "集合方法",
+      "code": "s = {1, 2}\ns.add(3)\nprint(s)          # {1, 2, 3}\ns.discard(9)      # 不报错\nprint(s)          # {1, 2, 3}\ns.remove(1)\nprint(s)          # {2, 3}\nprint(s.pop())    # 随机返回一个元素\n",
+      "note": "去重后如果需要保持原有顺序，可以用 dict.fromkeys(nums) 或遍历判断。"
+    },
+    {
+      "type": "tip",
+      "title": "如何选择容器",
+      "html": "<p>需要按位置访问、允许重复 → 列表；需要按键快速查找 → 字典；只关心元素是否存在、需要去重 → 集合；数据不允许修改 → 元组。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0705"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0714"
+    }
+  ],
+  "keypoints": [
+    "字典按键访问，键必须可哈希",
+    "get 安全取值，setdefault 可设默认值",
+    "items() 用于同时遍历键和值",
+    "空集合必须用 set() 创建",
+    "集合支持 | & - ^ 四种运算",
+    "remove 不存在会报错，discard 不会"
+  ],
+  "pitfalls": [
+    "用列表作为字典的键",
+    "把 {} 当成空集合",
+    "用 d[0] 按下标访问字典",
+    "认为集合可以像列表一样用下标取值"
+  ],
+  "summary": "字典和集合都基于哈希表，查找效率高。操作题中常用字典统计词频、用集合去重，要记牢 get 和 setdefault 的差别。"
+}

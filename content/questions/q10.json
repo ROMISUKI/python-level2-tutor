@@ -1,0 +1,358 @@
+{
+  "chapter": "ch10",
+  "questions": [
+    {
+      "id": "q1001",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "要安装第三方库 jieba，正确的命令是：",
+      "options": [
+        "python jieba",
+        "import jieba",
+        "pip jieba install",
+        "pip install jieba"
+      ],
+      "answer": 3,
+      "explanation": "pip install 库名 用于从 PyPI 安装第三方库。import 是在代码中导入，不是安装。",
+      "tags": [
+        "pip",
+        "安装"
+      ]
+    },
+    {
+      "id": "q1002",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "要查看当前环境已安装的第三方库，应使用：",
+      "options": [
+        "pip list",
+        "pip show",
+        "pip install",
+        "pip uninstall"
+      ],
+      "answer": 0,
+      "explanation": "pip list 列出已安装的包及版本；pip show 库名 查看某个库的详细信息。",
+      "tags": [
+        "pip",
+        "list"
+      ]
+    },
+    {
+      "id": "q1003",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "使用 PyInstaller 把脚本打包成单个可执行文件，应加的参数是：",
+      "options": [
+        "-D",
+        "-F",
+        "-w",
+        "-i"
+      ],
+      "answer": 1,
+      "explanation": "-F（--onefile）表示打包成单个文件；-D 是打包成目录；-w 是隐藏控制台；-i 指定图标。",
+      "tags": [
+        "PyInstaller"
+      ]
+    },
+    {
+      "id": "q1004",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "打包图形界面程序时，为了不显示黑色命令行窗口，应加的参数是：",
+      "options": [
+        "-F",
+        "-D",
+        "-w",
+        "--clean"
+      ],
+      "answer": 2,
+      "explanation": "-w（--noconsole / --windowed）表示运行时不显示控制台窗口，适合 GUI 程序。",
+      "tags": [
+        "PyInstaller",
+        "noconsole"
+      ]
+    },
+    {
+      "id": "q1005",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "jieba 库的主要功能是：",
+      "options": [
+        "绘制图表",
+        "机器学习",
+        "读写 Excel",
+        "中文分词"
+      ],
+      "answer": 3,
+      "explanation": "jieba 是常用的中文分词库，能把一段中文文本切分成词语。",
+      "tags": [
+        "jieba"
+      ]
+    },
+    {
+      "id": "q1006",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "jieba.lcut(text) 的返回值类型是：",
+      "options": [
+        "列表",
+        "字符串",
+        "生成器",
+        "字典"
+      ],
+      "answer": 0,
+      "explanation": "lcut 直接返回分词后的列表；cut 返回生成器，通常用 for 循环或 list() 转换后使用。",
+      "tags": [
+        "jieba",
+        "lcut"
+      ]
+    },
+    {
+      "id": "q1007",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "wordcloud 库的主要用途是：",
+      "options": [
+        "中文分词",
+        "生成词云图",
+        "数值计算",
+        "网络爬虫"
+      ],
+      "answer": 1,
+      "explanation": "wordcloud 根据词频生成词云图。中文词云通常需要指定中文字体路径，避免显示方框。",
+      "tags": [
+        "wordcloud"
+      ]
+    },
+    {
+      "id": "q1008",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "numpy 库最核心的数据结构是：",
+      "options": [
+        "DataFrame",
+        "Series",
+        "ndarray 多维数组",
+        "列表"
+      ],
+      "answer": 2,
+      "explanation": "numpy 的核心是 ndarray（多维数组），支持高效的向量化运算。DataFrame 和 Series 属于 pandas。",
+      "tags": [
+        "numpy",
+        "ndarray"
+      ]
+    },
+    {
+      "id": "q1009",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "pandas 中用于表示二维表格的数据结构是：",
+      "options": [
+        "ndarray",
+        "Series",
+        "list",
+        "DataFrame"
+      ],
+      "answer": 3,
+      "explanation": "pandas 的 DataFrame 表示二维表格，Series 表示一维带标签数组。",
+      "tags": [
+        "pandas",
+        "DataFrame"
+      ]
+    },
+    {
+      "id": "q1010",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "要绘制折线图、柱状图，最常用的库是：",
+      "options": [
+        "matplotlib",
+        "jieba",
+        "requests",
+        "PyInstaller"
+      ],
+      "answer": 0,
+      "explanation": "matplotlib 是 Python 最常用的绘图库，通过 pyplot 子模块提供 plot、bar、scatter 等绘图函数。",
+      "tags": [
+        "matplotlib"
+      ]
+    },
+    {
+      "id": "q1011",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "scipy 库主要面向：",
+      "options": [
+        "中文分词",
+        "科学计算（积分、优化、统计等）",
+        "网页开发",
+        "游戏开发"
+      ],
+      "answer": 1,
+      "explanation": "scipy 建立在 numpy 之上，提供积分、优化、插值、统计、信号处理等科学计算功能。",
+      "tags": [
+        "scipy"
+      ]
+    },
+    {
+      "id": "q1012",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "scikit-learn（sklearn）库主要用于：",
+      "options": [
+        "图像处理",
+        "中文分词",
+        "机器学习",
+        "打包程序"
+      ],
+      "answer": 2,
+      "explanation": "scikit-learn 提供分类、回归、聚类、降维等机器学习算法及模型评估工具。",
+      "tags": [
+        "sklearn"
+      ]
+    },
+    {
+      "id": "q1013",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "需要读取图片、视频帧等图像数据，最合适的库是：",
+      "options": [
+        "jieba",
+        "Flask",
+        "scrapy",
+        "imageio"
+      ],
+      "answer": 3,
+      "explanation": "imageio 用于读写图像和视频帧，常与 numpy 配合处理像素数据。",
+      "tags": [
+        "imageio"
+      ]
+    },
+    {
+      "id": "q1014",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "编写网络爬虫、发送 HTTP 请求，最常用的基础库是：",
+      "options": [
+        "requests",
+        "matplotlib",
+        "pandas",
+        "PyQt5"
+      ],
+      "answer": 0,
+      "explanation": "requests 用于发送 HTTP 请求，是网络爬虫和数据采集的基础库。scrapy 是更完整的爬虫框架。",
+      "tags": [
+        "requests",
+        "爬虫"
+      ]
+    },
+    {
+      "id": "q1015",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "下列库中，属于 Web 开发框架的是：",
+      "options": [
+        "numpy",
+        "Flask",
+        "pygame",
+        "wordcloud"
+      ],
+      "answer": 1,
+      "explanation": "Flask 和 Django 是 Python 常用的 Web 开发框架。numpy 用于数值计算，pygame 用于游戏开发。",
+      "tags": [
+        "Flask",
+        "Web"
+      ]
+    },
+    {
+      "id": "q1016",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "下列库中，用于开发 2D 游戏的是：",
+      "options": [
+        "pandas",
+        "scipy",
+        "pygame",
+        "jieba"
+      ],
+      "answer": 2,
+      "explanation": "pygame 是 Python 的 2D 游戏开发库，提供图形、声音、事件处理等功能。",
+      "tags": [
+        "pygame",
+        "游戏"
+      ]
+    },
+    {
+      "id": "q1017",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "下列库中，用于开发桌面图形用户界面的是：",
+      "options": [
+        "requests",
+        "numpy",
+        "scrapy",
+        "PyQt5"
+      ],
+      "answer": 3,
+      "explanation": "PyQt5、wxPython、tkinter 都可用于开发桌面 GUI。tkinter 是标准库，PyQt5 和 wxPython 是第三方库。",
+      "tags": [
+        "PyQt5",
+        "GUI"
+      ]
+    },
+    {
+      "id": "q1018",
+      "chapter": "ch10",
+      "difficulty": 1,
+      "stem": "关于标准库与第三方库，下列说法正确的是：",
+      "options": [
+        "标准库随 Python 安装，第三方库通常需要额外安装",
+        "标准库需要 pip 安装，第三方库不需要",
+        "两者都需要联网才能使用",
+        "第三方库只能用于数据分析"
+      ],
+      "answer": 0,
+      "explanation": "标准库是 Python 自带的，安装 Python 后即可 import；第三方库需要额外通过 pip 等工具安装。",
+      "tags": [
+        "标准库",
+        "第三方库"
+      ]
+    },
+    {
+      "id": "q1019",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "numpy 数组 arr = np.array([1, 2, 3])，执行 arr * 2 的结果是：",
+      "options": [
+        "[1, 2, 3, 1, 2, 3]",
+        "[2, 4, 6]",
+        "6",
+        "报错"
+      ],
+      "answer": 1,
+      "explanation": "numpy 支持向量化运算，arr * 2 会把每个元素都乘以 2，得到 [2, 4, 6]。",
+      "tags": [
+        "numpy",
+        "向量化"
+      ]
+    },
+    {
+      "id": "q1020",
+      "chapter": "ch10",
+      "difficulty": 2,
+      "stem": "使用 PyInstaller 打包后的可执行文件，在目标电脑上运行：",
+      "options": [
+        "必须安装相同版本的 Python",
+        "必须安装所有第三方库",
+        "通常不需要安装 Python 环境",
+        "只能在打包它的电脑上运行"
+      ],
+      "answer": 2,
+      "explanation": "PyInstaller 会把 Python 解释器和依赖打包进可执行文件，目标电脑通常不需要单独安装 Python。但打包时使用的第三方库必须已经安装。",
+      "tags": [
+        "PyInstaller",
+        "打包"
+      ]
+    }
+  ]
+}

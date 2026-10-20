@@ -1,0 +1,383 @@
+{
+  "exercises": [
+    {
+      "id": "e13",
+      "chapter": "ch05",
+      "title": "斐波那契数列前 n 项",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "斐波那契数列的前两项都是 1，从第三项起每一项等于前两项之和。读入 n，输出数列的前 n 项。",
+      "inputSpec": "一行，一个正整数 n（1 ≤ n ≤ 40）。",
+      "outputSpec": "一行，前 n 项，用空格分隔。",
+      "samples": [
+        { "stdin": "8\n", "stdout": "1 1 2 3 5 8 13 21\n" }
+      ],
+      "tests": [
+        { "name": "n=1", "stdin": "1\n", "stdout": "1\n" },
+        { "name": "n=2", "stdin": "2\n", "stdout": "1 1\n" },
+        { "name": "n=8", "stdin": "8\n", "stdout": "1 1 2 3 5 8 13 21\n" },
+        { "name": "n=15", "stdin": "15\n", "stdout": "1 1 2 3 5 8 13 21 34 55 89 144 233 377 610\n" }
+      ],
+      "starter": "# 用两个变量迭代生成斐波那契数列\n",
+      "solution": "n = int(input())\na, b = 1, 1\nresult = []\nfor _ in range(n):\n    result.append(a)\n    a, b = b, a + b\nprint(\" \".join(str(x) for x in result))\n",
+      "analysis": "用 a、b 保存相邻两项，每次输出 a 后同步更新 a, b = b, a+b。同步赋值保证更新时使用的是旧值，不需要临时变量。",
+      "hints": [
+        "前两项固定为 1、1。",
+        "每次循环先保存当前项，再计算下一项。",
+        "a, b = b, a + b 可以同时更新两个变量。"
+      ],
+      "tags": ["循环", "数列"],
+      "knowledge": ["for", "同步赋值"]
+    },
+    {
+      "id": "e14",
+      "chapter": "ch02",
+      "title": "回文字符串判断",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "回文是指正着读和反着读都相同的字符串。读入一个字符串，判断它是否为回文。",
+      "inputSpec": "一行字符串（不含空格）。",
+      "outputSpec": "输出“是回文”或“不是回文”。",
+      "samples": [
+        { "stdin": "level\n", "stdout": "是回文\n" }
+      ],
+      "tests": [
+        { "name": "英文回文", "stdin": "level\n", "stdout": "是回文\n" },
+        { "name": "非回文", "stdin": "python\n", "stdout": "不是回文\n" },
+        { "name": "单字符", "stdin": "a\n", "stdout": "是回文\n" },
+        { "name": "中文回文", "stdin": "上海自来水来自海上\n", "stdout": "是回文\n" },
+        { "name": "偶数长度回文", "stdin": "abba\n", "stdout": "是回文\n" }
+      ],
+      "starter": "# 比较原字符串与反转后的字符串\n",
+      "solution": "s = input().strip()\nif s == s[::-1]:\n    print(\"是回文\")\nelse:\n    print(\"不是回文\")\n",
+      "analysis": "s[::-1] 得到反转字符串，与原串比较即可。若与原串完全相同，就是回文。",
+      "hints": [
+        "先用切片得到反转字符串。",
+        "直接比较 s 与 s[::-1]。",
+        "注意输入可能带行末换行，用 strip() 去掉。"
+      ],
+      "tags": ["字符串", "切片"],
+      "knowledge": ["切片", "if-else"]
+    },
+    {
+      "id": "e15",
+      "chapter": "ch06",
+      "title": "冒泡排序",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入 n 个整数，使用冒泡排序将它们从小到大排列后输出。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个整数。",
+      "outputSpec": "一行，升序排列的整数，用空格分隔。",
+      "samples": [
+        { "stdin": "5\n5 3 8 1 2\n", "stdout": "1 2 3 5 8\n" }
+      ],
+      "tests": [
+        { "name": "常规", "stdin": "5\n5 3 8 1 2\n", "stdout": "1 2 3 5 8\n" },
+        { "name": "已有序", "stdin": "4\n1 2 3 4\n", "stdout": "1 2 3 4\n" },
+        { "name": "逆序", "stdin": "4\n9 7 5 3\n", "stdout": "3 5 7 9\n" },
+        { "name": "含重复和负数", "stdin": "6\n2 -1 2 0 -5 8\n", "stdout": "-5 -1 0 2 2 8\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 实现冒泡排序\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:1 + n]]\nfor i in range(n - 1):\n    for j in range(n - 1 - i):\n        if nums[j] > nums[j + 1]:\n            nums[j], nums[j + 1] = nums[j + 1], nums[j]\nprint(\" \".join(str(x) for x in nums))\n",
+      "analysis": "外层控制排序轮数，内层比较相邻元素并交换。每轮结束后，最大的元素会被“冒”到末尾，因此内层范围可以逐渐缩小。",
+      "hints": [
+        "比较相邻两个元素，前者大就交换。",
+        "外层循环执行 n-1 轮。",
+        "第 i 轮之后末尾 i 个元素已经有序，内层可以少比较 i 次。"
+      ],
+      "tags": ["排序", "嵌套循环"],
+      "knowledge": ["冒泡排序", "列表交换"]
+    },
+    {
+      "id": "e16",
+      "chapter": "ch11",
+      "title": "二分查找",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "给定一个升序排列的整数序列和目标值，使用二分查找找出目标值第一次出现的下标（下标从 0 开始）。如果不存在，输出 -1。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个升序整数；第三行一个整数 target。",
+      "outputSpec": "一行，目标值的下标或 -1。",
+      "samples": [
+        { "stdin": "6\n1 3 5 7 9 11\n7\n", "stdout": "3\n" }
+      ],
+      "tests": [
+        { "name": "找到中间值", "stdin": "6\n1 3 5 7 9 11\n7\n", "stdout": "3\n" },
+        { "name": "找到首元素", "stdin": "5\n2 4 6 8 10\n2\n", "stdout": "0\n" },
+        { "name": "找到末元素", "stdin": "5\n2 4 6 8 10\n10\n", "stdout": "4\n" },
+        { "name": "不存在", "stdin": "5\n2 4 6 8 10\n5\n", "stdout": "-1\n" },
+        { "name": "单元素", "stdin": "1\n42\n42\n", "stdout": "0\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 使用二分查找定位目标值\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:1 + n]]\ntarget = int(data[1 + n])\nleft, right = 0, n - 1\nanswer = -1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        answer = mid\n        break\n    elif nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\nprint(answer)\n",
+      "analysis": "维护查找区间 [left, right]，每次取中点比较。目标在右半部分时移动 left，在左半部分时移动 right，直到找到或区间为空。",
+      "hints": [
+        "用 left 和 right 表示当前查找范围。",
+        "中点 mid = (left + right) // 2。",
+        "如果 nums[mid] 小于目标，说明目标在右半部分。"
+      ],
+      "tags": ["查找", "二分"],
+      "knowledge": ["while", "二分查找"]
+    },
+    {
+      "id": "e17",
+      "chapter": "ch06",
+      "title": "矩阵转置",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入一个 n 行 m 列的整数矩阵，输出它的转置矩阵（m 行 n 列）。",
+      "inputSpec": "第一行两个整数 n 和 m；接下来 n 行，每行 m 个整数。",
+      "outputSpec": "共 m 行，每行 n 个整数，用空格分隔。",
+      "samples": [
+        { "stdin": "2 3\n1 2 3\n4 5 6\n", "stdout": "1 4\n2 5\n3 6\n" }
+      ],
+      "tests": [
+        { "name": "2x3", "stdin": "2 3\n1 2 3\n4 5 6\n", "stdout": "1 4\n2 5\n3 6\n" },
+        { "name": "方阵", "stdin": "2 2\n1 2\n3 4\n", "stdout": "1 3\n2 4\n" },
+        { "name": "单行", "stdin": "1 3\n7 8 9\n", "stdout": "7\n8\n9\n" },
+        { "name": "单列", "stdin": "3 1\n1\n2\n3\n", "stdout": "1 2 3\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 构造矩阵并转置输出\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nm = int(data[1])\nvalues = [int(x) for x in data[2:]]\nmatrix = [values[i * m:(i + 1) * m] for i in range(n)]\nfor j in range(m):\n    row = [str(matrix[i][j]) for i in range(n)]\n    print(\" \".join(row))\n",
+      "analysis": "把一维数据按每行 m 个切分成二维列表。转置后共 m 行，第 j 行的元素依次是原矩阵每一列的第 j 个元素。",
+      "hints": [
+        "先把输入数据切成 n 行、每行 m 个。",
+        "转置后第 j 行来自原矩阵的第 j 列。",
+        "用两层循环按列输出即可。"
+      ],
+      "tags": ["二维列表", "矩阵"],
+      "knowledge": ["嵌套列表", "切片"]
+    },
+    {
+      "id": "e18",
+      "chapter": "ch06",
+      "title": "成绩统计",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入 n 个学生的成绩，输出最高分、最低分和平均分。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个整数成绩。",
+      "outputSpec": "三行：最高分=值、最低分=值、平均分=值（保留 2 位小数）。",
+      "samples": [
+        { "stdin": "5\n88 92 79 95 61\n", "stdout": "最高分=95\n最低分=61\n平均分=83.00\n" }
+      ],
+      "tests": [
+        { "name": "常规", "stdin": "5\n88 92 79 95 61\n", "stdout": "最高分=95\n最低分=61\n平均分=83.00\n" },
+        { "name": "单元素", "stdin": "1\n75\n", "stdout": "最高分=75\n最低分=75\n平均分=75.00\n" },
+        { "name": "全部相同", "stdin": "3\n90 90 90\n", "stdout": "最高分=90\n最低分=90\n平均分=90.00\n" },
+        { "name": "小数平均", "stdin": "3\n80 81 82\n", "stdout": "最高分=82\n最低分=80\n平均分=81.00\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 统计最高、最低和平均分\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nscores = [int(x) for x in data[1:1 + n]]\nprint(f\"最高分={max(scores)}\")\nprint(f\"最低分={min(scores)}\")\nprint(f\"平均分={sum(scores) / n:.2f}\")\n",
+      "analysis": "max、min、sum 都是内置函数，直接作用于列表。平均分用总和除以人数，注意保留两位小数。",
+      "hints": [
+        "把成绩存到列表中。",
+        "最大值、最小值可以直接用 max() 和 min()。",
+        "平均分 = sum(scores) / n。"
+      ],
+      "tags": ["列表", "统计"],
+      "knowledge": ["max", "min", "sum"]
+    },
+    {
+      "id": "e19",
+      "chapter": "ch07",
+      "title": "学生成绩排名",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入 n 个学生的姓名和成绩，按成绩从高到低排序输出；成绩相同时按姓名的字典序从小到大排列。",
+      "inputSpec": "第一行一个整数 n；接下来 n 行，每行一个姓名和一个整数成绩，用空格分隔。",
+      "outputSpec": "共 n 行，每行“姓名 成绩”。",
+      "samples": [
+        { "stdin": "3\n小明 92\n小红 95\n小刚 92\n", "stdout": "小红 95\n小刚 92\n小明 92\n" }
+      ],
+      "tests": [
+        { "name": "常规排名", "stdin": "3\n小明 92\n小红 95\n小刚 92\n", "stdout": "小红 95\n小刚 92\n小明 92\n" },
+        { "name": "成绩都不同", "stdin": "3\nA 70\nB 90\nC 80\n", "stdout": "B 90\nC 80\nA 70\n" },
+        { "name": "成绩全部相同", "stdin": "3\nC 85\nA 85\nB 85\n", "stdout": "A 85\nB 85\nC 85\n" },
+        { "name": "单学生", "stdin": "1\n小明 100\n", "stdout": "小明 100\n" }
+      ],
+      "starter": "n = int(input())\nstudents = []\n# 读入学生并按规则排序\n",
+      "solution": "n = int(input())\nstudents = []\nfor _ in range(n):\n    name, score = input().split()\n    students.append((name, int(score)))\nstudents.sort(key=lambda item: (-item[1], item[0]))\nfor name, score in students:\n    print(name, score)\n",
+      "analysis": "排序键用 (-成绩, 姓名)：成绩取负数实现降序，姓名按升序。元组排序会先比较第一个元素，再比较第二个。",
+      "hints": [
+        "把每个学生保存成 (姓名, 成绩) 元组。",
+        "sort 的 key 可以返回一个元组。",
+        "成绩降序可以用 -score 实现。"
+      ],
+      "tags": ["排序", "字典/元组"],
+      "knowledge": ["sort", "lambda", "元组"]
+    },
+    {
+      "id": "e20",
+      "chapter": "ch07",
+      "title": "字母频率统计",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入一行英文句子，统计其中每个英文字母出现的次数（不区分大小写），按字母表顺序输出出现过的字母及次数。",
+      "inputSpec": "一行字符串。",
+      "outputSpec": "每行一个“字母:次数”，按字母表顺序排列，只输出出现过的字母。",
+      "samples": [
+        { "stdin": "Hello World\n", "stdout": "d:1\ne:1\nh:1\nl:3\no:2\nr:1\nw:1\n" }
+      ],
+      "tests": [
+        { "name": "Hello World", "stdin": "Hello World\n", "stdout": "d:1\ne:1\nh:1\nl:3\no:2\nr:1\nw:1\n" },
+        { "name": "全大写", "stdin": "AAA\n", "stdout": "a:3\n" },
+        { "name": "无字母", "stdin": "12345\n", "stdout": "" },
+        { "name": "混合", "stdin": "Abc abc\n", "stdout": "a:2\nb:2\nc:2\n" }
+      ],
+      "starter": "# 统一转小写后统计字母频率\n",
+      "solution": "s = input().lower()\ncounts = {}\nfor ch in s:\n    if 'a' <= ch <= 'z':\n        counts[ch] = counts.get(ch, 0) + 1\nfor ch in sorted(counts):\n    print(f\"{ch}:{counts[ch]}\")\n",
+      "analysis": "先 lower() 统一大小写，只统计 a-z 的字符。sorted(counts) 按字母顺序遍历键，保证输出稳定。",
+      "hints": [
+        "用 lower() 把大写转成小写。",
+        "只统计 'a' 到 'z' 范围内的字符。",
+        "sorted(dict) 会返回按字母排序的键列表。"
+      ],
+      "tags": ["字典", "字符串"],
+      "knowledge": ["lower", "dict", "sorted"]
+    },
+    {
+      "id": "e21",
+      "chapter": "ch05",
+      "title": "递归求最大公约数",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "使用递归实现辗转相除法，求两个正整数的最大公约数。",
+      "inputSpec": "一行，两个正整数 a 和 b。",
+      "outputSpec": "一行，a 和 b 的最大公约数。",
+      "samples": [
+        { "stdin": "18 24\n", "stdout": "6\n" }
+      ],
+      "tests": [
+        { "name": "18 和 24", "stdin": "18 24\n", "stdout": "6\n" },
+        { "name": "互质", "stdin": "7 9\n", "stdout": "1\n" },
+        { "name": "倍数关系", "stdin": "12 36\n", "stdout": "12\n" },
+        { "name": "相等", "stdin": "15 15\n", "stdout": "15\n" },
+        { "name": "大数", "stdin": "1071 462\n", "stdout": "21\n" }
+      ],
+      "starter": "def gcd(a, b):\n    # 请补全递归实现\n    pass\n\n",
+      "solution": "def gcd(a, b):\n    if b == 0:\n        return a\n    return gcd(b, a % b)\n\na, b = map(int, input().split())\nprint(gcd(a, b))\n",
+      "analysis": "辗转相除法：gcd(a, b) = gcd(b, a % b)，当 b 为 0 时，a 就是最大公约数。基例是 b == 0。",
+      "hints": [
+        "递归的基例是 b == 0。",
+        "递归表达式为 gcd(b, a % b)。",
+        "先定义函数，再读入数据调用。"
+      ],
+      "tags": ["递归", "数学"],
+      "knowledge": ["def", "递归", "%"]
+    },
+    {
+      "id": "e22",
+      "chapter": "ch09",
+      "title": "日期格式化",
+      "difficulty": 3,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入一个形如 2026-10-20 的日期，输出中文格式“2026年10月20日 星期二”。",
+      "inputSpec": "一行，格式为 YYYY-MM-DD 的日期。",
+      "outputSpec": "一行，格式为“YYYY年MM月DD日 星期X”，月和日补足两位。",
+      "samples": [
+        { "stdin": "2026-10-20\n", "stdout": "2026年10月20日 星期二\n" }
+      ],
+      "tests": [
+        { "name": "2026-10-20", "stdin": "2026-10-20\n", "stdout": "2026年10月20日 星期二\n" },
+        { "name": "2026-01-01", "stdin": "2026-01-01\n", "stdout": "2026年01月01日 星期四\n" },
+        { "name": "2024-02-29", "stdin": "2024-02-29\n", "stdout": "2024年02月29日 星期四\n" },
+        { "name": "2025-12-31", "stdin": "2025-12-31\n", "stdout": "2025年12月31日 星期三\n" }
+      ],
+      "starter": "from datetime import datetime\n\ns = input().strip()\n# 解析日期并输出中文格式\n",
+      "solution": "from datetime import datetime\n\ns = input().strip()\nd = datetime.strptime(s, \"%Y-%m-%d\")\nweek = [\"星期一\", \"星期二\", \"星期三\", \"星期四\", \"星期五\", \"星期六\", \"星期日\"]\nprint(f\"{d.year}年{d.month:02d}月{d.day:02d}日 {week[d.weekday()]}\")\n",
+      "analysis": "datetime.strptime 按格式解析字符串。weekday() 返回 0 到 6，分别对应星期一到星期日，用列表映射成中文。月和日使用 :02d 补零。",
+      "hints": [
+        "用 datetime.strptime(s, \"%Y-%m-%d\") 解析日期。",
+        "weekday() 返回 0 表示星期一。",
+        "输出月、日时用 :02d 补足两位。"
+      ],
+      "tags": ["datetime", "格式化"],
+      "knowledge": ["datetime", "strptime", "weekday"]
+    },
+    {
+      "id": "e23",
+      "chapter": "ch08",
+      "title": "统计文件行数与字符数",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "当前目录下有一个文本文件 data.txt，统计它的行数和字符数（不包含换行符），并输出。",
+      "inputSpec": "无需从键盘输入。测试环境会提供 data.txt。",
+      "outputSpec": "两行：第一行“行数=值”，第二行“字符数=值”。",
+      "samples": [
+        { "stdin": "", "stdout": "行数=2\n字符数=10\n", "files": { "data.txt": "hello\nworld\n" } }
+      ],
+      "tests": [
+        {
+          "name": "两行英文",
+          "files": { "data.txt": "hello\nworld\n" },
+          "stdout": "行数=2\n字符数=10\n"
+        },
+        {
+          "name": "含空行",
+          "files": { "data.txt": "a\n\nb" },
+          "stdout": "行数=3\n字符数=2\n"
+        },
+        {
+          "name": "中文内容",
+          "files": { "data.txt": "中文\n测试\n" },
+          "stdout": "行数=2\n字符数=4\n"
+        },
+        {
+          "name": "单行无换行",
+          "files": { "data.txt": "Python二级" },
+          "stdout": "行数=1\n字符数=8\n"
+        }
+      ],
+      "starter": "# 打开 data.txt 并统计\n",
+      "solution": "with open(\"data.txt\", \"r\", encoding=\"utf-8\") as f:\n    text = f.read()\nlines = text.splitlines()\nchars = len(text.replace(\"\\n\", \"\").replace(\"\\r\", \"\"))\nprint(f\"行数={len(lines)}\")\nprint(f\"字符数={chars}\")\n",
+      "analysis": "splitlines() 能正确处理不同平台的换行符，并且不会因为末尾换行多算一行。字符数需要去掉 \\n 和 \\r 后再统计。",
+      "hints": [
+        "用 with open(...) 打开文件并读取全部内容。",
+        "splitlines() 可以按行拆分文本。",
+        "统计字符数前先去掉换行符。"
+      ],
+      "tags": ["文件", "统计"],
+      "knowledge": ["open", "read", "splitlines"]
+    },
+    {
+      "id": "e24",
+      "chapter": "ch06",
+      "title": "偶数平方和",
+      "difficulty": 2,
+      "level": "simple",
+      "points": 25,
+      "statement": "读入 n 个整数，求其中所有偶数的平方和。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个整数。",
+      "outputSpec": "一行，一个整数，表示偶数平方和。",
+      "samples": [
+        { "stdin": "5\n1 2 3 4 5\n", "stdout": "20\n" }
+      ],
+      "tests": [
+        { "name": "混合数据", "stdin": "5\n1 2 3 4 5\n", "stdout": "20\n" },
+        { "name": "没有偶数", "stdin": "3\n1 3 5\n", "stdout": "0\n" },
+        { "name": "含负偶数", "stdin": "4\n-2 3 -4 5\n", "stdout": "20\n" },
+        { "name": "全部偶数", "stdin": "3\n2 4 6\n", "stdout": "56\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 计算偶数平方和\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:1 + n]]\ntotal = sum(x * x for x in nums if x % 2 == 0)\nprint(total)\n",
+      "analysis": "生成器表达式配合 sum 可以一行完成筛选和累加。负偶数的平方仍是正数，x % 2 == 0 对负数同样成立。",
+      "hints": [
+        "先筛选出偶数：x % 2 == 0。",
+        "平方用 x * x 或 x ** 2。",
+        "可以用 sum 对生成器表达式求和。"
+      ],
+      "tags": ["列表", "生成器", "求和"],
+      "knowledge": ["sum", "条件表达式", "生成器"]
+    }
+  ]
+}

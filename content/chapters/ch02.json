@@ -1,0 +1,170 @@
+{
+  "id": "ch02",
+  "module": "m1",
+  "order": 2,
+  "title": "基本数据类型",
+  "subtitle": "数字、字符串、切片与格式化",
+  "minutes": 55,
+  "objectives": [
+    "掌握整数、浮点数、复数的表示与运算",
+    "理解整除、取余和幂运算的规则",
+    "熟练进行字符串索引、切片和常用操作",
+    "掌握 format() 格式化输出的常用格式控制符",
+    "能够正确完成类型转换"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "2.1 数字类型",
+      "html": "<p>Python 提供三种数字类型：</p><ul><li><strong>整数 int</strong>：没有大小限制，可以表示任意大的整数。支持十进制、二进制（<code>0b</code>）、八进制（<code>0o</code>）、十六进制（<code>0x</code>）写法，数字之间可以用下划线分隔，如 <code>1_000_000</code>。</li><li><strong>浮点数 float</strong>：带小数点的数，也可用科学计数法表示，如 <code>1.5e3</code> 表示 1500.0。</li><li><strong>复数 complex</strong>：形如 <code>3+4j</code>，用 <code>z.real</code> 取实部、<code>z.imag</code> 取虚部，<code>abs(z)</code> 求模。</li></ul><p>布尔类型 <code>bool</code> 只有 <code>True</code> 和 <code>False</code> 两个值，它是整数 <code>int</code> 的子类，参与运算时分别相当于 1 和 0。</p>"
+    },
+    {
+      "type": "code",
+      "title": "不同进制的整数与浮点数",
+      "code": "print(0b1010, 0o17, 0x1F)     # 10 15 31\nprint(1_000_000)                # 1000000\nprint(1.5e3, 2e-2)              # 1500.0 0.02\nprint(type(1.5e3))              # <class 'float'>\nz = 3 + 4j\nprint(z.real, z.imag, abs(z))   # 3.0 4.0 5.0\n",
+      "note": "科学计数法表示的数一定是 float，即使结果是整数。"
+    },
+    {
+      "type": "warn",
+      "title": "浮点数的精度问题",
+      "html": "<p>计算机用二进制表示小数，某些十进制小数无法精确存储，因此 <code>0.1 + 0.2</code> 的结果是 <code>0.30000000000000004</code>，并不等于 0.3。考试中比较浮点数时通常用 <code>abs(a - b) < 1e-6</code>，或者用 <code>round()</code> 保留位数后再比较。</p>"
+    },
+    {
+      "type": "code",
+      "title": "浮点数误差",
+      "code": "print(0.1 + 0.2)                 # 0.30000000000000004\nprint(0.1 + 0.2 == 0.3)          # False\nprint(round(0.1 + 0.2, 2))       # 0.3\nprint(abs((0.1 + 0.2) - 0.3) < 1e-9)  # True\n",
+      "note": "这是浮点数的通病，不是 Python 的 bug。"
+    },
+    {
+      "type": "text",
+      "title": "2.2 数值运算符",
+      "html": "<p>常见运算符：<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>//</code>（整除）、<code>%</code>（取余）、<code>**</code>（幂）。其中 <code>/</code> 的结果一定是浮点数，<code>5 / 2</code> 得到 <code>2.5</code>。</p><p><strong>整除</strong>是向下取整，不是截断：<code>-7 // 2</code> 的结果是 <code>-4</code>。<strong>取余</strong>结果的符号与除数一致：<code>-7 % 2</code> 为 <code>1</code>，<code>7 % -2</code> 为 <code>-1</code>。可以用公式 <code>a == (a // b) * b + a % b</code> 验证。</p>"
+    },
+    {
+      "type": "code",
+      "title": "整除与取余",
+      "code": "print(7 / 2, 7 // 2, 7 % 2)      # 3.5 3 1\nprint(-7 // 2, -7 % 2)          # -4 1\nprint(7 // -2, 7 % -2)          # -4 -1\nprint(2 ** 10, 2 ** 0.5)        # 1024 1.4142135623730951\nprint(divmod(-7, 2))            # (-4, 1)\n",
+      "note": "divmod(a, b) 同时返回整除和取余的结果，是一个元组。"
+    },
+    {
+      "type": "text",
+      "title": "2.3 常用数值函数",
+      "html": "<p><code>abs(x)</code> 求绝对值；<code>pow(a, b)</code> 等价于 <code>a ** b</code>；<code>round(x, n)</code> 保留 n 位小数；<code>int(x)</code> 向零截断取整；<code>max()</code>、<code>min()</code>、<code>sum()</code> 对一组数求最大、最小、总和。</p>"
+    },
+    {
+      "type": "code",
+      "title": "数值函数示例",
+      "code": "print(abs(-3.5))        # 3.5\nprint(pow(2, 5))        # 32\nprint(round(3.14159, 2))  # 3.14\nprint(int(12.9), int(-12.9))  # 12 -12\nprint(max(3, 7, 2), min(3, 7, 2), sum([1, 2, 3]))  # 7 2 6\n",
+      "note": "int() 直接去掉小数部分，不要与四舍五入混淆。"
+    },
+    {
+      "type": "tip",
+      "title": "round 的“银行家舍入”",
+      "html": "<p><code>round(2.5)</code> 的结果是 2，<code>round(3.5)</code> 的结果是 4。Python 采用“四舍六入五成双”的规则：恰好位于中间时，舍入到最近的偶数。考试若考到 round，要按这个规则判断。</p>"
+    },
+    {
+      "type": "text",
+      "title": "2.4 字符串的表示",
+      "html": "<p>字符串是用一对单引号、双引号或三引号括起来的字符序列。单双引号功能相同，三引号可以跨行。字符串中的反斜杠表示转义：<code>\\n</code> 换行、<code>\\t</code> 制表符、<code>\\\\</code> 表示一个反斜杠、<code>\\'</code> 表示单引号。</p><p>在字符串前加 <code>r</code> 表示原始字符串，反斜杠不再转义，常用于表示 Windows 路径或正则表达式。</p>"
+    },
+    {
+      "type": "code",
+      "title": "转义与原始字符串",
+      "code": "print(\"第一行\\n第二行\")\nprint(\"姓名\\t成绩\")\nprint(\"C:\\\\Users\\\\test\")      # C:\\Users\\test\nprint(r\"C:\\Users\\test\")     # 原始字符串，效果相同\nprint(len(\"Python\"))        # 6\nprint(len(\"中文\"))          # 2，每个汉字算一个字符\n",
+      "note": "len() 统计的是字符个数，不是字节数。"
+    },
+    {
+      "type": "text",
+      "title": "2.5 索引与切片",
+      "html": "<p>字符串中的每个字符都有编号。正向索引从 0 开始，反向索引从 -1 开始。切片语法为 <code>s[start:end:step]</code>，包含 start，<strong>不包含 end</strong>；省略 start 表示从头开始，省略 end 表示到末尾，step 为负数时从右向左取。</p><ul><li><code>s[0]</code> 第一个字符，<code>s[-1]</code> 最后一个字符；</li><li><code>s[1:4]</code> 取下标 1、2、3 的字符；</li><li><code>s[::-1]</code> 反转字符串；</li><li><code>s[::2]</code> 每隔一个取一个。</li></ul>"
+    },
+    {
+      "type": "code",
+      "title": "索引与切片",
+      "code": "s = \"Python二级\"\nprint(s[0], s[5], s[-1])   # P n 级\nprint(s[1:4])              # yth\nprint(s[:6])               # Python\nprint(s[6:])               # 二级\nprint(s[::-1])             # 级二nohtyP\nprint(s[::2])              # Pto二\nprint(s[100:200])          # 空字符串，切片越界不报错\n",
+      "note": "单个索引越界会引发 IndexError，但切片越界只会得到空串或较短的结果。"
+    },
+    {
+      "type": "text",
+      "title": "2.6 字符串操作符与常用方法",
+      "html": "<p><code>+</code> 连接字符串，<code>*</code> 重复字符串，<code>in</code> 判断子串是否存在，<code>len()</code> 求长度。字符串是<strong>不可变对象</strong>，所有“修改”方法都返回新字符串，原字符串不变。</p><p>高频方法：<code>upper()</code>、<code>lower()</code>、<code>strip()</code>、<code>split()</code>、<code>join()</code>、<code>replace()</code>、<code>find()</code>、<code>count()</code>、<code>startswith()</code>、<code>endswith()</code>、<code>isdigit()</code>、<code>isalpha()</code>。</p>"
+    },
+    {
+      "type": "table",
+      "title": "字符串常用方法",
+      "head": ["方法", "作用", "示例", "结果"],
+      "rows": [
+        ["s.upper()", "转大写", "\"ab\".upper()", "AB"],
+        ["s.strip()", "去掉两端空白", "\" a \".strip()", "a"],
+        ["s.split(sep)", "按分隔符切分", "\"a,b\".split(\",\")", "['a', 'b']"],
+        ["sep.join(seq)", "用分隔符连接", "\"-\".join([\"a\",\"b\"])", "a-b"],
+        ["s.replace(a,b)", "替换", "\"aaa\".replace(\"a\",\"b\",1)", "baa"],
+        ["s.find(t)", "查找，找不到返回 -1", "\"abc\".find(\"x\")", "-1"],
+        ["s.count(t)", "统计出现次数", "\"aba\".count(\"a\")", "2"],
+        ["s.isdigit()", "是否全为数字字符", "\"123\".isdigit()", "True"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "字符串方法演示",
+      "code": "s = \"  Hello World  \"\nprint(s.strip())                 # Hello World\nprint(s.strip().lower())         # hello world\nprint(\"a,b,c\".split(\",\"))       # ['a', 'b', 'c']\nprint(\"-\".join([\"2026\", \"10\", \"20\"]))  # 2026-10-20\nprint(\"apple\".replace(\"p\", \"P\"))  # aPPle\nprint(\"banana\".count(\"a\"))        # 3\nprint(\"abc\".find(\"c\"), \"abc\".find(\"x\"))  # 2 -1\n",
+      "note": "split() 不写参数时按任意空白字符切分，并会合并连续空白。"
+    },
+    {
+      "type": "warn",
+      "title": "字符串不可变",
+      "html": "<p>执行 <code>s = \"abc\"; s[0] = \"A\"</code> 会引发 <code>TypeError</code>。想得到新字符串，只能重新赋值，例如 <code>s = \"A\" + s[1:]</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "2.7 字符串格式化",
+      "html": "<p>最常考的是 <code>format()</code> 方法，用 <code>{}</code> 占位：</p><ul><li><code>\"{:.2f}\".format(3.14159)</code> → <code>3.14</code>（保留两位小数）；</li><li><code>\"{0}的{1}\".format(\"我\", \"书\")</code> → 按位置取参数；</li><li><code>\"{name}\".format(name=\"小明\")</code> → 按名称取参数；</li><li><code>\"{:>8}\".format(\"ab\")</code> → 右对齐，宽度 8；</li><li><code>\"{:*^9}\".format(\"ab\")</code> → 居中，用 * 填充。</li></ul><p>Python 3.6 以后还支持 f-string：<code>f\"{x:.2f}\"</code>，可读性更好，考试中也可能出现。</p>"
+    },
+    {
+      "type": "code",
+      "title": "format 格式化",
+      "code": "print(\"{:.2f}\".format(3.14159))     # 3.14\nprint(\"{}+{}={}\".format(1, 2, 3))   # 1+2=3\nprint(\"{0}{1}{0}\".format(\"A\", \"B\")) # ABA\nprint(\"{:>6}\".format(\"ab\"))         #     ab\nprint(\"{:*^7}\".format(\"ab\"))        # **ab***\nprint(\"{:,}\".format(1234567))        # 1,234,567\nname, score = \"小明\", 92.5\nprint(f\"{name}的成绩是{score:.1f}分\")  # 小明的成绩是92.5分\n",
+      "note": "格式控制符写在冒号后面：.2f 表示两位小数，> 右对齐，^ 居中，, 表示千位分隔。"
+    },
+    {
+      "type": "text",
+      "title": "2.8 类型转换",
+      "html": "<p>常见转换函数：<code>int()</code>、<code>float()</code>、<code>str()</code>、<code>bool()</code>、<code>list()</code>、<code>tuple()</code>、<code>set()</code>。</p><ul><li><code>int(\"12\")</code> 成功；<code>int(\"12.5\")</code> 失败，因为字符串不是整数字面量；</li><li><code>int(12.9)</code> 得到 12，向零截断；</li><li><code>float(\"1.2\")</code> 得到 1.2；<code>float(\"abc\")</code> 引发 ValueError；</li><li><code>str(12.0)</code> 得到 \"12.0\"；</li><li><code>bool(0)</code>、<code>bool(\"\")</code>、<code>bool([])</code> 都是 False，其余大多数对象为 True。</li></ul>"
+    },
+    {
+      "type": "code",
+      "title": "类型转换与真假值",
+      "code": "print(int(\"12\"), int(12.9), int(-12.9))  # 12 12 -12\nprint(float(\"1.5\"), str(12))             # 1.5 12\nprint(list(\"abc\"))                       # ['a', 'b', 'c']\nprint(bool(0), bool(\"\"), bool([]), bool(\"0\"))  # False False False True\n",
+      "note": "字符串 \"0\" 是非空字符串，bool(\"0\") 为 True，这是常考陷阱。"
+    },
+    {
+      "type": "tip",
+      "title": "本节速记",
+      "html": "<p>整除向下取整、取余符号跟除数；切片左闭右开；字符串不可变；format 的格式符在冒号后；int() 截断而不四舍五入。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0206"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0212"
+    }
+  ],
+  "keypoints": [
+    "0.1+0.2 不等于 0.3，浮点数存在精度误差",
+    "// 向下取整，% 的结果符号与除数相同",
+    "int() 向零截断，round() 采用银行家舍入",
+    "切片 s[start:end:step] 左闭右开，越界不报错",
+    "字符串不可变，方法都返回新字符串",
+    "format 格式控制符：.2f、>、^、,"
+  ],
+  "pitfalls": [
+    "把 5/2 的结果当成整数 2",
+    "认为 -7//2 等于 -3（正确答案是 -4）",
+    "用 int(\"12.5\") 转换小数字符串",
+    "认为 s[0]='A' 可以修改字符串",
+    "把 round(2.5) 算成 3"
+  ],
+  "summary": "数字和字符串是操作题中出现频率最高的两类数据。重点掌握整除取余的符号规律、切片的边界、字符串方法的返回值，以及 format 的格式控制。"
+}

@@ -1,0 +1,359 @@
+{
+  "chapter": "ch06",
+  "questions": [
+    {
+      "id": "q0601",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 lst = [1, 2]，执行 lst.append([3, 4]) 后，lst 的值是：",
+      "options": [
+        "[1, 2, 3, 4]",
+        "[1, 2, 3]",
+        "[[3, 4]]",
+        "[1, 2, [3, 4]]"
+      ],
+      "answer": 3,
+      "explanation": "append 把参数当作一个整体元素追加到末尾，因此列表变成 [1, 2, [3, 4]]。若要逐个加入 3、4，应使用 extend。",
+      "tags": [
+        "append",
+        "extend"
+      ]
+    },
+    {
+      "id": "q0602",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 lst = [3, 1, 2]，执行 result = lst.sort() 后，result 的值是：",
+      "options": [
+        "None",
+        "[1, 2, 3]",
+        "[3, 1, 2]",
+        "True"
+      ],
+      "answer": 0,
+      "explanation": "sort() 原地排序，返回值为 None。lst 本身已变为 [1, 2, 3]，但 result 是 None。",
+      "tags": [
+        "sort",
+        "返回值"
+      ]
+    },
+    {
+      "id": "q0603",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "下列操作中，不会修改原列表的是：",
+      "options": [
+        "lst.append(1)",
+        "sorted(lst)",
+        "lst.sort()",
+        "lst.reverse()"
+      ],
+      "answer": 1,
+      "explanation": "sorted(lst) 返回排序后的新列表，原列表不变。append、sort、reverse 都直接修改原列表。",
+      "tags": [
+        "sorted",
+        "sort"
+      ]
+    },
+    {
+      "id": "q0604",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 lst = [10, 20, 30]，执行 x = lst.pop() 后，x 和 lst 分别是：",
+      "options": [
+        "10 和 [20, 30]",
+        "30 和 [10, 20, 30]",
+        "30 和 [10, 20]",
+        "None 和 [10, 20]"
+      ],
+      "answer": 2,
+      "explanation": "pop() 不写参数时删除并返回最后一个元素 30，列表剩下 [10, 20]。",
+      "tags": [
+        "pop"
+      ]
+    },
+    {
+      "id": "q0605",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "已知 lst = [1, 2, 1, 3]，执行 lst.remove(1) 后，lst 的值是：",
+      "options": [
+        "[2, 3]",
+        "[1, 2, 3]",
+        "[1, 2, 1, 3]",
+        "[2, 1, 3]"
+      ],
+      "answer": 3,
+      "explanation": "remove(x) 只删除第一个值为 x 的元素，因此删除下标 0 的 1，剩下 [2, 1, 3]。",
+      "tags": [
+        "remove"
+      ]
+    },
+    {
+      "id": "q0606",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "已知 lst = [1, 2, 3, 4]，执行 lst[1:3] = [9] 后，lst 的值是：",
+      "options": [
+        "[1, 9, 4]",
+        "[1, 9, 3, 4]",
+        "[9, 3, 4]",
+        "[1, 2, 9, 4]"
+      ],
+      "answer": 0,
+      "explanation": "切片赋值把下标 1、2（不包含 3）的两个元素替换为 9，列表长度减少，结果为 [1, 9, 4]。",
+      "tags": [
+        "切片赋值"
+      ]
+    },
+    {
+      "id": "q0607",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "表达式 [x * 2 for x in range(1, 5) if x % 2 == 0] 的值是：",
+      "options": [
+        "[2, 4, 6, 8]",
+        "[4, 8]",
+        "[2, 4]",
+        "[4, 6, 8]"
+      ],
+      "answer": 1,
+      "explanation": "range(1,5) 中偶数只有 2 和 4，分别乘以 2 得到 4 和 8，结果为 [4, 8]。",
+      "tags": [
+        "列表推导式"
+      ]
+    },
+    {
+      "id": "q0608",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "表达式 [1, 2] * 2 的值是：",
+      "options": [
+        "[2, 4]",
+        "[[1, 2], [1, 2]]",
+        "[1, 2, 1, 2]",
+        "[1, 2, 2]"
+      ],
+      "answer": 2,
+      "explanation": "列表与整数相乘表示重复列表内容，返回新列表 [1, 2, 1, 2]，不会做数值乘法。",
+      "tags": [
+        "列表",
+        "运算符"
+      ]
+    },
+    {
+      "id": "q0609",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 lst = [[1, 2], [3, 4]]，表达式 lst[1][0] 的值是：",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "answer": 3,
+      "explanation": "lst[1] 取出内层列表 [3, 4]，再取 [0] 得到 3。嵌套列表用连续下标访问。",
+      "tags": [
+        "嵌套列表",
+        "索引"
+      ]
+    },
+    {
+      "id": "q0610",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\na = [1, 2]\nb = a\nb.append(3)\nprint(a)",
+      "code": "a = [1, 2]\nb = a\nb.append(3)\nprint(a)",
+      "options": [
+        "[1, 2, 3]",
+        "[1, 2]",
+        "[3]",
+        "程序报错"
+      ],
+      "answer": 0,
+      "explanation": "b = a 只是创建别名，两个变量指向同一个列表对象。通过 b 修改内容，a 看到的结果也会改变。",
+      "tags": [
+        "别名",
+        "引用"
+      ]
+    },
+    {
+      "id": "q0611",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\na = [1, 2]\nb = a[:]\nb.append(3)\nprint(a, b)",
+      "code": "a = [1, 2]\nb = a[:]\nb.append(3)\nprint(a, b)",
+      "options": [
+        "[1, 2, 3] [1, 2, 3]",
+        "[1, 2] [1, 2, 3]",
+        "[1, 2, 3] [1, 2]",
+        "[1, 2] [1, 2]"
+      ],
+      "answer": 1,
+      "explanation": "a[:] 创建了浅拷贝，b 是新的列表对象。修改 b 不会影响 a，因此输出 [1, 2] [1, 2, 3]。",
+      "tags": [
+        "浅拷贝",
+        "切片"
+      ]
+    },
+    {
+      "id": "q0612",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "创建只包含一个元素 1 的元组，正确的写法是：",
+      "options": [
+        "(1)",
+        "[1]",
+        "(1,)",
+        "tuple(1)"
+      ],
+      "answer": 2,
+      "explanation": "单元素元组必须带逗号，(1,) 才是元组；(1) 只是整数 1；tuple(1) 会报错，因为 1 不是可迭代对象。",
+      "tags": [
+        "元组"
+      ]
+    },
+    {
+      "id": "q0613",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "关于元组，下列说法正确的是：",
+      "options": [
+        "元组创建后可以修改其中的元素",
+        "元组必须用方括号表示",
+        "元组中不能包含列表",
+        "元组可以作为字典的键"
+      ],
+      "answer": 3,
+      "explanation": "元组是不可变对象，可以作为字典的键（键必须可哈希）。元组可以包含列表等可变对象，但此时元组本身不再可哈希。",
+      "tags": [
+        "元组",
+        "不可变"
+      ]
+    },
+    {
+      "id": "q0614",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "执行 a, b = (3, 5) 后，a 和 b 的值分别是：",
+      "options": [
+        "3 和 5",
+        "5 和 3",
+        "(3,5) 和 None",
+        "程序报错"
+      ],
+      "answer": 0,
+      "explanation": "元组解包按位置依次赋值，a=3，b=5。",
+      "tags": [
+        "解包",
+        "元组"
+      ]
+    },
+    {
+      "id": "q0615",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nfor i, ch in enumerate(\"ab\", start=1):\n    print(i, ch)",
+      "code": "for i, ch in enumerate(\"ab\", start=1):\n    print(i, ch)",
+      "options": [
+        "0 a 换行 1 b",
+        "1 a 换行 2 b",
+        "1 a 2 b 在同一行",
+        "a 1 换行 b 2"
+      ],
+      "answer": 1,
+      "explanation": "enumerate 的 start=1 让编号从 1 开始，依次输出 1 a 和 2 b，每次 print 默认换行。",
+      "tags": [
+        "enumerate"
+      ]
+    },
+    {
+      "id": "q0616",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "已知 a = [1, 2, 3]，b = [4, 5]，执行 list(zip(a, b)) 的结果是：",
+      "options": [
+        "[(1, 4), (2, 5), (3, None)]",
+        "[(1, 2, 3), (4, 5)]",
+        "[(1, 4), (2, 5)]",
+        "[1, 4, 2, 5]"
+      ],
+      "answer": 2,
+      "explanation": "zip 按位置配对，长度以较短的序列为准。a 有 3 个元素、b 有 2 个，因此只产生 2 个元组。",
+      "tags": [
+        "zip"
+      ]
+    },
+    {
+      "id": "q0617",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 lst = [1, 2, 3]，执行 lst[3] 的结果是：",
+      "options": [
+        "返回 3",
+        "返回 None",
+        "引发 KeyError",
+        "引发 IndexError"
+      ],
+      "answer": 3,
+      "explanation": "列表下标从 0 开始，合法下标是 0、1、2。访问下标 3 越界，抛出 IndexError。",
+      "tags": [
+        "索引",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0618",
+      "chapter": "ch06",
+      "difficulty": 1,
+      "stem": "已知 nums = [4, 1, 7, 3]，表达式 max(nums) - min(nums) 的值是：",
+      "options": [
+        "6",
+        "3",
+        "4",
+        "7"
+      ],
+      "answer": 0,
+      "explanation": "最大值为 7，最小值为 1，差为 6。",
+      "tags": [
+        "max",
+        "min"
+      ]
+    },
+    {
+      "id": "q0619",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "已知 lst = [1, 2, 3]，执行 del lst[1] 后，lst 的值是：",
+      "options": [
+        "[2, 3]",
+        "[1, 3]",
+        "[1, 2]",
+        "[1, 2, 3]"
+      ],
+      "answer": 1,
+      "explanation": "del lst[1] 删除下标 1 的元素 2，剩下 [1, 3]。del 也可以删除切片或多个元素。",
+      "tags": [
+        "del"
+      ]
+    },
+    {
+      "id": "q0620",
+      "chapter": "ch06",
+      "difficulty": 2,
+      "stem": "已知 lst = [1, 3]，执行 lst.insert(1, 2) 后，lst 的值是：",
+      "options": [
+        "[1, 3, 2]",
+        "[2, 1, 3]",
+        "[1, 2, 3]",
+        "[1, 3]"
+      ],
+      "answer": 2,
+      "explanation": "insert(i, x) 把 x 插入到下标 i 之前。插入到下标 1 之前，即 1 和 3 之间，结果为 [1, 2, 3]。",
+      "tags": [
+        "insert"
+      ]
+    }
+  ]
+}
