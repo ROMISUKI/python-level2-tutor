@@ -44,8 +44,16 @@ jobs:
         run: |
           $zip = Get-ChildItem dist/*.zip | Select-Object -First 1
           $sha = Get-ChildItem dist/*.sha256 | Select-Object -First 1
-          gh release create $env:GITHUB_REF_NAME `
-            $zip.FullName `
-            $sha.FullName `
-            --title "Python 二级通关 $env:GITHUB_REF_NAME" `
-            --notes-file CHANGELOG.md
+          gh release view $env:GITHUB_REF_NAME *> $null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $env:GITHUB_REF_NAME $zip.FullName $sha.FullName --clobber
+            gh release edit $env:GITHUB_REF_NAME `
+              --title "Python 二级通关 $env:GITHUB_REF_NAME" `
+              --notes-file CHANGELOG.md
+          } else {
+            gh release create $env:GITHUB_REF_NAME `
+              $zip.FullName `
+              $sha.FullName `
+              --title "Python 二级通关 $env:GITHUB_REF_NAME" `
+              --notes-file CHANGELOG.md
+          }
