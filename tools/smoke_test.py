@@ -39,6 +39,9 @@ def check(condition, message, problems):
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     base = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8765"
     client = Client(base)
     problems = []

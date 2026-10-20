@@ -17,6 +17,9 @@ TARGETS = [0, 1, 2, 3]
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     apply = "--apply" in sys.argv
     files = sorted(QUESTIONS.glob("*.json"))
     payloads = {path: json.loads(path.read_text(encoding="utf-8")) for path in files}
