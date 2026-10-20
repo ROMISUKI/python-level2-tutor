@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  windows-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Validate content
+        run: python tools/validate_content.py
+
+      - name: Build Windows package
+        run: ./build.ps1 -OutDir dist -Version ${{ github.ref_name }}
+
+      - name: Create GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $zip = Get-ChildItem dist/*.zip | Select-Object -First 1
+          $sha = Get-ChildItem dist/*.sha256 | Select-Object -First 1
+          gh release create $env:GITHUB_REF_NAME `
+            $zip.FullName `
+            $sha.FullName `
+            --title "Python 二级通关 $env:GITHUB_REF_NAME" `
+            --notes-file CHANGELOG.md

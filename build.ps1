@@ -7,6 +7,7 @@ $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 Set-Location $root
 
+$Version = $Version.TrimStart('v')
 $appName = 'Python二级通关'
 $appDir = Join-Path $OutDir $appName
 $zipPath = Join-Path $OutDir "PythonLevel2Tutor-v$Version-win64.zip"
