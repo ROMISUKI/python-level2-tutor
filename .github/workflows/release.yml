@@ -31,9 +31,6 @@ jobs:
         run: |
           python -u tools/validate_content.py 2>&1 | Tee-Object -FilePath validate.log
           $code = $LASTEXITCODE
-          if ($code -ne 0) {
-            Get-Content validate.log | Select-Object -Last 40 | ForEach-Object { Write-Output "::error::$_" }
-          }
           Get-Content validate.log | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
           exit $code
 

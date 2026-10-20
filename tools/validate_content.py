@@ -1,8 +1,10 @@
 """Validate bundled curriculum: schema, cross references, runnable examples, exercise tests."""
 from __future__ import annotations
 
+import os
 import sys
 import time
+import traceback
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -61,8 +63,15 @@ def main() -> int:
         for index, section in enumerate(chapter.get("sections", []), start=1):
             if section.get("type") != "code" or section.get("run") is False:
                 continue
-            result = run_code(section["code"], section.get("stdin", ""), timeout=6)
             label = f"{cid} 示例{index} {section.get('title', '')}"
+            try:
+                result = run_code(section["code"], section.get("stdin", ""), timeout=6)
+            except Exception as exc:  # pragma: no cover - diagnostics
+                failures += 1
+                problems.append(f"{label} 验证时异常: {exc!r}")
+                traceback.print_exc()
+                print(f"[FAIL] {label} 异常")
+                continue
             if not result["ok"]:
                 failures += 1
                 problems.append(f"{label} 运行失败: {result['stderr'][:300]}")
@@ -77,26 +86,31 @@ def main() -> int:
         exercise = content.exercises[eid]
         solution = exercise["solution"]
         tests = exercise["tests"]
-        result = grade(solution, tests, timeout=6)
-        if not result["allPassed"]:
-            problems.append(f"{eid} 参考答案未通过全部测试 ({result['passed']}/{result['total']})")
-            print(f"[FAIL] {eid} {exercise['title']} {result['passed']}/{result['total']}")
-            for item in result["results"]:
-                if not item["passed"]:
-                    print(
-                        f"       测试 {item['index']} {item['name']}: "
-                        f"期望 {normalize_output(item['expected'])!r} "
-                        f"实际 {normalize_output(item['actual'])!r} "
-                        f"stderr={item['stderr'][:200]!r}"
-                    )
-        else:
-            print(f"[ OK ] {eid} {exercise['title']} ({result['total']} 项)")
-        # Samples should agree with tests / solution
-        for sample in exercise.get("samples", []):
-            outcome = run_code(solution, sample.get("stdin", ""), timeout=6, files=sample.get("files"))
-            if not outcome["ok"] or normalize_output(outcome["stdout"]) != normalize_output(sample["stdout"]):
-                problems.append(f"{eid} 样例输出与参考程序不一致")
-                print(f"       样例不一致: 期望 {sample['stdout']!r} 实际 {outcome['stdout']!r}")
+        try:
+            result = grade(solution, tests, timeout=6)
+            if not result["allPassed"]:
+                problems.append(f"{eid} 参考答案未通过全部测试 ({result['passed']}/{result['total']})")
+                print(f"[FAIL] {eid} {exercise['title']} {result['passed']}/{result['total']}")
+                for item in result["results"]:
+                    if not item["passed"]:
+                        print(
+                            f"       测试 {item['index']} {item['name']}: "
+                            f"期望 {normalize_output(item['expected'])!r} "
+                            f"实际 {normalize_output(item['actual'])!r} "
+                            f"stderr={item['stderr'][:200]!r}"
+                        )
+            else:
+                print(f"[ OK ] {eid} {exercise['title']} ({result['total']} 项)")
+            # Samples should agree with tests / solution
+            for sample in exercise.get("samples", []):
+                outcome = run_code(solution, sample.get("stdin", ""), timeout=6, files=sample.get("files"))
+                if not outcome["ok"] or normalize_output(outcome["stdout"]) != normalize_output(sample["stdout"]):
+                    problems.append(f"{eid} 样例输出与参考程序不一致")
+                    print(f"       样例不一致: 期望 {sample['stdout']!r} 实际 {outcome['stdout']!r}")
+        except Exception as exc:  # pragma: no cover - diagnostics
+            problems.append(f"{eid} 验证时异常: {exc!r}")
+            traceback.print_exc()
+            print(f"[FAIL] {eid} 异常")
 
     print("\n== 结果 ==")
     if warnings:
@@ -108,6 +122,10 @@ def main() -> int:
         for item in problems:
             print(" -", item)
         print(f"\n共 {len(problems)} 个问题")
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            for item in problems:
+                message = " ".join(str(item).split())[:900]
+                print(f"::error::{message}")
         return 1
     print("全部通过。")
     return 0
