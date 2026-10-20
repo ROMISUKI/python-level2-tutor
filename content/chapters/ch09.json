@@ -94,8 +94,8 @@
     {
       "type": "code",
       "title": "时间格式化与计时",
-      "code": "import time\n\nnow = time.localtime()\nprint(time.strftime(\"%Y-%m-%d %H:%M:%S\", now))\nprint(time.strftime(\"%Y年%m月%d日\", now))\n\nstart = time.perf_counter()\ntime.sleep(0.1)\nend = time.perf_counter()\nprint(round(end - start, 2))   # 约 0.10\n",
-      "note": "strftime 的第一参数是格式字符串，第二参数是时间结构；不传第二参数时默认使用当前时间。"
+      "code": "import time\n\nnow = time.localtime()\nprint(time.strftime(\"%Y-%m-%d %H:%M:%S\", now))\nprint(f\"{now.tm_year}年{now.tm_mon:02d}月{now.tm_mday:02d}日\")\n\nstart = time.perf_counter()\ntime.sleep(0.1)\nend = time.perf_counter()\nprint(round(end - start, 2))   # 约 0.10\n",
+      "note": "strftime 的第一参数是格式字符串，第二参数是时间结构；不传第二参数时默认使用当前时间。格式字符串里的非 ASCII 字符在部分系统上会因本地编码报错，中文建议在 Python 层拼接。"
     },
     {
       "type": "text",
