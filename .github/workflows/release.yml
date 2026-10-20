@@ -27,7 +27,15 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Validate content
-        run: python tools/validate_content.py
+        shell: pwsh
+        run: |
+          python -u tools/validate_content.py 2>&1 | Tee-Object -FilePath validate.log
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            Get-Content validate.log | Select-Object -Last 40 | ForEach-Object { Write-Output "::error::$_" }
+          }
+          Get-Content validate.log | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          exit $code
 
       - name: Build Windows package
         run: ./build.ps1 -OutDir dist -Version ${{ github.ref_name }}
