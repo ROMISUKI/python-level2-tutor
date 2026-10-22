@@ -1,0 +1,43 @@
+name: Deploy mobile PWA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mobile/**"
+      - "content/**"
+      - "tools/build_mobile.py"
+      - "tools/fetch_pyodide.py"
+      - "build-mobile.ps1"
+      - ".github/workflows/deploy-mobile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Fetch Pyodide runtime
+        run: python tools/fetch_pyodide.py
+
+      - name: Build PWA
+        run: python tools/build_mobile.py
+
+      - name: Publish gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./mobile-dist
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
