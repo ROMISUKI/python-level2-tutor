@@ -91,13 +91,13 @@ Windows 包解压后运行 `Python二级通关.exe`。首次启动会引导设�
 
 Android 包直接传到手机安装；首次安装需在系统设置中允许「安装未知来源应用」。SHA256 见 Release 中的 `.sha256` 文件。
 
-学习数据保存在：
+Windows 桌面版的学习数据保存在：
 
 ```text
 %APPDATA%\PythonLevel2Tutor\progress.db
 ```
 
-应用只监听 `127.0.0.1` 的随机端口，不向外部网络发送任何内容。
+Android 版的学习数据保存在 WebView 的 localStorage，可通过设置页导出 JSON。Windows 桌面版只监听 `127.0.0.1` 的随机端口，不向外部网络发送任何内容。
 
 ## 系统要求
 
