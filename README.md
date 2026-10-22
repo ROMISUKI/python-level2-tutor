@@ -50,6 +50,8 @@ https://romisuki.github.io/python-level2-tutor/
 | --- | --- |
 | ![手机首页](docs/mobile-screenshots/home.png) | ![手机答题](docs/mobile-screenshots/practice.png) |
 
+> 手机版源码在 `mobile/`。运行 `.\build-mobile.ps1` 生成 `mobile-dist/`，再把内容发布到 `gh-pages` 分支即可更新。
+
 ## 下载使用
 
 从 [Releases](https://github.com/ROMISUKI/python-level2-tutor/releases) 下载：
