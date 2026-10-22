@@ -6,6 +6,9 @@ dist/
 release/
 mobile-dist/
 mobile/vendor/pyodide/
+android/build/
+android/app/src/main/assets/
+android/*.jks
 __pycache__/
 *.py[cod]
 *$py.class

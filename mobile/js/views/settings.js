@@ -102,7 +102,7 @@ export async function render(root) {
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="install-card">
           <div class="card-head"><h2 class="card-title">${icon("sparkles")} 安装到手机主屏幕</h2></div>
           <div class="card-body">
             <div class="small" style="color:var(--text-2);line-height:1.8">
@@ -124,6 +124,8 @@ export async function render(root) {
       </div>
     </div>
   </div>`;
+
+  if (window.AndroidApp) document.getElementById("install-card")?.remove();
 
   async function save(patch, message = "已保存") {
     try {
@@ -160,11 +162,18 @@ export async function render(root) {
   document.getElementById("export-data").addEventListener("click", async () => {
     try {
       const data = await api.exportData();
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const json = JSON.stringify(data, null, 2);
+      const filename = `python-level2-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      if (window.AndroidApp?.saveFile) {
+        window.AndroidApp.saveFile(filename, json);
+        toast("请选择保存位置", "success");
+        return;
+      }
+      const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `python-level2-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      link.download = filename;
       link.click();
       URL.revokeObjectURL(url);
       toast("备份已导出", "success");

@@ -234,6 +234,7 @@ async function onboarding() {
 }
 
 function registerServiceWorker() {
+  if (window.AndroidApp) return;
   if (!("serviceWorker" in navigator)) return;
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch(() => {

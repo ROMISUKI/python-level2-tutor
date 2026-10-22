@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![Content: CC BY-NC-SA 4.0](https://img.shields.io/badge/content-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-CONTENT)
-[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4.svg)](#系统要求)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android%20%7C%20PWA-0078D4.svg)](#系统要求)
 
 ![首页](docs/screenshots/home.png)
 
@@ -52,6 +52,32 @@ https://romisuki.github.io/python-level2-tutor/
 
 > 手机版源码在 `mobile/`。运行 `.\build-mobile.ps1` 生成 `mobile-dist/`，再把内容发布到 `gh-pages` 分支即可更新。
 
+## Android APK
+
+同一套手机页面也打包为原生 Android WebView APK，离线可用，不需要先安装 PWA：
+
+- 包名：`com.duan.pythonlevel2`；最低 Android 7.0（API 24）。
+- 页面、题库和 Pyodide 全部放在 APK 的 `assets/www/`，通过本地 HTTPS 资产层加载。
+- 学习数据保存在 WebView 的本地存储；设置页支持 JSON 备份导出 / 导入。
+- 发布包由本地密钥签名，适合直接安装测试；未上架 Google Play。
+
+构建（需要 JDK 17、Android SDK Platform 35、Build-Tools 35.0.0）：
+
+```powershell
+.\build-mobile.ps1
+.\android\build-apk.ps1
+```
+
+脚本优先使用 `ANDROID_HOME` / `JAVA_HOME`；本机未设置时回退到 `X:\OpenCodeTools\android-sdk`。输出：
+
+```text
+android\build\Python二级通关.apk
+```
+
+首次构建会生成 `android\pyl2-release.jks`（已 gitignore）。这是本地 sideload 签名密钥，不要提交；如果要长期分发，请备份并妥善保管。
+
+> Android WebView 的 Python 运行时仍使用 Pyodide，首次运行代码题需要几秒加载；APK 已内置运行时，不会联网下载。
+
 ## 下载使用
 
 从 [Releases](https://github.com/ROMISUKI/python-level2-tutor/releases) 下载：
@@ -73,10 +99,11 @@ PythonLevel2Tutor-v1.0.0-win64.zip
 ## 系统要求
 
 - Windows 10 / 11（x64）
-- 运行发布包：通常无需额外安装，系统自带 WebView2 运行时
-- 从源码运行：Python 3.10+
+- 运行 Windows 发布包：通常无需额外安装，系统自带 WebView2 运行时
+- 从源码运行桌面版：Python 3.10+
+- Android 7.0+（API 24），建议保持系统 WebView 为较新版本
 
-本项目的窗口层使用 pywebview + Edge WebView2，代码执行使用 Windows 子进程与 `taskkill`，因此目前只支持 Windows。
+桌面窗口层使用 pywebview + Edge WebView2，代码执行使用 Windows 子进程与 `taskkill`。Android 版是独立的原生 WebView 壳，代码题使用 Pyodide，不依赖 Windows 后端。
 
 ## 从源码运行
 
@@ -172,12 +199,14 @@ python-level2-tutor/
 │  ├─ runner.py         代码执行与测试点判分
 │  └─ paths.py          资源与数据目录
 ├─ content/             课程、题库、代码题、速查（JSON）
-├─ web/                 前端（原生 ES Modules + CodeMirror 5）
+├─ web/                 桌面前端（原生 ES Modules + CodeMirror 5）
+├─ mobile/              手机 PWA / Android 共用前端
+├─ android/             原生 Android WebView 壳与 APK 构建脚本
 ├─ tools/               内容校验、答案均衡、冒烟测试、图标生成
 ├─ packaging/           PyInstaller 版本信息
 ├─ docs/screenshots/    README 截图
 ├─ licenses/            第三方许可证全文
-├─ build.ps1            打包并生成发布 zip
+├─ build.ps1            打包并生成 Windows 发布 zip
 └─ run_app.py           PyInstaller 入口
 ```
 
