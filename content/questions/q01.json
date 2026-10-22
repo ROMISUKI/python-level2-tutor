@@ -1,0 +1,363 @@
+{
+  "chapter": "ch01",
+  "questions": [
+    {
+      "id": "q0101",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "关于 Python 的缩进，下列说法正确的是：",
+      "options": [
+        "同一代码块中的语句必须保持相同的缩进量",
+        "缩进只是为了美观，不影响程序运行",
+        "每行代码都必须缩进 4 个空格",
+        "缩进可以使用任意数量的空格，同一代码块也可以不一致"
+      ],
+      "answer": 0,
+      "explanation": "Python 用缩进表示代码块，同一代码块内缩进量必须一致。顶层语句不缩进，缩进量约定为 4 个空格但并非固定值；缩进不一致会导致 IndentationError。",
+      "tags": [
+        "缩进",
+        "格式"
+      ]
+    },
+    {
+      "id": "q0102",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "下列选项中，可以作为 Python 变量名的是：",
+      "options": [
+        "2nd_score",
+        "_score2",
+        "my-score",
+        "class"
+      ],
+      "answer": 1,
+      "explanation": "变量名不能以数字开头，不能包含减号，不能使用保留字。_score2 以下划线开头，包含字母和数字，合法。",
+      "tags": [
+        "标识符",
+        "命名"
+      ]
+    },
+    {
+      "id": "q0103",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "执行语句 x = input(\"请输入：\")，若用户输入 18 并回车，则变量 x 的类型是：",
+      "options": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ],
+      "answer": 2,
+      "explanation": "input() 始终返回字符串。即使输入的内容看起来是数字，x 的值也是字符串 \"18\"，需要 int(x) 才能得到整数。",
+      "tags": [
+        "input",
+        "类型"
+      ]
+    },
+    {
+      "id": "q0104",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "语句 print(1, 2, 3, sep=\"-\") 的输出结果是：",
+      "options": [
+        "1 2 3",
+        "123",
+        "1,2,3",
+        "1-2-3"
+      ],
+      "answer": 3,
+      "explanation": "sep 参数指定多个输出对象之间的分隔符，默认是空格。这里指定为减号，因此输出 1-2-3。",
+      "tags": [
+        "print",
+        "sep"
+      ]
+    },
+    {
+      "id": "q0105",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "下列单词中，属于 Python 保留字的是：",
+      "options": [
+        "lambda",
+        "print",
+        "input",
+        "type"
+      ],
+      "answer": 0,
+      "explanation": "lambda 是保留字（用于定义匿名函数）。print、input、type 都是内置函数名，不是保留字，但也不建议用作变量名。",
+      "tags": [
+        "保留字"
+      ]
+    },
+    {
+      "id": "q0106",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "执行下列语句后，输出的结果是：\na, b = 3, 8\na, b = b, a\nprint(a, b)",
+      "code": "a, b = 3, 8\na, b = b, a\nprint(a, b)",
+      "options": [
+        "3 8",
+        "8 3",
+        "3 3",
+        "8 8"
+      ],
+      "answer": 1,
+      "explanation": "同步赋值先计算等号右边 (b, a) 得到 (8, 3)，再依次赋给 a、b，因此输出 8 3，完成了变量交换。",
+      "tags": [
+        "赋值",
+        "交换"
+      ]
+    },
+    {
+      "id": "q0107",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "执行 print(type(True)) 的输出结果是：",
+      "options": [
+        "<class 'int'>",
+        "<class 'str'>",
+        "<class 'bool'>",
+        "True"
+      ],
+      "answer": 2,
+      "explanation": "True 的类型是 bool。虽然 bool 是 int 的子类，isinstance(True, int) 为 True，但 type(True) 精确返回 bool。",
+      "tags": [
+        "type",
+        "bool"
+      ]
+    },
+    {
+      "id": "q0108",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "关于 Python 注释，下列说法错误的是：",
+      "options": [
+        "单行注释以 # 开头",
+        "# 后的内容不会被执行",
+        "三引号包围的内容在语法上是字符串",
+        "注释会被编译成机器码，因此会增加程序运行时间"
+      ],
+      "answer": 3,
+      "explanation": "注释只是给人阅读的说明，不参与执行，也不会编译成机器码。# 用于单行注释；三引号本质是字符串，未赋值时不产生实际效果，常被当作多行注释。",
+      "tags": [
+        "注释"
+      ]
+    },
+    {
+      "id": "q0109",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "执行下列语句后，x、y、z 的值分别是：\nx = y = z = 0\nx = 5",
+      "code": "x = y = z = 0\nx = 5\nprint(x, y, z)",
+      "options": [
+        "5 0 0",
+        "5 5 5",
+        "0 0 5",
+        "5 0 5"
+      ],
+      "answer": 0,
+      "explanation": "链式赋值让 x、y、z 都指向整数 0。随后 x = 5 只是让 x 重新指向 5，整数不可变，y、z 仍为 0。",
+      "tags": [
+        "赋值",
+        "链式赋值"
+      ]
+    },
+    {
+      "id": "q0110",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "执行下列程序，输出结果是：\nprint(\"A\", end=\"\")\nprint(\"B\")",
+      "code": "print(\"A\", end=\"\")\nprint(\"B\")",
+      "options": [
+        "A B",
+        "AB",
+        "A\\nB",
+        "B A"
+      ],
+      "answer": 1,
+      "explanation": "第一个 print 用 end=\"\" 取消了默认换行，第二个 print 紧接着输出 B，因此同一行得到 AB。",
+      "tags": [
+        "print",
+        "end"
+      ]
+    },
+    {
+      "id": "q0111",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "执行语句 x = eval(\"1+2\") 后，x 的值和类型是：",
+      "options": [
+        "字符串 \"1+2\"",
+        "浮点数 3.0",
+        "整数 3",
+        "字符串 \"3\""
+      ],
+      "answer": 2,
+      "explanation": "eval() 会把字符串当作 Python 表达式求值，1+2 的结果是整数 3。若写成 eval(\"3.0\") 则得到浮点数。",
+      "tags": [
+        "eval",
+        "类型转换"
+      ]
+    },
+    {
+      "id": "q0112",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "下列符号中，不能用于表示 Python 注释的是：",
+      "options": [
+        "#",
+        "'''",
+        "\"\"\"",
+        "//"
+      ],
+      "answer": 3,
+      "explanation": "# 是单行注释；三引号字符串常被用作多行注释；// 是 C/Java 的注释符号，在 Python 中表示整除运算符。",
+      "tags": [
+        "注释"
+      ]
+    },
+    {
+      "id": "q0113",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "下列变量名中，全部合法的一组是：",
+      "options": [
+        "_a1、abc_2、姓名",
+        "1a、abc-2、if",
+        "a b、True、x2",
+        "for、x_1、class"
+      ],
+      "answer": 0,
+      "explanation": "第一组三个标识符分别以下划线开头、字母加下划线数字、汉字，均合法。其余各组包含数字开头、空格、减号或保留字。",
+      "tags": [
+        "标识符"
+      ]
+    },
+    {
+      "id": "q0114",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "语句 print(\"Python\", \"二级\") 的输出结果是：",
+      "options": [
+        "Python 二级",
+        "Python二级",
+        "Python,二级",
+        "Python\\n二级"
+      ],
+      "answer": 0,
+      "explanation": "print 输出多个对象时默认用空格分隔，因此两个字符串之间有一个空格。",
+      "tags": [
+        "print"
+      ]
+    },
+    {
+      "id": "q0115",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "运行下列程序，输入 12 和 30 后，输出结果是：\na = input()\nb = input()\nprint(a + b)",
+      "code": "a = input()\nb = input()\nprint(a + b)",
+      "options": [
+        "42",
+        "1230",
+        "12 30",
+        "程序报错"
+      ],
+      "answer": 1,
+      "explanation": "input() 返回字符串，a + b 执行的是字符串拼接，因此 \"12\" + \"30\" 得到 \"1230\"。若要得到 42，应写成 int(a) + int(b)。",
+      "tags": [
+        "input",
+        "字符串拼接"
+      ]
+    },
+    {
+      "id": "q0116",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "执行语句 a, b = 1, 2, 3 的结果是：",
+      "options": [
+        "a=1，b=2，多余的 3 被忽略",
+        "a=1，b=2，3 赋给 b",
+        "引发 ValueError",
+        "引发 SyntaxError"
+      ],
+      "answer": 2,
+      "explanation": "同步赋值要求等号两边数量一致。右边有 3 个值，左边只有 2 个变量，会引发 ValueError: too many values to unpack。",
+      "tags": [
+        "同步赋值",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0117",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "执行语句 print(\"3\" + 2) 的结果是：",
+      "options": [
+        "5",
+        "32",
+        "引发 ValueError",
+        "引发 TypeError"
+      ],
+      "answer": 3,
+      "explanation": "字符串不能直接与整数相加。Python 不会自动把 \"3\" 转成数字，会引发 TypeError。可以写成 int(\"3\") + 2。",
+      "tags": [
+        "类型",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0118",
+      "chapter": "ch01",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nx = 10\nif x > 5:\n    print(\"big\")\nprint(\"end\")",
+      "code": "x = 10\nif x > 5:\n    print(\"big\")\nprint(\"end\")",
+      "options": [
+        "big 与 end 各占一行",
+        "big",
+        "end",
+        "程序报错"
+      ],
+      "answer": 0,
+      "explanation": "x > 5 成立，执行缩进的 print(\"big\")；最后一条 print(\"end\") 与 if 平级，也会执行。因此两行都会输出。",
+      "tags": [
+        "缩进",
+        "分支"
+      ]
+    },
+    {
+      "id": "q0119",
+      "chapter": "ch01",
+      "difficulty": 3,
+      "stem": "Python 3.10 中保留字的数量是：",
+      "options": [
+        "33 个",
+        "35 个",
+        "36 个",
+        "没有固定数量"
+      ],
+      "answer": 1,
+      "explanation": "Python 3.10 共有 35 个保留字，如 False、None、True、and、as、assert、async、await、break、class 等。match 和 case 是软关键字，不计入保留字。",
+      "tags": [
+        "保留字"
+      ]
+    },
+    {
+      "id": "q0120",
+      "chapter": "ch01",
+      "difficulty": 1,
+      "stem": "下列书写习惯中，最符合 Python 代码风格的是：",
+      "options": [
+        "变量名使用大写字母加数字，如 Student1",
+        "为了节省行数，把多条语句写在同一行并用分号隔开",
+        "每级缩进使用 4 个空格，运算符两侧加空格",
+        "所有变量都用 a、b、c 这样的单字母命名"
+      ],
+      "answer": 2,
+      "explanation": "PEP 8 建议每级缩进 4 个空格，运算符两侧留空格，变量名使用小写字母加下划线。单字母命名不利于表达含义，多语句挤在一行也会降低可读性。",
+      "tags": [
+        "代码风格"
+      ]
+    }
+  ]
+}

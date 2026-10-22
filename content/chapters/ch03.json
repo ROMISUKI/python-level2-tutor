@@ -1,0 +1,132 @@
+{
+  "id": "ch03",
+  "module": "m2",
+  "order": 3,
+  "title": "程序的控制结构",
+  "subtitle": "分支、循环与循环控制",
+  "minutes": 60,
+  "objectives": [
+    "掌握单分支、二分支和多分支结构",
+    "熟练使用 for 遍历循环和 range() 函数",
+    "掌握 while 循环及 break、continue 的作用",
+    "理解循环 else 子句的执行时机",
+    "能编写累加、计数、枚举等基础算法"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "3.1 程序的三种控制结构",
+      "html": "<p>任何程序都可以由三种基本结构组合而成：<strong>顺序结构</strong>（语句从上到下依次执行）、<strong>分支结构</strong>（根据条件选择执行路径）、<strong>循环结构</strong>（重复执行某段代码）。Python 中分支用 <code>if</code>，循环用 <code>for</code> 和 <code>while</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "3.2 分支结构",
+      "html": "<p><strong>单分支</strong>：条件成立时执行缩进语句块。<strong>二分支</strong>：用 <code>if...else...</code> 在两条路径中选择一条。<strong>多分支</strong>：用 <code>if...elif...else...</code> 从上到下依次判断，<strong>只有一个分支会被执行</strong>。</p><p>条件表达式（三元运算）写作 <code>A if 条件 else B</code>，条件成立取 A，否则取 B。</p>"
+    },
+    {
+      "type": "code",
+      "title": "多分支与条件表达式",
+      "code": "score = 85\nif score >= 90:\n    level = \"优秀\"\nelif score >= 75:\n    level = \"良好\"\nelif score >= 60:\n    level = \"及格\"\nelse:\n    level = \"不及格\"\nprint(level)                      # 良好\n\nx = 12\nresult = \"偶数\" if x % 2 == 0 else \"奇数\"\nprint(result)                     # 偶数\n",
+      "note": "多分支从上往下判断，一旦某个条件成立，后面的 elif 和 else 都会被跳过。"
+    },
+    {
+      "type": "warn",
+      "title": "条件判断的常见错误",
+      "html": "<p>判断相等要用 <code>==</code>，单个 <code>=</code> 是赋值；判断不相等用 <code>!=</code>。Python 中不能写 <code>if x = 5:</code>，会直接产生语法错误。区间判断可以连写：<code>60 <= score < 90</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "3.3 遍历循环 for",
+      "html": "<p><code>for 变量 in 可迭代对象:</code> 会依次从字符串、列表、元组、字典、range 等对象中取出元素，每取一个执行一次循环体。<code>range()</code> 生成整数序列，是最常用的循环搭档。</p>"
+    },
+    {
+      "type": "table",
+      "title": "range() 的三种写法",
+      "head": ["写法", "生成的序列", "元素个数"],
+      "rows": [
+        ["range(5)", "0, 1, 2, 3, 4", "5"],
+        ["range(1, 5)", "1, 2, 3, 4", "4"],
+        ["range(1, 10, 2)", "1, 3, 5, 7, 9", "5"],
+        ["range(5, 0, -1)", "5, 4, 3, 2, 1", "5"],
+        ["range(0)", "空序列", "0"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "for 与 range",
+      "code": "total = 0\nfor i in range(1, 101):\n    total += i\nprint(\"1 到 100 的和：\", total)    # 5050\n\nfor ch in \"Python\":\n    print(ch, end=\" \")\nprint()                            # P y t h o n\n\nfor i in range(5, 0, -1):\n    print(i, end=\" \")\nprint()                            # 5 4 3 2 1\n",
+      "note": "range(a, b) 包含 a、不包含 b。步长可以为负，此时 a 应大于 b。"
+    },
+    {
+      "type": "text",
+      "title": "3.4 while 循环",
+      "html": "<p><code>while 条件:</code> 在条件为真时反复执行循环体。循环体内部必须有让条件最终变为假的语句，否则会形成无限循环。常用模式是“初始化计数器 → 判断条件 → 循环体 → 更新计数器”。</p>"
+    },
+    {
+      "type": "code",
+      "title": "while 累加与数字拆分",
+      "code": "n = 1\ntotal = 0\nwhile n <= 10:\n    total += n\n    n += 1\nprint(total)          # 55\n\nnum = 12345\nwhile num > 0:\n    print(num % 10, end=\"\")\n    num //= 10\nprint()               # 54321\n",
+      "note": "num % 10 取出个位，num //= 10 去掉个位，这是拆分整数的标准写法。"
+    },
+    {
+      "type": "text",
+      "title": "3.5 break 与 continue",
+      "html": "<p><code>break</code> 立即结束<strong>当前这一层</strong>循环，跳到循环后面的语句；<code>continue</code> 立即结束本次循环，跳过循环体中剩余的语句，直接进入下一次循环。</p><p>在嵌套循环中，break 只跳出它所在的那一层，不会跳出外层循环。</p>"
+    },
+    {
+      "type": "code",
+      "title": "break 与 continue 对比",
+      "code": "for i in range(1, 10):\n    if i == 5:\n        break\n    print(i, end=\" \")\nprint()                    # 1 2 3 4\n\nfor i in range(1, 10):\n    if i % 2 == 0:\n        continue\n    print(i, end=\" \")\nprint()                    # 1 3 5 7 9\n",
+      "note": "break 是“提前收工”，continue 是“跳过这一个”。"
+    },
+    {
+      "type": "text",
+      "title": "3.6 循环的 else 子句",
+      "html": "<p>Python 的 for 和 while 可以带一个 <code>else</code> 子句。它的含义是：<strong>循环正常结束（没有被 break 中断）时执行 else</strong>。如果循环被 break 提前结束，else 不会执行。这个特性常用于“查找失败”的处理。</p>"
+    },
+    {
+      "type": "code",
+      "title": "for-else 判断素数",
+      "code": "n = 29\nfor i in range(2, n):\n    if n % i == 0:\n        print(n, \"不是素数\")\n        break\nelse:\n    print(n, \"是素数\")\n",
+      "note": "循环完整跑完都没有找到因数，说明是素数，此时执行 else。"
+    },
+    {
+      "type": "text",
+      "title": "3.7 嵌套循环",
+      "html": "<p>循环里再写循环叫嵌套循环。外层循环每执行一次，内层循环都要完整执行一轮。嵌套循环常用于打印图形、处理二维数据、枚举组合。</p>"
+    },
+    {
+      "type": "code",
+      "title": "打印九九乘法表的一部分",
+      "code": "for i in range(1, 4):\n    for j in range(1, i + 1):\n        print(f\"{j}x{i}={i*j}\", end=\"\\t\")\n    print()\n",
+      "note": "外层控制行，内层控制每行输出的列数，print() 负责换行。"
+    },
+    {
+      "type": "tip",
+      "title": "循环次数速算",
+      "html": "<p><code>for i in range(a, b, s)</code> 的循环次数为 <code>max(0, ceil((b-a)/s))</code>。考试中更简单的办法是列出首项、末项再数一数。嵌套循环的总次数等于外层次数乘以内层次数。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0305"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0312"
+    }
+  ],
+  "keypoints": [
+    "多分支只执行第一个成立的分支",
+    "range(a,b) 左闭右开，步长可为负",
+    "break 结束本层循环，continue 跳过本次",
+    "循环 else 在未执行 break 时运行",
+    "嵌套循环总次数为各层次数之积"
+  ],
+  "pitfalls": [
+    "把 range(1,5) 当成 1 到 5 共 5 个数",
+    "while 循环忘记更新条件变量导致死循环",
+    "认为 break 能跳出所有嵌套循环",
+    "把 for-else 的 else 理解成“循环没执行时”才运行"
+  ],
+  "summary": "控制结构决定了程序的执行路径。做操作题时，先想清楚“循环几次、每次做什么、什么时候停”，再动手写代码，能避免大多数边界错误。"
+}

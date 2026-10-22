@@ -1,0 +1,365 @@
+{
+  "chapter": "ch02",
+  "questions": [
+    {
+      "id": "q0201",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "在 Python 中，表达式 0.1 + 0.2 == 0.3 的值是：",
+      "options": [
+        "True",
+        "0.3",
+        "引发异常",
+        "False"
+      ],
+      "answer": 3,
+      "explanation": "浮点数在计算机中采用二进制近似存储，0.1 + 0.2 的结果是 0.30000000000000004，并不精确等于 0.3，因此比较结果为 False。",
+      "tags": [
+        "浮点数",
+        "精度"
+      ]
+    },
+    {
+      "id": "q0202",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 -7 // 2 的值是：",
+      "options": [
+        "-4",
+        "-3",
+        "3",
+        "-3.5"
+      ],
+      "answer": 0,
+      "explanation": "// 是向下取整（向负无穷方向），-7/2 = -3.5，向下取整得到 -4。注意不是向零截断的 -3。",
+      "tags": [
+        "整除"
+      ]
+    },
+    {
+      "id": "q0203",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 -7 % 2 的值是：",
+      "options": [
+        "-1",
+        "1",
+        "1.0",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "Python 中取余结果的符号与除数一致。因为 -7 = (-4) * 2 + 1，所以 -7 % 2 等于 1。可用 a == (a//b)*b + a%b 验证。",
+      "tags": [
+        "取余"
+      ]
+    },
+    {
+      "id": "q0204",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 round(2.5) 的值是：",
+      "options": [
+        "3",
+        "2.0",
+        "2",
+        "3.0"
+      ],
+      "answer": 2,
+      "explanation": "Python 的 round 采用“四舍六入五成双”的银行家舍入：恰好为 .5 时取最近的偶数，因此 round(2.5) 为 2，round(3.5) 为 4。",
+      "tags": [
+        "round",
+        "舍入"
+      ]
+    },
+    {
+      "id": "q0205",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "已知 s = \"Python\"，表达式 s[1:4] 的值是：",
+      "options": [
+        "Pyt",
+        "ytho",
+        "tho",
+        "yth"
+      ],
+      "answer": 3,
+      "explanation": "切片包含起始下标 1，不包含结束下标 4，因此取下标 1、2、3 的字符，得到 yth。",
+      "tags": [
+        "切片"
+      ]
+    },
+    {
+      "id": "q0206",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "已知 s = \"Python\"，表达式 s[::-1] 的值是：",
+      "options": [
+        "nohtyP",
+        "Python",
+        "P",
+        "n"
+      ],
+      "answer": 0,
+      "explanation": "切片步长为 -1 时从右向左取所有字符，实现字符串反转，结果为 nohtyP。",
+      "tags": [
+        "切片",
+        "反转"
+      ]
+    },
+    {
+      "id": "q0207",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 len(\"中文abc\") 的值是：",
+      "options": [
+        "7",
+        "5",
+        "8",
+        "9"
+      ],
+      "answer": 1,
+      "explanation": "len() 统计字符个数。两个汉字各算一个字符，加上三个英文字母，共 5 个字符。",
+      "tags": [
+        "len",
+        "字符串"
+      ]
+    },
+    {
+      "id": "q0208",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 \"3\" * 2 的值是：",
+      "options": [
+        "6",
+        "\"6\"",
+        "33",
+        "引发 TypeError"
+      ],
+      "answer": 2,
+      "explanation": "字符串与整数相乘表示重复字符串，\"3\" * 2 得到 \"33\"。只有与整数相乘才合法，乘以浮点数会报错。",
+      "tags": [
+        "字符串",
+        "运算符"
+      ]
+    },
+    {
+      "id": "q0209",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "已知 s = \"abc\"，下列表达式会引发 IndexError 的是：",
+      "options": [
+        "s[2]",
+        "s[-1]",
+        "s[1:10]",
+        "s[5]"
+      ],
+      "answer": 3,
+      "explanation": "单个索引越界（下标 5 超出范围）会引发 IndexError；切片越界不会报错，s[1:10] 只会返回 \"bc\"。",
+      "tags": [
+        "索引",
+        "切片",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0210",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 \"{:.2f}\".format(3.14159) 的值是：",
+      "options": [
+        "\"3.14\"",
+        "\"3.1\"",
+        "\"3.142\"",
+        "\"3\""
+      ],
+      "answer": 0,
+      "explanation": ".2f 表示以浮点数格式保留两位小数，第三位 1 被舍去，结果为字符串 \"3.14\"。",
+      "tags": [
+        "format",
+        "格式化"
+      ]
+    },
+    {
+      "id": "q0211",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 \"{:*^7}\".format(\"ab\") 的结果是：",
+      "options": [
+        "\"ab*****\"",
+        "\"**ab***\"",
+        "\"*****ab\"",
+        "\"**ab**\""
+      ],
+      "answer": 1,
+      "explanation": "^ 表示居中对齐，7 表示总宽度，* 是填充字符。ab 占 2 个位置，剩余 5 个星号左右分配，左侧 2 个、右侧 3 个，得到 **ab***。",
+      "tags": [
+        "format",
+        "对齐"
+      ]
+    },
+    {
+      "id": "q0212",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "执行语句 int(\"12.5\") 的结果是：",
+      "options": [
+        "12",
+        "13",
+        "引发 ValueError",
+        "12.5"
+      ],
+      "answer": 2,
+      "explanation": "int() 可以把\"看起来像整数\"的字符串转换为整数，但 \"12.5\" 不是合法的整数字面量，会引发 ValueError。应先 float(\"12.5\") 再 int()。",
+      "tags": [
+        "int",
+        "类型转换",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0213",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 int(-12.9) 的值是：",
+      "options": [
+        "-13",
+        "-12.9",
+        "12",
+        "-12"
+      ],
+      "answer": 3,
+      "explanation": "int() 对浮点数向零方向截断，直接去掉小数部分，因此 -12.9 变成 -12，而不是四舍五入的 -13。",
+      "tags": [
+        "int",
+        "截断"
+      ]
+    },
+    {
+      "id": "q0214",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 bool(\"0\") 的值是：",
+      "options": [
+        "True",
+        "False",
+        "0",
+        "引发异常"
+      ],
+      "answer": 0,
+      "explanation": "bool() 判断的是对象是否为空。字符串 \"0\" 长度为 1，是非空字符串，因此为 True。只有空字符串 \"\"、数字 0、空列表等才为 False。",
+      "tags": [
+        "bool",
+        "真假值"
+      ]
+    },
+    {
+      "id": "q0215",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 \"a,b,c\".split(\",\") 的结果是：",
+      "options": [
+        "\"abc\"",
+        "[\"a\", \"b\", \"c\"]",
+        "[\"a,b,c\"]",
+        "(\"a\", \"b\", \"c\")"
+      ],
+      "answer": 1,
+      "explanation": "split(\",\") 按逗号切分字符串，返回由三个字符串组成的列表。返回类型是 list，不是元组或字符串。",
+      "tags": [
+        "split",
+        "字符串"
+      ]
+    },
+    {
+      "id": "q0216",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "表达式 \"-\".join([\"2026\", \"10\", \"20\"]) 的结果是：",
+      "options": [
+        "[\"2026-10-20\"]",
+        "\"2026 10 20\"",
+        "\"2026-10-20\"",
+        "引发 TypeError"
+      ],
+      "answer": 2,
+      "explanation": "join() 用指定分隔符把序列中的字符串连接成一个新字符串，结果为 2026-10-20。注意序列中的元素必须都是字符串。",
+      "tags": [
+        "join",
+        "字符串"
+      ]
+    },
+    {
+      "id": "q0217",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 \"banana\".find(\"na\") 和 \"banana\".count(\"na\") 的值分别是：",
+      "options": [
+        "1 和 2",
+        "2 和 3",
+        "-1 和 2",
+        "2 和 2"
+      ],
+      "answer": 3,
+      "explanation": "\"banana\" 中第一个 \"na\" 从下标 2 开始（b=0,a=1,n=2），因此 find 返回 2；\"na\" 出现两次（下标 2 和 4），count 返回 2。",
+      "tags": [
+        "find",
+        "count"
+      ]
+    },
+    {
+      "id": "q0218",
+      "chapter": "ch02",
+      "difficulty": 1,
+      "stem": "执行下列语句会得到什么结果？\ns = \"abc\"\ns[0] = \"A\"",
+      "code": "s = \"abc\"\ns[0] = \"A\"",
+      "options": [
+        "引发 TypeError",
+        "s 变成 \"Abc\"",
+        "s 不变，但产生警告",
+        "引发 IndexError"
+      ],
+      "answer": 0,
+      "explanation": "字符串是不可变对象，不能通过下标修改其中的字符，会引发 TypeError。若要修改，只能创建新字符串，如 s = \"A\" + s[1:]。",
+      "tags": [
+        "字符串",
+        "不可变"
+      ]
+    },
+    {
+      "id": "q0219",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "表达式 0b1010 + 0o10 + 0x10 的值是：",
+      "options": [
+        "36",
+        "34",
+        "32",
+        "30"
+      ],
+      "answer": 1,
+      "explanation": "0b1010 是二进制 10，0o10 是八进制 8，0x10 是十六进制 16，三者相加为 34。",
+      "tags": [
+        "进制",
+        "整数"
+      ]
+    },
+    {
+      "id": "q0220",
+      "chapter": "ch02",
+      "difficulty": 2,
+      "stem": "已知 s = \"abcdef\"，表达式 s[1:5:2] 的值是：",
+      "options": [
+        "\"bdf\"",
+        "\"bcd\"",
+        "\"bd\"",
+        "\"ce\""
+      ],
+      "answer": 2,
+      "explanation": "从下标 1 开始，到下标 5 之前（不含 5）结束，步长为 2。先取下标 1、3，即 b、d，得到 \"bd\"。",
+      "tags": [
+        "切片",
+        "步长"
+      ]
+    }
+  ]
+}

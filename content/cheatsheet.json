@@ -1,0 +1,138 @@
+{
+  "groups": [
+    {
+      "id": "syntax",
+      "title": "基础语法",
+      "items": [
+        { "name": "缩进", "syntax": "4 个空格", "desc": "表示代码块，同一代码块缩进必须一致。缩进错误会引发 IndentationError。" },
+        { "name": "注释", "syntax": "# 注释内容", "desc": "单行注释。# 之后到行尾不执行；三引号字符串常被当作多行注释。" },
+        { "name": "变量命名", "syntax": "字母/数字/下划线/汉字", "desc": "不能以数字开头，区分大小写，不能是保留字。" },
+        { "name": "输入", "syntax": "input(提示文字)", "desc": "读入一行，返回值一定是字符串。" },
+        { "name": "输出", "syntax": "print(a, b, sep=\" \", end=\"\\n\")", "desc": "sep 控制多个值之间的分隔符，end 控制结尾字符。" },
+        { "name": "同步赋值", "syntax": "a, b = b, a", "desc": "先计算右边，再依次赋给左边，可直接交换变量。" },
+        { "name": "类型查看", "syntax": "type(x) / isinstance(x, 类型)", "desc": "type 返回精确类型，isinstance 判断是否属于某类型（包含子类）。" }
+      ]
+    },
+    {
+      "id": "number",
+      "title": "数字与运算",
+      "items": [
+        { "name": "整除", "syntax": "a // b", "desc": "向下取整。-7 // 2 等于 -4。" },
+        { "name": "取余", "syntax": "a % b", "desc": "结果符号与除数一致。-7 % 2 等于 1。" },
+        { "name": "幂", "syntax": "a ** b", "desc": "a 的 b 次方；2 ** 0.5 等于根号 2。" },
+        { "name": "四舍五入", "syntax": "round(x, n)", "desc": "银行家舍入：round(2.5) 为 2，round(3.5) 为 4。" },
+        { "name": "取整", "syntax": "int(x)", "desc": "向零截断，int(-12.9) 等于 -12。" },
+        { "name": "商和余", "syntax": "divmod(a, b)", "desc": "返回 (a // b, a % b) 元组。" },
+        { "name": "数值函数", "syntax": "abs / max / min / sum / pow", "desc": "绝对值、最大、最小、求和、幂运算。" }
+      ]
+    },
+    {
+      "id": "string",
+      "title": "字符串",
+      "items": [
+        { "name": "索引", "syntax": "s[0] / s[-1]", "desc": "下标从 0 开始，-1 是最后一个字符；越界引发 IndexError。" },
+        { "name": "切片", "syntax": "s[start:end:step]", "desc": "左闭右开；s[::-1] 反转字符串；切片越界不报错。" },
+        { "name": "大小写", "syntax": "s.upper() / s.lower()", "desc": "返回新字符串，原字符串不变。" },
+        { "name": "去空白", "syntax": "s.strip()", "desc": "去掉两端空白（含换行），常用于读取文件行。" },
+        { "name": "拆分", "syntax": "s.split(sep)", "desc": "按分隔符拆成列表；不写参数时按任意空白拆分。" },
+        { "name": "连接", "syntax": "sep.join(seq)", "desc": "用 sep 连接字符串序列，元素必须都是字符串。" },
+        { "name": "替换", "syntax": "s.replace(old, new, count)", "desc": "返回替换后的新字符串，可限定替换次数。" },
+        { "name": "查找", "syntax": "s.find(t) / s.index(t)", "desc": "find 找不到返回 -1；index 找不到引发 ValueError。" },
+        { "name": "格式化", "syntax": "\"{:.2f}\".format(x) / f\"{x:.2f}\"", "desc": ".2f 保留两位小数；> 右对齐、^ 居中、, 千位分隔。" }
+      ]
+    },
+    {
+      "id": "container",
+      "title": "列表、元组、字典、集合",
+      "items": [
+        { "name": "列表追加", "syntax": "lst.append(x) / lst.extend(seq)", "desc": "append 加一个整体元素，extend 逐个加入元素。" },
+        { "name": "列表插入删除", "syntax": "lst.insert(i, x) / lst.pop(i) / lst.remove(x)", "desc": "insert 在下标 i 前插入；pop 删除并返回；remove 删除第一个匹配值。" },
+        { "name": "列表排序", "syntax": "lst.sort() / sorted(lst)", "desc": "sort 原地排序返回 None；sorted 返回新列表。" },
+        { "name": "列表推导式", "syntax": "[表达式 for x in 序列 if 条件]", "desc": "一行生成新列表。" },
+        { "name": "别名与拷贝", "syntax": "b = a / b = a[:]", "desc": "= 是别名；切片或 copy() 是浅拷贝；嵌套需 deepcopy。" },
+        { "name": "元组", "syntax": "t = (1, 2) / (1,)", "desc": "不可变；单元素必须带逗号；可作为字典键。" },
+        { "name": "字典取值", "syntax": "d[key] / d.get(key, default)", "desc": "[] 键不存在报 KeyError；get 返回默认值。" },
+        { "name": "字典遍历", "syntax": "for k, v in d.items()", "desc": "keys/values/items 分别遍历键、值、键值对。" },
+        { "name": "字典默认值", "syntax": "d.setdefault(k, v)", "desc": "键不存在时设置并返回 v，存在时返回旧值。" },
+        { "name": "集合创建", "syntax": "set() / {1, 2}", "desc": "空集合只能用 set()，{} 是空字典。" },
+        { "name": "集合运算", "syntax": "a | b / a & b / a - b / a ^ b", "desc": "并、交、差、对称差；集合无序、不重复、无下标。" },
+        { "name": "集合增删", "syntax": "s.add(x) / s.remove(x) / s.discard(x)", "desc": "remove 不存在报错；discard 不报错。" }
+      ]
+    },
+    {
+      "id": "flow",
+      "title": "控制流与异常",
+      "items": [
+        { "name": "多分支", "syntax": "if / elif / else", "desc": "从上到下判断，最多执行一个分支。" },
+        { "name": "条件表达式", "syntax": "A if 条件 else B", "desc": "条件成立取 A，否则取 B。" },
+        { "name": "range", "syntax": "range(start, stop, step)", "desc": "左闭右开；步长可为负；range(5) 为 0 到 4。" },
+        { "name": "break", "syntax": "break", "desc": "结束当前这一层循环。" },
+        { "name": "continue", "syntax": "continue", "desc": "跳过本次循环剩余语句，进入下一次。" },
+        { "name": "循环 else", "syntax": "for ... else / while ... else", "desc": "循环未被 break 中断时执行 else。" },
+        { "name": "异常处理", "syntax": "try / except / else / finally", "desc": "else 无异常时执行；finally 无论是否异常都执行。" },
+        { "name": "捕获多种异常", "syntax": "except (ValueError, TypeError) as e", "desc": "异常类型放在元组中；except 按顺序匹配，先具体后宽泛。" },
+        { "name": "主动抛出", "syntax": "raise ValueError(\"提示\")", "desc": "抛出异常；assert 条件, \"提示\" 条件为假时抛 AssertionError。" }
+      ]
+    },
+    {
+      "id": "function",
+      "title": "函数",
+      "items": [
+        { "name": "定义", "syntax": "def 函数名(参数):", "desc": "定义时不执行函数体，调用时才执行。" },
+        { "name": "默认参数", "syntax": "def f(a, b=2):", "desc": "默认参数必须在非默认参数之后，且只在定义时求值一次。" },
+        { "name": "可变参数", "syntax": "*args / **kwargs", "desc": "*args 收集位置参数为元组，**kwargs 收集关键字参数为字典。" },
+        { "name": "返回值", "syntax": "return a, b", "desc": "返回多个值本质是元组；没有 return 返回 None。" },
+        { "name": "作用域", "syntax": "global / nonlocal", "desc": "函数内修改全局变量要 global；嵌套函数修改外层局部变量用 nonlocal。" },
+        { "name": "递归", "syntax": "def f(n): if 基例: return ...; return f(更小规模)", "desc": "必须有基例，且每次向基例靠近，否则 RecursionError。" },
+        { "name": "匿名函数", "syntax": "lambda x: x + 1", "desc": "只能包含一个表达式，常用作 sorted 的 key。" }
+      ]
+    },
+    {
+      "id": "file",
+      "title": "文件与 CSV",
+      "items": [
+        { "name": "打开文件", "syntax": "open(文件, \"r\", encoding=\"utf-8\")", "desc": "常用模式：r 只读、w 清空重写、a 末尾追加、b 二进制。" },
+        { "name": "自动关闭", "syntax": "with open(...) as f:", "desc": "代码块结束时自动关闭文件，异常时也能关闭。" },
+        { "name": "读取全部", "syntax": "f.read()", "desc": "返回字符串；读取后指针到末尾。" },
+        { "name": "读取一行", "syntax": "f.readline()", "desc": "返回一行，包含行末换行符，常配合 strip()。" },
+        { "name": "读取所有行", "syntax": "f.readlines()", "desc": "返回列表，每项是一行。" },
+        { "name": "逐行遍历", "syntax": "for line in f:", "desc": "每次只读一行，适合大文件。" },
+        { "name": "写入", "syntax": "f.write(s) / f.writelines(seq)", "desc": "都不会自动换行，需要自己写 \\n。" },
+        { "name": "CSV 读", "syntax": "csv.reader(f) / csv.DictReader(f)", "desc": "每行是字符串列表；DictReader 按表头返回字典。" },
+        { "name": "CSV 写", "syntax": "csv.writer(f).writerow(row)", "desc": "打开文件时建议加 newline=\"\"，避免多余空行。" }
+      ]
+    },
+    {
+      "id": "stdlib",
+      "title": "标准库与第三方库",
+      "items": [
+        { "name": "random 整数", "syntax": "randint(a, b) / randrange(a, b)", "desc": "randint 含 b；randrange 不含 b。" },
+        { "name": "random 序列", "syntax": "choice(seq) / sample(seq, k) / shuffle(lst)", "desc": "choice 选一个；sample 不重复选 k 个；shuffle 原地打乱返回 None。" },
+        { "name": "random 种子", "syntax": "random.seed(n)", "desc": "固定种子后随机序列可复现。" },
+        { "name": "time", "syntax": "time() / sleep(s) / strftime(fmt, t) / strptime(s, fmt)", "desc": "time() 是时间戳；strftime 格式化；strptime 解析；sleep 暂停。" },
+        { "name": "turtle", "syntax": "forward / right / circle / penup / pendown", "desc": "right 顺时针转；circle(r) 画圆；penup 移动不留痕。" },
+        { "name": "math", "syntax": "sqrt / ceil / floor / pi", "desc": "开方返回浮点数；ceil 向上取整，floor 向下取整。" },
+        { "name": "pip", "syntax": "pip install 库名", "desc": "安装第三方库；pip list 查看，pip uninstall 卸载。" },
+        { "name": "PyInstaller", "syntax": "pyinstaller -F -w main.py", "desc": "-F 单文件，-w 隐藏控制台，-i 指定图标。" },
+        { "name": "常用库", "syntax": "jieba / numpy / pandas / matplotlib / sklearn", "desc": "分词 / 数组 / 表格 / 绘图 / 机器学习。" }
+      ]
+    },
+    {
+      "id": "public",
+      "title": "公共基础知识",
+      "items": [
+        { "name": "算法特征", "syntax": "有穷性、确定性、可行性、输入、输出", "desc": "输入可以有零个，输出至少一个。" },
+        { "name": "栈与队列", "syntax": "栈 LIFO / 队列 FIFO", "desc": "栈在栈顶进出；队列队尾进、队头出。" },
+        { "name": "二叉树性质", "syntax": "第 k 层最多 2^(k-1)；n0 = n2 + 1", "desc": "深度 m 的满二叉树共 2^m - 1 个结点。" },
+        { "name": "遍历", "syntax": "前序根左右 / 中序左根右 / 后序左右根", "desc": "已知前序+中序或后序+中序可唯一确定二叉树。" },
+        { "name": "二分查找", "syntax": "O(log2n)", "desc": "要求有序且顺序存储；1000 个元素最多约 10 次比较。" },
+        { "name": "排序复杂度", "syntax": "冒泡/选择/插入 O(n²)；快排平均 O(nlog2n)", "desc": "快排最坏 O(n²)；归并、堆最坏 O(nlog2n)。" },
+        { "name": "排序稳定性", "syntax": "稳定：冒泡、插入、归并", "desc": "不稳定：选择、快速、希尔、堆。" },
+        { "name": "软件生命周期", "syntax": "需求 → 概要设计 → 详细设计 → 编码 → 测试 → 维护", "desc": "需求分析用 DFD 和数据字典；详细设计用流程图、N-S 图。" },
+        { "name": "测试", "syntax": "黑盒测功能 / 白盒测结构", "desc": "测试发现错误，调试定位并修正错误。" },
+        { "name": "E-R 图", "syntax": "矩形实体、椭圆属性、菱形联系", "desc": "多对多联系需要单独建表。" },
+        { "name": "范式", "syntax": "1NF 不可分 / 2NF 无部分依赖 / 3NF 无传递依赖", "desc": "主键唯一且非空属于实体完整性；外键属于参照完整性。" }
+      ]
+    }
+  ]
+}

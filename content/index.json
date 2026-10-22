@@ -1,0 +1,39 @@
+{
+  "meta": "meta.json",
+  "cheatsheet": "cheatsheet.json",
+  "chapters": [
+    "chapters/ch01.json",
+    "chapters/ch02.json",
+    "chapters/ch03.json",
+    "chapters/ch04.json",
+    "chapters/ch05.json",
+    "chapters/ch06.json",
+    "chapters/ch07.json",
+    "chapters/ch08.json",
+    "chapters/ch09.json",
+    "chapters/ch10.json",
+    "chapters/ch11.json",
+    "chapters/ch12.json",
+    "chapters/ch13.json"
+  ],
+  "questions": [
+    "questions/q01.json",
+    "questions/q02.json",
+    "questions/q03.json",
+    "questions/q04.json",
+    "questions/q05.json",
+    "questions/q06.json",
+    "questions/q07.json",
+    "questions/q08.json",
+    "questions/q09.json",
+    "questions/q10.json",
+    "questions/q11.json",
+    "questions/q12.json",
+    "questions/q13.json"
+  ],
+  "exercises": [
+    "exercises/ex_basic.json",
+    "exercises/ex_comprehensive.json",
+    "exercises/ex_simple.json"
+  ]
+}

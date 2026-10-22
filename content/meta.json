@@ -1,0 +1,76 @@
+{
+  "title": "Python 二级通关",
+  "subtitle": "全国计算机等级考试二级 Python 语言程序设计 · 本地学习系统",
+  "version": "1.0.0",
+  "modules": [
+    { "id": "m1", "name": "语法基础", "color": "#6366f1", "desc": "基本语法元素与基本数据类型" },
+    { "id": "m2", "name": "流程控制", "color": "#0ea5e9", "desc": "分支、循环与异常处理" },
+    { "id": "m3", "name": "函数与容器", "color": "#10b981", "desc": "函数、列表、元组、字典、集合" },
+    { "id": "m4", "name": "文件与生态", "color": "#f59e0b", "desc": "文件、CSV、标准库与第三方库" },
+    { "id": "m5", "name": "公共基础", "color": "#ec4899", "desc": "数据结构、软件工程、数据库" }
+  ],
+  "examInfo": {
+    "name": "全国计算机等级考试（NCRE）二级 Python 语言程序设计",
+    "duration": 120,
+    "fullScore": 100,
+    "sections": [
+      { "name": "单项选择题", "score": 40, "note": "公共基础知识 10 分 + Python 知识 30 分" },
+      { "name": "基本操作题", "score": 15, "note": "补全或修改简单程序" },
+      { "name": "简单应用题", "score": 25, "note": "编写函数或处理数据" },
+      { "name": "综合应用题", "score": 20, "note": "综合运用完成一个小任务" }
+    ],
+    "tips": [
+      "选择题覆盖教材全部章节，公共基础知识固定占 10 分。",
+      "操作题在计算机上完成，最终以程序运行结果评分，注意输入输出格式。",
+      "考试环境通常为 Python 3.x，题库代码以 Python 3.10 语法为准。"
+    ]
+  },
+  "papers": {
+    "mock": {
+      "title": "全真模拟卷",
+      "description": "40 道选择题 + 3 道操作题，120 分钟，贴近真实考试结构",
+      "duration": 120,
+      "passScore": 60,
+      "choicePoints": 1,
+      "counts": {
+        "ch01": 4,
+        "ch02": 4,
+        "ch03": 4,
+        "ch04": 2,
+        "ch05": 4,
+        "ch06": 3,
+        "ch07": 3,
+        "ch08": 2,
+        "ch09": 2,
+        "ch10": 2,
+        "ch11": 4,
+        "ch12": 3,
+        "ch13": 3
+      },
+      "codingLevels": ["basic", "simple", "comprehensive"]
+    },
+    "sprint": {
+      "title": "考前冲刺卷",
+      "description": "30 道选择题 + 2 道操作题，60 分钟，适合考前查漏补缺",
+      "duration": 60,
+      "passScore": 60,
+      "choicePoints": 1,
+      "counts": {
+        "ch01": 3,
+        "ch02": 3,
+        "ch03": 3,
+        "ch04": 2,
+        "ch05": 3,
+        "ch06": 2,
+        "ch07": 2,
+        "ch08": 2,
+        "ch09": 1,
+        "ch10": 1,
+        "ch11": 3,
+        "ch12": 2,
+        "ch13": 3
+      },
+      "codingLevels": ["basic", "simple"]
+    }
+  }
+}

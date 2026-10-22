@@ -1,0 +1,364 @@
+{
+  "chapter": "ch09",
+  "questions": [
+    {
+      "id": "q0901",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "random.randint(1, 10) 可能返回的值是：",
+      "options": [
+        "1 到 9 的整数",
+        "0 到 10 的整数",
+        "1 到 10 的浮点数",
+        "1 到 10 的整数（包含 1 和 10）"
+      ],
+      "answer": 3,
+      "explanation": "randint(a, b) 生成 [a, b] 区间内的整数，两个端点都包含，因此可能返回 1 到 10 中的任意整数。",
+      "tags": [
+        "random",
+        "randint"
+      ]
+    },
+    {
+      "id": "q0902",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "random.randrange(1, 10) 可能返回的值是：",
+      "options": [
+        "1 到 9 的整数",
+        "1 到 10 的整数",
+        "0 到 9 的整数",
+        "1 到 10 的浮点数"
+      ],
+      "answer": 0,
+      "explanation": "randrange(a, b) 等价于从 range(a, b) 中随机取一个整数，不包含 b，因此只可能返回 1 到 9。",
+      "tags": [
+        "random",
+        "randrange"
+      ]
+    },
+    {
+      "id": "q0903",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "random.random() 返回值的范围是：",
+      "options": [
+        "0 到 1 的整数",
+        "[0.0, 1.0) 的浮点数",
+        "[1, 10] 的整数",
+        "任意浮点数"
+      ],
+      "answer": 1,
+      "explanation": "random.random() 生成 0.0（含）到 1.0（不含）之间的浮点数，即 [0.0, 1.0)。",
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "id": "q0904",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "random.choice([10, 20, 30]) 的返回值是：",
+      "options": [
+        "一个列表",
+        "三个元素的和",
+        "10、20、30 中的一个元素",
+        "一个 0 到 2 的下标"
+      ],
+      "answer": 2,
+      "explanation": "choice(seq) 从序列中随机选择一个元素并返回该元素本身。要得到下标应使用 randrange(len(seq))。",
+      "tags": [
+        "random",
+        "choice"
+      ]
+    },
+    {
+      "id": "q0905",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "random.sample([1, 2, 3, 4], 2) 的结果是：",
+      "options": [
+        "包含两个可能重复元素的列表",
+        "一个整数",
+        "一个元组",
+        "包含两个不重复元素的列表"
+      ],
+      "answer": 3,
+      "explanation": "sample(seq, k) 从序列中不重复地随机选取 k 个元素，返回列表。元素不会重复出现。",
+      "tags": [
+        "random",
+        "sample"
+      ]
+    },
+    {
+      "id": "q0906",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "执行 result = random.shuffle(lst) 后，result 的值是：",
+      "options": [
+        "None",
+        "打乱后的列表",
+        "原列表的副本",
+        "True"
+      ],
+      "answer": 0,
+      "explanation": "shuffle 原地打乱列表，返回值为 None。正确用法是直接调用 random.shuffle(lst)，不要再赋值。",
+      "tags": [
+        "random",
+        "shuffle"
+      ]
+    },
+    {
+      "id": "q0907",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "random.seed(1) 的作用是：",
+      "options": [
+        "生成一个随机整数",
+        "设置随机种子，使每次运行得到相同的随机序列",
+        "清空随机数缓存",
+        "让随机数变成真正的物理随机"
+      ],
+      "answer": 1,
+      "explanation": "seed 设置随机数生成器的初始状态。种子相同，后续生成的随机序列就相同，便于复现实验结果。",
+      "tags": [
+        "random",
+        "seed"
+      ]
+    },
+    {
+      "id": "q0908",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "time.time() 返回的是：",
+      "options": [
+        "当前日期字符串",
+        "当前小时数",
+        "从 1970 年 1 月 1 日到现在的秒数",
+        "程序运行时间"
+      ],
+      "answer": 2,
+      "explanation": "time.time() 返回当前时间戳，即从 1970-01-01 00:00:00 UTC 到现在的秒数，是浮点数。",
+      "tags": [
+        "time",
+        "时间戳"
+      ]
+    },
+    {
+      "id": "q0909",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "要让程序暂停 2 秒，应使用：",
+      "options": [
+        "time.time(2)",
+        "time.delay(2)",
+        "time.wait(2)",
+        "time.sleep(2)"
+      ],
+      "answer": 3,
+      "explanation": "time.sleep(sec) 让当前程序暂停指定的秒数。",
+      "tags": [
+        "time",
+        "sleep"
+      ]
+    },
+    {
+      "id": "q0910",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "已知 t 是时间结构，表达式 time.strftime(\"%Y-%m-%d\", t) 的结果是：",
+      "options": [
+        "形如 2026-10-20 的字符串",
+        "时间戳",
+        "时间结构体",
+        "星期几"
+      ],
+      "answer": 0,
+      "explanation": "strftime 按格式字符串把时间结构转换成字符串，%Y 是四位年、%m 是月、%d 是日，结果为 2026-10-20 这样的字符串。",
+      "tags": [
+        "time",
+        "strftime"
+      ]
+    },
+    {
+      "id": "q0911",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "函数 time.strptime(\"2026-10-20\", \"%Y-%m-%d\") 的作用是：",
+      "options": [
+        "把时间结构格式化为字符串",
+        "把字符串按格式解析为时间结构",
+        "计算两个日期的差",
+        "获取当前时间戳"
+      ],
+      "answer": 1,
+      "explanation": "strptime 是 parse time，把字符串按指定格式解析成时间结构；strftime 才是格式化输出。两者方向相反。",
+      "tags": [
+        "time",
+        "strptime"
+      ]
+    },
+    {
+      "id": "q0912",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "在 turtle 中，执行 turtle.right(90) 表示：",
+      "options": [
+        "向右移动 90 像素",
+        "逆时针旋转 90 度",
+        "顺时针旋转 90 度",
+        "抬笔 90 度"
+      ],
+      "answer": 2,
+      "explanation": "right(angle) 让海龟顺时针旋转指定角度；left(angle) 才是逆时针。旋转不改变位置。",
+      "tags": [
+        "turtle",
+        "right"
+      ]
+    },
+    {
+      "id": "q0913",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "turtle.forward(100) 的作用是：",
+      "options": [
+        "向正右方移动 100 像素",
+        "向上移动 100 像素",
+        "旋转 100 度",
+        "沿当前朝向前进 100 像素"
+      ],
+      "answer": 3,
+      "explanation": "forward 沿当前海龟的朝向移动指定距离，不一定是水平向右，取决于之前的转向。",
+      "tags": [
+        "turtle",
+        "forward"
+      ]
+    },
+    {
+      "id": "q0914",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "在 turtle 中，移动海龟但不留下轨迹，应先调用：",
+      "options": [
+        "penup()",
+        "pendown()",
+        "hideturtle()",
+        "clear()"
+      ],
+      "answer": 0,
+      "explanation": "penup() 抬起画笔，之后移动不会绘制线条；pendown() 落下画笔恢复绘制。",
+      "tags": [
+        "turtle",
+        "penup"
+      ]
+    },
+    {
+      "id": "q0915",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "turtle.circle(60) 的作用是：",
+      "options": [
+        "画一条长 60 的直线",
+        "画一个半径为 60 的圆",
+        "移动到坐标 (60, 60)",
+        "把画笔宽度设为 60"
+      ],
+      "answer": 1,
+      "explanation": "circle(radius) 以海龟当前位置为起点，按当前朝向画半径为 radius 的圆。",
+      "tags": [
+        "turtle",
+        "circle"
+      ]
+    },
+    {
+      "id": "q0916",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "要填充 turtle 绘制的封闭图形，应使用的一对函数是：",
+      "options": [
+        "penup() 和 pendown()",
+        "forward() 和 backward()",
+        "begin_fill() 和 end_fill()",
+        "showturtle() 和 hideturtle()"
+      ],
+      "answer": 2,
+      "explanation": "begin_fill() 和 end_fill() 之间的封闭图形会用当前填充色填充，填充色由 fillcolor() 设置。",
+      "tags": [
+        "turtle",
+        "填充"
+      ]
+    },
+    {
+      "id": "q0917",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "math.sqrt(16) 的值是：",
+      "options": [
+        "4",
+        "8",
+        "256",
+        "4.0"
+      ],
+      "answer": 3,
+      "explanation": "math.sqrt 返回浮点数，即使结果是整数也返回 4.0。",
+      "tags": [
+        "math",
+        "sqrt"
+      ]
+    },
+    {
+      "id": "q0918",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "math.ceil(3.2) 和 math.floor(3.8) 的值分别是：",
+      "options": [
+        "4 和 3",
+        "3 和 3",
+        "3 和 4",
+        "4 和 4"
+      ],
+      "answer": 0,
+      "explanation": "ceil 向上取整，3.2 变成 4；floor 向下取整，3.8 变成 3。",
+      "tags": [
+        "math",
+        "ceil",
+        "floor"
+      ]
+    },
+    {
+      "id": "q0919",
+      "chapter": "ch09",
+      "difficulty": 1,
+      "stem": "关于 Python 标准库，下列说法正确的是：",
+      "options": [
+        "需要先用 pip 安装才能使用",
+        "随 Python 一起安装，直接 import 即可",
+        "只能用于网络编程",
+        "必须联网才能使用"
+      ],
+      "answer": 1,
+      "explanation": "标准库是 Python 自带的模块集合，安装 Python 时已经包含，直接 import 就能使用，不需要 pip 安装。",
+      "tags": [
+        "标准库"
+      ]
+    },
+    {
+      "id": "q0920",
+      "chapter": "ch09",
+      "difficulty": 2,
+      "stem": "要精确测量一段代码的运行耗时，最合适的函数是：",
+      "options": [
+        "time.sleep()",
+        "time.ctime()",
+        "time.perf_counter()",
+        "time.strftime()"
+      ],
+      "answer": 2,
+      "explanation": "perf_counter() 提供高精度计时器，适合测量短时间间隔。在代码前后各调用一次，相减即得耗时。",
+      "tags": [
+        "time",
+        "perf_counter"
+      ]
+    }
+  ]
+}

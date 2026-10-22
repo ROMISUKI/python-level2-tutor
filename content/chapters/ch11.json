@@ -1,0 +1,142 @@
+{
+  "id": "ch11",
+  "module": "m5",
+  "order": 11,
+  "title": "公共基础：数据结构与算法",
+  "subtitle": "线性表、栈队列、树、查找与排序",
+  "minutes": 60,
+  "objectives": [
+    "掌握算法的五个基本特征与复杂度概念",
+    "理解线性表的顺序存储与链式存储",
+    "掌握栈、队列、树和二叉树的基本性质",
+    "记住常见查找与排序算法的时间复杂度和稳定性",
+    "能进行二叉树结点数与遍历的简单计算"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "11.1 算法的基本概念",
+      "html": "<p>算法是对解题方案的准确而完整的描述，是一组有穷的指令序列。算法具有五个基本特征：</p><ul><li><strong>有穷性</strong>：算法必须在执行有限步后结束；</li><li><strong>确定性</strong>：每一步都有确定的含义，不能有歧义；</li><li><strong>可行性</strong>：每一步都能通过有限次基本运算实现；</li><li><strong>输入</strong>：可以有零个或多个输入；</li><li><strong>输出</strong>：必须有一个或多个输出。</li></ul><p>算法的时间复杂度描述算法执行时间随问题规模增长的趋势，与具体计算机硬件无关。</p>"
+    },
+    {
+      "type": "table",
+      "title": "常见时间复杂度",
+      "head": ["复杂度", "典型算法"],
+      "rows": [
+        ["O(1)", "哈希查找、数组随机访问"],
+        ["O(log2n)", "二分查找"],
+        ["O(n)", "顺序查找、遍历"],
+        ["O(nlog2n)", "快速排序（平均）、归并排序、堆排序"],
+        ["O(n²)", "冒泡排序、简单选择排序、插入排序"],
+        ["O(n³)", "三重循环的朴素矩阵运算"]
+      ]
+    },
+    {
+      "type": "text",
+      "title": "11.2 数据结构的基本概念",
+      "html": "<p>数据结构研究数据元素之间的关系。分为<strong>逻辑结构</strong>和<strong>存储结构</strong>：</p><ul><li>逻辑结构：集合、线性结构、树形结构、图形结构；</li><li>存储结构：顺序存储、链式存储、索引存储、散列存储。</li></ul><p>线性结构的特点是除第一个和最后一个元素外，每个元素都有且只有一个前驱和一个后继。</p>"
+    },
+    {
+      "type": "text",
+      "title": "11.3 线性表",
+      "html": "<p><strong>顺序存储</strong>用一段连续的内存单元依次存放元素，可以随机存取（按下标直接访问），但插入和删除需要移动大量元素。</p><p><strong>链式存储</strong>用节点存放数据和指针，节点之间通过指针连接。插入和删除只需修改指针，不需要移动元素，但不能随机存取，查找必须从头开始。</p>"
+    },
+    {
+      "type": "table",
+      "title": "顺序表与链表的比较",
+      "head": ["比较项", "顺序表", "链表"],
+      "rows": [
+        ["存储空间", "连续", "可以不连续"],
+        ["随机访问", "支持 O(1)", "不支持，需 O(n)"],
+        ["插入删除", "平均移动约 n/2 个元素", "修改指针，O(1)（已知位置）"],
+        ["存储密度", "高", "较低（需要指针域）"]
+      ]
+    },
+    {
+      "type": "text",
+      "title": "11.4 栈与队列",
+      "html": "<p><strong>栈</strong>是只能在栈顶进行插入和删除的线性表，特点是<strong>后进先出（LIFO）</strong>。入栈和出栈都在栈顶进行。</p><p><strong>队列</strong>是只能在队尾插入、在队头删除的线性表，特点是<strong>先进先出（FIFO）</strong>。循环队列用取模运算解决假溢出问题。</p>"
+    },
+    {
+      "type": "code",
+      "title": "用列表模拟栈和队列",
+      "code": "stack = []\nstack.append(1)\nstack.append(2)\nprint(stack.pop())   # 2，后进先出\n\nfrom collections import deque\nqueue = deque([1, 2])\nqueue.append(3)          # 入队\nprint(queue.popleft())   # 1，先进先出\n",
+      "note": "Python 列表的 append/pop 适合模拟栈；队列建议用 collections.deque，头部删除效率更高。",
+      "run": true
+    },
+    {
+      "type": "text",
+      "title": "11.5 树与二叉树",
+      "html": "<p>树是一种非线性结构，有且只有一个根结点，其余结点分成若干互不相交的子树。二叉树每个结点最多有两个子结点，分别称为左子树和右子树。</p><p>重要性质：</p><ul><li>二叉树第 k 层最多有 <strong>2^(k-1)</strong> 个结点；</li><li>深度为 m 的二叉树最多有 <strong>2^m - 1</strong> 个结点；</li><li>叶子结点数 n0 与度为 2 的结点数 n2 满足 <strong>n0 = n2 + 1</strong>；</li><li>具有 n 个结点的完全二叉树深度为 <strong>⌊log2n⌋ + 1</strong>。</li></ul>"
+    },
+    {
+      "type": "code",
+      "title": "二叉树结点数计算",
+      "code": "# 一棵二叉树有 10 个度为 2 的结点，求叶子结点数\nn2 = 10\nn0 = n2 + 1\nprint(\"叶子结点数：\", n0)   # 11\n\n# 深度为 5 的满二叉树结点总数\nm = 5\nprint(\"结点总数：\", 2 ** m - 1)   # 31\n",
+      "note": "n0 = n2 + 1 是二叉树最重要的性质，考试中经常直接套用。"
+    },
+    {
+      "type": "text",
+      "title": "11.6 二叉树的遍历",
+      "html": "<p>遍历是按某种次序访问每个结点一次且仅一次：</p><ul><li><strong>前序遍历</strong>：根 → 左子树 → 右子树；</li><li><strong>中序遍历</strong>：左子树 → 根 → 右子树；</li><li><strong>后序遍历</strong>：左子树 → 右子树 → 根。</li></ul><p>已知前序序列和中序序列，可以唯一确定一棵二叉树；已知后序和中序也可以。只给前序和后序则不能唯一确定。</p>"
+    },
+    {
+      "type": "code",
+      "title": "二叉树的三种遍历",
+      "code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.left = None\n        self.right = None\n\nroot = Node(\"A\")\nroot.left = Node(\"B\")\nroot.right = Node(\"C\")\nroot.left.left = Node(\"D\")\n\ndef preorder(node):\n    if node:\n        print(node.value, end=\" \")\n        preorder(node.left)\n        preorder(node.right)\n\ndef inorder(node):\n    if node:\n        inorder(node.left)\n        print(node.value, end=\" \")\n        inorder(node.right)\n\npreorder(root)   # A B D C\nprint()\ninorder(root)    # D B A C\n",
+      "note": "递归实现遍历最直观。注意前序是“先访问根”，中序是“中间访问根”。"
+    },
+    {
+      "type": "text",
+      "title": "11.7 查找算法",
+      "html": "<p><strong>顺序查找</strong>从第一个元素开始逐个比较，平均比较次数约为 (n+1)/2，时间复杂度 O(n)，对数据是否有序没有要求。</p><p><strong>二分查找</strong>要求数据<strong>有序且顺序存储</strong>，每次取中间元素比较，把查找范围缩小一半，时间复杂度 O(log2n)。n 个元素最多比较 ⌊log2n⌋ + 1 次。</p>"
+    },
+    {
+      "type": "text",
+      "title": "11.8 排序算法",
+      "html": "<p>考试重点是比较各种排序的时间复杂度、空间复杂度和稳定性。稳定性是指：排序前后，值相等的元素相对次序保持不变。</p>"
+    },
+    {
+      "type": "table",
+      "title": "常见排序算法对比",
+      "head": ["算法", "平均时间", "最坏时间", "空间", "稳定性"],
+      "rows": [
+        ["冒泡排序", "O(n²)", "O(n²)", "O(1)", "稳定"],
+        ["快速排序", "O(nlog2n)", "O(n²)", "O(log2n)", "不稳定"],
+        ["简单选择排序", "O(n²)", "O(n²)", "O(1)", "不稳定"],
+        ["直接插入排序", "O(n²)", "O(n²)", "O(1)", "稳定"],
+        ["希尔排序", "O(n^1.5)", "与增量有关", "O(1)", "不稳定"],
+        ["归并排序", "O(nlog2n)", "O(nlog2n)", "O(n)", "稳定"],
+        ["堆排序", "O(nlog2n)", "O(nlog2n)", "O(1)", "不稳定"]
+      ]
+    },
+    {
+      "type": "tip",
+      "title": "记忆口诀",
+      "html": "<p>稳定的排序：<strong>冒泡、插入、归并</strong>（“冒插归”）。不稳定的：<strong>选择、快速、希尔、堆</strong>。时间复杂度为 O(nlog2n) 的：快速（平均）、归并、堆。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q1104"
+    },
+    {
+      "type": "quiz",
+      "qid": "q1112"
+    }
+  ],
+  "keypoints": [
+    "算法有穷性、确定性、可行性、输入、输出",
+    "栈后进先出，队列先进先出",
+    "二叉树第 k 层最多 2^(k-1) 个结点",
+    "n0 = n2 + 1",
+    "二分查找要求有序顺序存储，O(log2n)",
+    "稳定排序：冒泡、插入、归并"
+  ],
+  "pitfalls": [
+    "认为算法必须有输入（可以有零个输入）",
+    "混淆栈和队列的进出规则",
+    "把快速排序的最坏情况也算成 O(nlog2n)",
+    "认为二分查找可以用于链表"
+  ],
+  "summary": "公共基础知识偏概念和计算。把结点数公式、遍历顺序、查找与排序的复杂度表记牢，这部分 10 分就能稳稳拿到。"
+}

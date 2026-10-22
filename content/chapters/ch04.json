@@ -1,0 +1,117 @@
+{
+  "id": "ch04",
+  "module": "m2",
+  "order": 4,
+  "title": "异常处理",
+  "subtitle": "try-except、else、finally 与主动抛出",
+  "minutes": 40,
+  "objectives": [
+    "区分语法错误与运行时异常",
+    "记住常考异常类型的触发场景",
+    "掌握 try-except-else-finally 的执行流程",
+    "能使用 raise 和 assert 主动抛出异常",
+    "理解异常处理的适用场景与原则"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "4.1 什么是异常",
+      "html": "<p>程序在运行过程中遇到的错误称为<strong>异常</strong>。语法错误（如少写冒号、括号不匹配）在程序运行前就会被发现，属于 <code>SyntaxError</code>；而运行时异常只有在执行到出错语句时才会发生，例如除数为 0、下标越界、类型不匹配。</p><p>如果异常没有被处理，程序会立即终止，并在屏幕上打印 traceback 信息。异常处理的作用是：<strong>让程序在出错时仍能按预设方式继续运行或优雅退出</strong>。</p>"
+    },
+    {
+      "type": "table",
+      "title": "常考异常类型",
+      "head": ["异常", "典型触发场景"],
+      "rows": [
+        ["ZeroDivisionError", "除数为 0，如 1/0"],
+        ["ValueError", "值不合适，如 int(\"abc\")"],
+        ["TypeError", "类型不匹配，如 \"a\" + 1"],
+        ["NameError", "使用未定义的变量"],
+        ["IndexError", "列表/字符串下标越界"],
+        ["KeyError", "字典中不存在指定的键"],
+        ["AttributeError", "对象没有该属性或方法"],
+        ["FileNotFoundError", "打开的文件不存在"],
+        ["SyntaxError", "语法错误，如 if 后漏写冒号"],
+        ["IndentationError", "缩进错误"],
+        ["OverflowError", "数值运算结果过大（浮点数）"],
+        ["ImportError", "导入模块失败"]
+      ]
+    },
+    {
+      "type": "text",
+      "title": "4.2 try-except 基本结构",
+      "html": "<p><code>try</code> 块中放置可能出错的语句，<code>except</code> 块中放置出错后的处理代码。如果 try 块没有发生异常，except 块会被跳过；如果发生异常且类型匹配，程序跳转到对应的 except 块，处理完后继续执行后面的语句，<strong>不会崩溃</strong>。</p>"
+    },
+    {
+      "type": "code",
+      "title": "捕获除零异常",
+      "code": "try:\n    x = 10 / 0\nexcept ZeroDivisionError:\n    print(\"除数不能为 0\")\nprint(\"程序继续运行\")\n",
+      "note": "发生异常后，try 块中剩余的语句不会执行，直接跳到匹配的 except。"
+    },
+    {
+      "type": "text",
+      "title": "4.3 多个 except 与异常对象",
+      "html": "<p>一个 try 可以对应多个 except，按顺序匹配。可以用 <code>except 异常类型 as e</code> 把异常对象绑定到变量 e，通过 <code>str(e)</code> 查看错误信息。如果要同时捕获多种异常，可以把它们写成元组：<code>except (ValueError, TypeError) as e:</code>。</p>"
+    },
+    {
+      "type": "code",
+      "title": "多分支捕获与异常信息",
+      "code": "def convert(text):\n    try:\n        return int(text)\n    except ValueError as e:\n        print(\"值错误：\", e)\n    except TypeError as e:\n        print(\"类型错误：\", e)\n    return None\n\nprint(convert(\"12\"))     # 12\nprint(convert(\"abc\"))    # 值错误：invalid literal for int() ...\nprint(convert(None))     # 类型错误：int() argument must be ...\n",
+      "note": "异常类型要按“从具体到宽泛”的顺序排列，否则宽泛的类型会先截获异常。"
+    },
+    {
+      "type": "warn",
+      "title": "不要滥用裸 except",
+      "html": "<p>只写 <code>except:</code> 会捕获包括键盘中断在内的所有异常，容易掩盖真正的错误。应尽量捕获明确的异常类型；确需兜底时可写 <code>except Exception as e:</code>。</p>"
+    },
+    {
+      "type": "text",
+      "title": "4.4 else 与 finally",
+      "html": "<p>完整的结构是 <code>try-except-else-finally</code>：</p><ul><li><code>else</code>：try 块<strong>没有发生异常</strong>时执行；</li><li><code>finally</code>：<strong>无论是否发生异常都会执行</strong>，常用于关闭文件、释放资源。</li></ul><p>即使 try 或 except 中写了 return，finally 也会在返回前执行。</p>"
+    },
+    {
+      "type": "code",
+      "title": "else 与 finally 的执行顺序",
+      "code": "def divide(a, b):\n    try:\n        result = a / b\n    except ZeroDivisionError:\n        print(\"除零错误\")\n        return None\n    else:\n        print(\"计算成功\")\n        return result\n    finally:\n        print(\"finally 一定会执行\")\n\nprint(divide(10, 2))\nprint(\"---\")\nprint(divide(10, 0))\n",
+      "note": "第一次调用：try 成功 → else → finally → 返回。第二次调用：except → finally → 返回。"
+    },
+    {
+      "type": "text",
+      "title": "4.5 raise 与 assert",
+      "html": "<p><code>raise 异常类型(\"提示信息\")</code> 用于主动抛出异常，常出现在函数参数校验中。<code>assert 条件, \"提示信息\"</code> 是断言，条件为假时抛出 <code>AssertionError</code>，常用于调试。</p>"
+    },
+    {
+      "type": "code",
+      "title": "主动抛出异常",
+      "code": "def set_age(age):\n    if not isinstance(age, int):\n        raise TypeError(\"年龄必须是整数\")\n    if age < 0 or age > 150:\n        raise ValueError(\"年龄超出合理范围\")\n    return age\n\ntry:\n    set_age(-5)\nexcept ValueError as e:\n    print(e)\n\nassert 3 > 2, \"条件不成立\"\nprint(\"断言通过\")\n",
+      "note": "raise 抛出后，如果当前函数没有处理，会向上层调用者传播。"
+    },
+    {
+      "type": "tip",
+      "title": "本节速记",
+      "html": "<p>try 放风险代码，except 接住异常，else 是“没出事时”，finally 是“无论如何”。异常的匹配遵循“先具体后宽泛”。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0404"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0411"
+    }
+  ],
+  "keypoints": [
+    "try 中没有异常时跳过 except，执行 else",
+    "finally 无论是否异常都会执行",
+    "except 按顺序匹配，先具体后宽泛",
+    "raise 主动抛出，assert 用于断言",
+    "异常被处理后程序继续执行"
+  ],
+  "pitfalls": [
+    "认为 except 只能捕获一种异常",
+    "把finally放在else之前理解（顺序是 try-except-else-finally）",
+    "用裸 except 掩盖所有错误",
+    "以为发生异常后 try 中剩余语句还会执行"
+  ],
+  "summary": "异常处理让程序更健壮。考试重点是判断某段代码会触发哪种异常，以及 try-except-else-finally 的执行顺序。写操作题时，对输入转换加上 try-except 可以避免程序崩溃。"
+}

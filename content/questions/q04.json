@@ -1,0 +1,363 @@
+{
+  "chapter": "ch04",
+  "questions": [
+    {
+      "id": "q0401",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "执行表达式 1 / 0 会引发的异常是：",
+      "options": [
+        "ValueError",
+        "TypeError",
+        "ArithmeticError",
+        "ZeroDivisionError"
+      ],
+      "answer": 3,
+      "explanation": "除数为 0 时 Python 抛出 ZeroDivisionError。ArithmeticError 是它的父类，但具体异常类型是 ZeroDivisionError。",
+      "tags": [
+        "异常类型"
+      ]
+    },
+    {
+      "id": "q0402",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "执行语句 int(\"abc\") 会引发的异常是：",
+      "options": [
+        "ValueError",
+        "TypeError",
+        "NameError",
+        "SyntaxError"
+      ],
+      "answer": 0,
+      "explanation": "int() 收到了类型正确（字符串）但内容无法转换为整数的值，抛出 ValueError。TypeError 是类型本身不匹配时才抛出。",
+      "tags": [
+        "ValueError",
+        "类型转换"
+      ]
+    },
+    {
+      "id": "q0403",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "执行表达式 \"a\" + 1 会引发的异常是：",
+      "options": [
+        "ValueError",
+        "TypeError",
+        "IndexError",
+        "KeyError"
+      ],
+      "answer": 1,
+      "explanation": "字符串和整数不能直接相加，属于操作数类型不匹配，抛出 TypeError。",
+      "tags": [
+        "TypeError"
+      ]
+    },
+    {
+      "id": "q0404",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "已知列表 lst = [1, 2, 3]，执行 lst[5] 会引发的异常是：",
+      "options": [
+        "KeyError",
+        "ValueError",
+        "IndexError",
+        "AttributeError"
+      ],
+      "answer": 2,
+      "explanation": "列表下标超出范围抛出 IndexError。KeyError 通常出现在字典中访问不存在的键。",
+      "tags": [
+        "IndexError",
+        "列表"
+      ]
+    },
+    {
+      "id": "q0405",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "已知字典 d = {\"name\": \"Tom\"}，执行 d[\"age\"] 会引发的异常是：",
+      "options": [
+        "IndexError",
+        "ValueError",
+        "TypeError",
+        "KeyError"
+      ],
+      "answer": 3,
+      "explanation": "字典中不存在键 \"age\"，抛出 KeyError。若使用 d.get(\"age\") 则返回 None，不会报错。",
+      "tags": [
+        "KeyError",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0406",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "在未定义变量 total 的情况下执行 print(total)，会引发的异常是：",
+      "options": [
+        "NameError",
+        "ValueError",
+        "AttributeError",
+        "TypeError"
+      ],
+      "answer": 0,
+      "explanation": "使用了未定义的变量名，Python 抛出 NameError。AttributeError 是对象没有某个属性时才抛出。",
+      "tags": [
+        "NameError"
+      ]
+    },
+    {
+      "id": "q0407",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "使用 open(\"not_exist.txt\", \"r\") 打开一个不存在的文件，会引发的异常是：",
+      "options": [
+        "IOError",
+        "FileNotFoundError",
+        "PermissionError",
+        "OSError"
+      ],
+      "answer": 1,
+      "explanation": "以只读方式打开不存在的文件，抛出 FileNotFoundError（它是 OSError 的子类）。考试中应填写最具体的类型。",
+      "tags": [
+        "FileNotFoundError",
+        "文件"
+      ]
+    },
+    {
+      "id": "q0408",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ntry:\n    print(\"start\")\n    x = int(\"abc\")\n    print(\"after\")\nexcept ValueError:\n    print(\"error\")",
+      "code": "try:\n    print(\"start\")\n    x = int(\"abc\")\n    print(\"after\")\nexcept ValueError:\n    print(\"error\")",
+      "options": [
+        "start after error",
+        "error",
+        "start error",
+        "start after"
+      ],
+      "answer": 2,
+      "explanation": "先输出 start；执行 int(\"abc\") 时抛出 ValueError，try 块中剩余的 print(\"after\") 不再执行，直接跳到 except 输出 error。",
+      "tags": [
+        "try",
+        "执行流程"
+      ]
+    },
+    {
+      "id": "q0409",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ntry:\n    x = 10 / 2\nexcept ZeroDivisionError:\n    print(\"A\")\nelse:\n    print(\"B\")\nfinally:\n    print(\"C\")",
+      "code": "try:\n    x = 10 / 2\nexcept ZeroDivisionError:\n    print(\"A\")\nelse:\n    print(\"B\")\nfinally:\n    print(\"C\")",
+      "options": [
+        "A C",
+        "B",
+        "A B C",
+        "B C"
+      ],
+      "answer": 3,
+      "explanation": "10/2 没有异常，except 被跳过，执行 else 输出 B；finally 无论如何都执行，输出 C。因此结果是 B 和 C 两行。",
+      "tags": [
+        "else",
+        "finally"
+      ]
+    },
+    {
+      "id": "q0410",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "下列关于 finally 子句的说法，正确的是：",
+      "options": [
+        "无论是否发生异常都会执行",
+        "只有发生异常时才执行",
+        "只有没有异常时才执行",
+        "finally 必须与 else 一起使用"
+      ],
+      "answer": 0,
+      "explanation": "finally 块无论 try 是否发生异常、是否被 except 捕获，都会执行，常用于释放资源。即使 try 中有 return，finally 也会在返回前执行。",
+      "tags": [
+        "finally"
+      ]
+    },
+    {
+      "id": "q0411",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "要同时捕获 ValueError 和 TypeError，正确的写法是：",
+      "options": [
+        "except ValueError, TypeError:",
+        "except (ValueError, TypeError):",
+        "except ValueError or TypeError:",
+        "except [ValueError, TypeError]:"
+      ],
+      "answer": 1,
+      "explanation": "一个 except 捕获多种异常时，需要把异常类型放在圆括号中组成元组。Python 3 不支持 except A, B 这种旧写法。",
+      "tags": [
+        "except",
+        "多异常"
+      ]
+    },
+    {
+      "id": "q0412",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ntry:\n    raise ValueError(\"bad\")\nexcept ValueError as e:\n    print(type(e).__name__)",
+      "code": "try:\n    raise ValueError(\"bad\")\nexcept ValueError as e:\n    print(type(e).__name__)",
+      "options": [
+        "bad",
+        "Exception",
+        "ValueError",
+        "True"
+      ],
+      "answer": 2,
+      "explanation": "raise 主动抛出 ValueError，except 捕获后 e 是异常对象，type(e).__name__ 返回异常类型的名称 ValueError。若要输出提示信息应写 print(e)。",
+      "tags": [
+        "raise",
+        "异常对象"
+      ]
+    },
+    {
+      "id": "q0413",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "语句 assert x > 0, \"x 必须为正数\" 在 x 等于 -1 时会：",
+      "options": [
+        "输出提示信息，程序继续运行",
+        "抛出 ValueError",
+        "直接终止解释器，无法捕获",
+        "抛出 AssertionError，提示信息为 \"x 必须为正数\""
+      ],
+      "answer": 3,
+      "explanation": "assert 条件为假时抛出 AssertionError，逗号后的字符串作为异常信息。该异常可以被 try-except 捕获。",
+      "tags": [
+        "assert"
+      ]
+    },
+    {
+      "id": "q0414",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "如果 try 块中某条语句发生异常并被 except 捕获，那么 try 块中该语句之后的代码会：",
+      "options": [
+        "被跳过，直接执行 except 块",
+        "继续按顺序执行",
+        "从异常语句处重新执行",
+        "全部回滚，变量恢复原值"
+      ],
+      "answer": 0,
+      "explanation": "异常发生后，try 块中剩余语句不会执行，控制流立即跳转到匹配的 except 块。",
+      "tags": [
+        "try",
+        "执行流程"
+      ]
+    },
+    {
+      "id": "q0415",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "下列错误中，属于语法错误而不是运行时异常的是：",
+      "options": [
+        "1 / 0",
+        "if x > 0 缺少冒号",
+        "int(\"abc\")",
+        "lst[10]"
+      ],
+      "answer": 1,
+      "explanation": "if 语句末尾缺少冒号属于语法错误（SyntaxError），程序在运行前就会被发现。其余三项都是运行时才发生的异常。",
+      "tags": [
+        "SyntaxError"
+      ]
+    },
+    {
+      "id": "q0416",
+      "chapter": "ch04",
+      "difficulty": 3,
+      "stem": "下列程序段的输出结果是：\ntry:\n    x = int(\"abc\")\nexcept Exception:\n    print(\"E\")\nexcept ValueError:\n    print(\"V\")",
+      "code": "try:\n    x = int(\"abc\")\nexcept Exception:\n    print(\"E\")\nexcept ValueError:\n    print(\"V\")",
+      "options": [
+        "V",
+        "E 和 V",
+        "E",
+        "程序报错"
+      ],
+      "answer": 2,
+      "explanation": "except 从上到下匹配，ValueError 是 Exception 的子类，但 Exception 写在前面会先截获异常，输出 E。后面的 ValueError 分支永远得不到执行机会。应把具体异常写在前面。",
+      "tags": [
+        "except",
+        "顺序"
+      ]
+    },
+    {
+      "id": "q0417",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "在 except ValueError as e 中，变量 e 的类型是：",
+      "options": [
+        "字符串",
+        "整数错误码",
+        "布尔值",
+        "异常对象"
+      ],
+      "answer": 3,
+      "explanation": "as e 把捕获到的异常对象绑定给 e，e 是 ValueError 的实例。用 print(e) 输出错误描述，用 type(e) 查看类型。",
+      "tags": [
+        "异常对象"
+      ]
+    },
+    {
+      "id": "q0418",
+      "chapter": "ch04",
+      "difficulty": 1,
+      "stem": "下列哪种写法最不推荐用于异常处理？",
+      "options": [
+        "except:",
+        "except ValueError:",
+        "except (ValueError, TypeError):",
+        "except Exception as e:"
+      ],
+      "answer": 0,
+      "explanation": "裸 except 会捕获所有异常（包括 KeyboardInterrupt 等），掩盖真正的问题，不利于调试。应尽量捕获明确的异常类型。",
+      "tags": [
+        "异常处理",
+        "规范"
+      ]
+    },
+    {
+      "id": "q0419",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "执行下列程序，输出结果是：\ntry:\n    print(\"A\")\nfinally:\n    print(\"B\")",
+      "code": "try:\n    print(\"A\")\nfinally:\n    print(\"B\")",
+      "options": [
+        "A",
+        "A 和 B",
+        "B",
+        "程序报错"
+      ],
+      "answer": 1,
+      "explanation": "try 可以只配 finally 而不写 except。try 块正常执行输出 A，finally 必定执行输出 B。",
+      "tags": [
+        "finally",
+        "try"
+      ]
+    },
+    {
+      "id": "q0420",
+      "chapter": "ch04",
+      "difficulty": 2,
+      "stem": "执行表达式 \"abc\".push(\"d\") 会引发的异常是：",
+      "options": [
+        "TypeError",
+        "ValueError",
+        "AttributeError",
+        "NameError"
+      ],
+      "answer": 2,
+      "explanation": "字符串对象没有 push 方法，访问不存在的属性/方法会抛出 AttributeError。",
+      "tags": [
+        "AttributeError",
+        "字符串"
+      ]
+    }
+  ]
+}

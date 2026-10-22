@@ -1,0 +1,365 @@
+{
+  "chapter": "ch07",
+  "questions": [
+    {
+      "id": "q0701",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 d = {\"a\": 1}，执行 d[\"b\"] 的结果是：",
+      "options": [
+        "返回 None",
+        "返回 0",
+        "返回空字符串",
+        "引发 KeyError"
+      ],
+      "answer": 3,
+      "explanation": "字典用 [] 访问不存在的键会抛出 KeyError。若想安全访问，应使用 d.get(\"b\")，返回 None 或指定默认值。",
+      "tags": [
+        "字典",
+        "KeyError"
+      ]
+    },
+    {
+      "id": "q0702",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 d = {\"a\": 1}，表达式 d.get(\"b\", 0) 的值是：",
+      "options": [
+        "0",
+        "None",
+        "1",
+        "引发 KeyError"
+      ],
+      "answer": 0,
+      "explanation": "get(key, default) 在键不存在时返回 default，这里返回 0。若省略 default 则返回 None。",
+      "tags": [
+        "get",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0703",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 d = {\"name\": \"Tom\", \"age\": 18}，表达式 \"name\" in d 的值是：",
+      "options": [
+        "False",
+        "True",
+        "引发异常",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "对字典使用 in 判断的是键是否存在。\"name\" 是字典的键，因此返回 True；判断值是否存在应使用 value in d.values()。",
+      "tags": [
+        "in",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0704",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 d = {\"a\": 1, \"b\": 2}，执行 list(d.keys()) 的结果是：",
+      "options": [
+        "[1, 2]",
+        "[(\"a\", 1), (\"b\", 2)]",
+        "[\"a\", \"b\"]",
+        "\"ab\""
+      ],
+      "answer": 2,
+      "explanation": "keys() 返回所有键的视图，转成列表后是 [\"a\", \"b\"]。values() 才是 [1, 2]。",
+      "tags": [
+        "keys",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0705",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "要同时遍历字典的键和值，应使用：",
+      "options": [
+        "for k in d",
+        "for v in d.values()",
+        "for i in range(len(d))",
+        "for k, v in d.items()"
+      ],
+      "answer": 3,
+      "explanation": "items() 返回键值对，遍历时可以直接解包为 k 和 v。直接遍历字典得到的是键；字典也不支持用下标遍历。",
+      "tags": [
+        "items",
+        "遍历"
+      ]
+    },
+    {
+      "id": "q0706",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "已知 d = {\"a\": 1, \"b\": 2}，执行 d.update({\"b\": 20, \"c\": 3}) 后，d 的值是：",
+      "options": [
+        "{\"a\": 1, \"b\": 20, \"c\": 3}",
+        "{\"a\": 1, \"b\": 2, \"c\": 3}",
+        "{\"b\": 20, \"c\": 3}",
+        "{\"a\": 1, \"b\": 2}"
+      ],
+      "answer": 0,
+      "explanation": "update 把另一个字典的键值对合并进来，同名键 b 被新值 20 覆盖，新键 c 被加入。",
+      "tags": [
+        "update",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0707",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "已知 d = {\"a\": 1, \"b\": 2}，表达式 d.pop(\"a\") 的值和 d 的值分别是：",
+      "options": [
+        "None 和 {\"b\": 2}",
+        "1 和 {\"b\": 2}",
+        "1 和 {\"a\": 1, \"b\": 2}",
+        "\"a\" 和 {\"b\": 2}"
+      ],
+      "answer": 1,
+      "explanation": "pop(key) 删除指定键并返回对应的值，因此返回 1，字典剩下 {\"b\": 2}。",
+      "tags": [
+        "pop",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0708",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "已知 d = {\"a\": 1}，执行 d.setdefault(\"a\", 100) 的返回值是：",
+      "options": [
+        "100",
+        "None",
+        "1",
+        "引发 KeyError"
+      ],
+      "answer": 2,
+      "explanation": "setdefault 在键已存在时直接返回原有的值 1，不会修改字典；只有键不存在时才设置新值并返回它。",
+      "tags": [
+        "setdefault",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0709",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "下列对象中，不能作为字典键的是：",
+      "options": [
+        "整数 1",
+        "字符串 \"a\"",
+        "元组 (1, 2)",
+        "列表 [1, 2]"
+      ],
+      "answer": 3,
+      "explanation": "字典的键必须是可哈希的不可变对象。列表是可变对象，不可哈希，用作键会抛出 TypeError。",
+      "tags": [
+        "字典",
+        "可哈希"
+      ]
+    },
+    {
+      "id": "q0710",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "表达式 {x: x * x for x in range(1, 4)} 的结果是：",
+      "options": [
+        "{1: 1, 2: 4, 3: 9}",
+        "[1, 4, 9]",
+        "{1, 4, 9}",
+        "{(1,1), (2,4), (3,9)}"
+      ],
+      "answer": 0,
+      "explanation": "这是字典推导式，键为 x，值为 x 的平方，得到 {1: 1, 2: 4, 3: 9}。",
+      "tags": [
+        "字典推导式"
+      ]
+    },
+    {
+      "id": "q0711",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "执行 set([1, 2, 2, 3, 3, 3]) 后得到的集合元素个数是：",
+      "options": [
+        "2",
+        "3",
+        "6",
+        "1"
+      ],
+      "answer": 1,
+      "explanation": "集合自动去除重复元素，1、2、3 各保留一个，共 3 个元素。",
+      "tags": [
+        "集合",
+        "去重"
+      ]
+    },
+    {
+      "id": "q0712",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "下列写法中，能创建空集合的是：",
+      "options": [
+        "{}",
+        "[]",
+        "set()",
+        "()"
+      ],
+      "answer": 2,
+      "explanation": "{} 创建的是空字典，[] 是空列表，() 是空元组。创建空集合只能用 set()。",
+      "tags": [
+        "集合",
+        "创建"
+      ]
+    },
+    {
+      "id": "q0713",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 a = {1, 2, 3}，b = {2, 3, 4}，表达式 a & b 的结果是：",
+      "options": [
+        "{1, 2, 3, 4}",
+        "{1, 4}",
+        "{1, 2, 3}",
+        "{2, 3}"
+      ],
+      "answer": 3,
+      "explanation": "& 表示交集，取同时属于 a 和 b 的元素，即 {2, 3}。",
+      "tags": [
+        "集合",
+        "交集"
+      ]
+    },
+    {
+      "id": "q0714",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 a = {1, 2}，b = {2, 3}，表达式 a | b 的结果是：",
+      "options": [
+        "{1, 2, 3}",
+        "{2}",
+        "{1, 3}",
+        "{1, 2, 2, 3}"
+      ],
+      "answer": 0,
+      "explanation": "| 表示并集，合并两个集合的元素并自动去重，结果为 {1, 2, 3}。",
+      "tags": [
+        "集合",
+        "并集"
+      ]
+    },
+    {
+      "id": "q0715",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "已知 a = {1, 2, 3}，b = {2, 3, 4}，表达式 a - b 的结果是：",
+      "options": [
+        "{4}",
+        "{1}",
+        "{2, 3}",
+        "{1, 4}"
+      ],
+      "answer": 1,
+      "explanation": "- 表示差集，取属于 a 但不属于 b 的元素，只有 1，结果为 {1}。",
+      "tags": [
+        "集合",
+        "差集"
+      ]
+    },
+    {
+      "id": "q0716",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "集合方法中，删除不存在的元素也不会报错的是：",
+      "options": [
+        "remove()",
+        "pop()",
+        "discard()",
+        "del"
+      ],
+      "answer": 2,
+      "explanation": "discard(x) 在元素不存在时什么也不做；remove(x) 在元素不存在时会抛出 KeyError。",
+      "tags": [
+        "集合",
+        "discard"
+      ]
+    },
+    {
+      "id": "q0717",
+      "chapter": "ch07",
+      "difficulty": 1,
+      "stem": "已知 s = {1, 2, 3}，下列操作会报错的是：",
+      "options": [
+        "s.add(4)",
+        "2 in s",
+        "for x in s: print(x)",
+        "s[0]"
+      ],
+      "answer": 3,
+      "explanation": "集合是无序的，不支持下标访问，s[0] 会抛出 TypeError。集合支持遍历、成员判断和 add。",
+      "tags": [
+        "集合",
+        "索引"
+      ]
+    },
+    {
+      "id": "q0718",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "下列程序执行后，count 中键 \"a\" 的值是：\ncount = {}\nfor ch in \"abaca\":\n    count[ch] = count.get(ch, 0) + 1",
+      "code": "count = {}\nfor ch in \"abaca\":\n    count[ch] = count.get(ch, 0) + 1\nprint(count)",
+      "options": [
+        "3",
+        "2",
+        "4",
+        "1"
+      ],
+      "answer": 0,
+      "explanation": "字符串 \"abaca\" 中 a 出现 3 次，因此 count[\"a\"] 为 3。这是字典统计词频的标准写法。",
+      "tags": [
+        "字典",
+        "词频"
+      ]
+    },
+    {
+      "id": "q0719",
+      "chapter": "ch07",
+      "difficulty": 2,
+      "stem": "已知 d = {\"a\": 1, \"b\": 2, \"c\": 3}，表达式 len(d) 的值是：",
+      "options": [
+        "2",
+        "3",
+        "6",
+        "1"
+      ],
+      "answer": 1,
+      "explanation": "len() 对字典返回键值对的数量，这里有 3 个键，因此为 3。",
+      "tags": [
+        "len",
+        "字典"
+      ]
+    },
+    {
+      "id": "q0720",
+      "chapter": "ch07",
+      "difficulty": 3,
+      "stem": "已知 a = {1, 2, 3}，b = {2, 3, 4}，表达式 (a | b) - (a & b) 的结果是：",
+      "options": [
+        "{2, 3}",
+        "{1, 2, 3, 4}",
+        "{1, 4}",
+        "{1}"
+      ],
+      "answer": 2,
+      "explanation": "a | b 是 {1,2,3,4}，a & b 是 {2,3}，差集去掉公共元素，得到 {1,4}，这正是对称差 a ^ b。",
+      "tags": [
+        "集合",
+        "运算"
+      ]
+    }
+  ]
+}

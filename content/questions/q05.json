@@ -1,0 +1,369 @@
+{
+  "chapter": "ch05",
+  "questions": [
+    {
+      "id": "q0501",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "定义函数 def f(a, b=2): return a + b，调用 f(3) 的返回值是：",
+      "options": [
+        "3",
+        "2",
+        "程序报错",
+        "5"
+      ],
+      "answer": 3,
+      "explanation": "b 有默认值 2，调用 f(3) 时只传入 a=3，b 使用默认值 2，返回 3+2=5。",
+      "tags": [
+        "默认参数"
+      ]
+    },
+    {
+      "id": "q0502",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "下列函数定义中，语法正确的是：",
+      "options": [
+        "def f(a, b=1): pass",
+        "def f(a=1, b): pass",
+        "def f(a=1, b=2, c): pass",
+        "def f(a, b=1, c): pass"
+      ],
+      "answer": 0,
+      "explanation": "默认参数必须放在非默认参数之后。只要某个参数有默认值，它后面的参数都必须有默认值，因此只有 def f(a, b=1) 合法。",
+      "tags": [
+        "默认参数",
+        "语法"
+      ]
+    },
+    {
+      "id": "q0503",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "函数 return a, b 返回的值的类型是：",
+      "options": [
+        "列表",
+        "元组",
+        "字典",
+        "字符串"
+      ],
+      "answer": 1,
+      "explanation": "return a, b 中的逗号会创建一个元组，等价于 return (a, b)。可以用 x, y = f() 解包接收。",
+      "tags": [
+        "返回值",
+        "元组"
+      ]
+    },
+    {
+      "id": "q0504",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "一个函数中没有写 return 语句，调用该函数得到的返回值是：",
+      "options": [
+        "0",
+        "空字符串",
+        "None",
+        "False"
+      ],
+      "answer": 2,
+      "explanation": "函数没有 return 或只写 return 时，默认返回 None。None 的类型是 NoneType。",
+      "tags": [
+        "返回值",
+        "None"
+      ]
+    },
+    {
+      "id": "q0505",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nx = 10\ndef f():\n    x = 20\nf()\nprint(x)",
+      "code": "x = 10\ndef f():\n    x = 20\nf()\nprint(x)",
+      "options": [
+        "20",
+        "None",
+        "程序报错",
+        "10"
+      ],
+      "answer": 3,
+      "explanation": "函数内的 x = 20 创建了一个局部变量，不会修改全局变量 x。没有 global 声明时，函数内对同名变量赋值只影响局部作用域。",
+      "tags": [
+        "作用域",
+        "global"
+      ]
+    },
+    {
+      "id": "q0506",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ndef f():\n    y = 5\nf()\nprint(y)",
+      "code": "def f():\n    y = 5\nf()\nprint(y)",
+      "options": [
+        "引发 NameError",
+        "5",
+        "None",
+        "0"
+      ],
+      "answer": 0,
+      "explanation": "y 是函数 f 的局部变量，函数执行结束后局部作用域被销毁，外部无法访问 y，因此 print(y) 抛出 NameError。",
+      "tags": [
+        "局部变量",
+        "作用域"
+      ]
+    },
+    {
+      "id": "q0507",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "递归函数必须包含的部分是：",
+      "options": [
+        "至少两个 return",
+        "基例（终止条件）和递归链条",
+        "global 声明",
+        "lambda 表达式"
+      ],
+      "answer": 1,
+      "explanation": "递归函数必须有基例来终止递归，并且每次递归都要让问题规模向基例靠近，否则会无限递归。",
+      "tags": [
+        "递归"
+      ]
+    },
+    {
+      "id": "q0508",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "已知 def fact(n): return 1 if n <= 1 else n * fact(n-1)，fact(4) 的值是：",
+      "options": [
+        "4",
+        "12",
+        "24",
+        "120"
+      ],
+      "answer": 2,
+      "explanation": "fact(4)=4×fact(3)=4×3×2×1=24。这是阶乘的递归实现。",
+      "tags": [
+        "递归",
+        "阶乘"
+      ]
+    },
+    {
+      "id": "q0509",
+      "chapter": "ch05",
+      "difficulty": 3,
+      "stem": "下列程序的输出结果是：\ndef f(x, lst=[]):\n    lst.append(x)\n    return lst\nprint(f(1), f(2))",
+      "code": "def f(x, lst=[]):\n    lst.append(x)\n    return lst\nprint(f(1), f(2))",
+      "options": [
+        "[1] [2]",
+        "[1] [1, 2]",
+        "[1, 2] [2]",
+        "[1, 2] [1, 2]"
+      ],
+      "answer": 3,
+      "explanation": "默认参数只在定义时创建一次。两次调用共享同一个列表对象，先 append 1 再 append 2，两个返回值都指向这个列表，打印时都显示 [1, 2]。",
+      "tags": [
+        "默认参数",
+        "可变对象"
+      ]
+    },
+    {
+      "id": "q0510",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "调用函数时使用 f(b=3, a=1) 这种写法，称为：",
+      "options": [
+        "关键字参数",
+        "位置参数",
+        "默认参数",
+        "可变参数"
+      ],
+      "answer": 0,
+      "explanation": "在调用时通过“参数名=值”指定实参，称为关键字参数。关键字参数可以不按定义顺序书写。",
+      "tags": [
+        "关键字参数"
+      ]
+    },
+    {
+      "id": "q0511",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "在函数定义 def f(*args): 中，args 的类型是：",
+      "options": [
+        "列表",
+        "元组",
+        "字典",
+        "字符串"
+      ],
+      "answer": 1,
+      "explanation": "*args 把接收到的多余位置参数收集成一个元组。**kwargs 收集关键字参数为字典。",
+      "tags": [
+        "可变参数",
+        "*args"
+      ]
+    },
+    {
+      "id": "q0512",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "在函数定义 def f(**kwargs): 中，kwargs 的类型是：",
+      "options": [
+        "列表",
+        "元组",
+        "字典",
+        "集合"
+      ],
+      "answer": 2,
+      "explanation": "**kwargs 把多余的关键字参数收集为字典，键是参数名（字符串），值是实参。",
+      "tags": [
+        "可变参数",
+        "**kwargs"
+      ]
+    },
+    {
+      "id": "q0513",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "表达式 (lambda x: x + 1)(5) 的值是：",
+      "options": [
+        "5",
+        "x+1",
+        "程序报错",
+        "6"
+      ],
+      "answer": 3,
+      "explanation": "lambda x: x + 1 定义了一个匿名函数，后面紧跟 (5) 表示立即调用，结果为 6。",
+      "tags": [
+        "lambda"
+      ]
+    },
+    {
+      "id": "q0514",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ndef f(a, b=2):\n    return a * b\nprint(f(3), f(3, 4), f(a=3, b=5))",
+      "code": "def f(a, b=2):\n    return a * b\nprint(f(3), f(3, 4), f(a=3, b=5))",
+      "options": [
+        "6 12 15",
+        "6 6 15",
+        "3 12 15",
+        "6 12 8"
+      ],
+      "answer": 0,
+      "explanation": "f(3) 使用默认 b=2 得 6；f(3,4) 得 12；f(a=3,b=5) 使用关键字参数得 15。",
+      "tags": [
+        "参数",
+        "调用"
+      ]
+    },
+    {
+      "id": "q0515",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序输出结果是：\ncount = 0\ndef add():\n    global count\n    count += 1\nadd()\nadd()\nprint(count)",
+      "code": "count = 0\ndef add():\n    global count\n    count += 1\nadd()\nadd()\nprint(count)",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "程序报错"
+      ],
+      "answer": 1,
+      "explanation": "global count 声明函数内使用的是全局变量，两次调用各加 1，最终 count 为 2。",
+      "tags": [
+        "global",
+        "作用域"
+      ]
+    },
+    {
+      "id": "q0516",
+      "chapter": "ch05",
+      "difficulty": 1,
+      "stem": "关于函数的定义与调用，下列说法正确的是：",
+      "options": [
+        "定义函数时函数体立即执行",
+        "函数可以不调用就自动运行",
+        "定义函数只是创建函数对象，调用时才执行函数体",
+        "函数必须返回一个值"
+      ],
+      "answer": 2,
+      "explanation": "def 语句执行时只是创建函数对象并绑定函数名，函数体要等到调用时才执行。函数也可以不返回值（返回 None）。",
+      "tags": [
+        "函数",
+        "调用"
+      ]
+    },
+    {
+      "id": "q0517",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "执行下列代码会出现的错误是：\ndef f(n):\n    return f(n + 1)\nf(1)",
+      "code": "def f(n):\n    return f(n + 1)\nf(1)",
+      "options": [
+        "NameError",
+        "ValueError",
+        "ZeroDivisionError",
+        "RecursionError"
+      ],
+      "answer": 3,
+      "explanation": "函数没有基例，n 不断增大，递归层数超过 Python 的限制，抛出 RecursionError（递归深度超出）。",
+      "tags": [
+        "递归",
+        "异常"
+      ]
+    },
+    {
+      "id": "q0518",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nnums = [1, 2, 3]\ndef add(lst):\n    lst.append(4)\nadd(nums)\nprint(nums)",
+      "code": "nums = [1, 2, 3]\ndef add(lst):\n    lst.append(4)\nadd(nums)\nprint(nums)",
+      "options": [
+        "[1, 2, 3, 4]",
+        "[1, 2, 3]",
+        "[4]",
+        "程序报错"
+      ],
+      "answer": 0,
+      "explanation": "列表是可变对象，函数参数 lst 与外部 nums 指向同一个列表。在函数内 append 会直接修改原列表。",
+      "tags": [
+        "参数传递",
+        "可变对象"
+      ]
+    },
+    {
+      "id": "q0519",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列函数名中，合法的是：",
+      "options": [
+        "2sum",
+        "_calculate",
+        "my-func",
+        "def"
+      ],
+      "answer": 1,
+      "explanation": "函数名遵循标识符规则：不能数字开头、不能含减号、不能是保留字。_calculate 合法。",
+      "tags": [
+        "函数名",
+        "标识符"
+      ]
+    },
+    {
+      "id": "q0520",
+      "chapter": "ch05",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\ndef f():\n    pass\nprint(f())",
+      "code": "def f():\n    pass\nprint(f())",
+      "options": [
+        "0",
+        "空行",
+        "None",
+        "程序报错"
+      ],
+      "answer": 2,
+      "explanation": "pass 是空语句，只用来占位，不执行任何操作。函数没有返回值，因此 print 输出 None。",
+      "tags": [
+        "pass",
+        "返回值"
+      ]
+    }
+  ]
+}

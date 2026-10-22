@@ -1,0 +1,368 @@
+{
+  "exercises": [
+    {
+      "id": "e01",
+      "chapter": "ch02",
+      "title": "摄氏度转华氏度",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "从键盘读入一个摄氏温度（实数），按公式 F = C × 1.8 + 32 计算华氏温度，并按指定格式输出。",
+      "inputSpec": "一行，一个实数，表示摄氏温度。",
+      "outputSpec": "一行，格式为 F=华氏温度，保留 1 位小数。",
+      "samples": [
+        { "stdin": "100\n", "stdout": "F=212.0\n" }
+      ],
+      "tests": [
+        { "name": "沸点", "stdin": "100\n", "stdout": "F=212.0\n" },
+        { "name": "冰点", "stdin": "0\n", "stdout": "F=32.0\n" },
+        { "name": "人体温度", "stdin": "37\n", "stdout": "F=98.6\n" },
+        { "name": "负温度", "stdin": "-40\n", "stdout": "F=-40.0\n" }
+      ],
+      "starter": "# 读入摄氏温度，计算并输出华氏温度\n",
+      "solution": "c = float(input())\nf = c * 1.8 + 32\nprint(f\"F={f:.1f}\")\n",
+      "analysis": "先用 float() 把输入转成实数，再套用转换公式。输出用 f-string 的 :.1f 控制一位小数，注意格式中不能多写空格。",
+      "hints": [
+        "input() 得到的是字符串，需要 float() 转换。",
+        "公式为 F = C * 1.8 + 32。",
+        "输出格式严格为 F=数值，保留一位小数。"
+      ],
+      "tags": ["输入输出", "格式化"],
+      "knowledge": ["input", "float", "f-string"]
+    },
+    {
+      "id": "e02",
+      "chapter": "ch02",
+      "title": "圆的面积与周长",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入圆的半径 r，取圆周率 π = 3.14159，计算并输出圆的面积和周长，均保留 2 位小数。",
+      "inputSpec": "一行，一个实数 r（r > 0）。",
+      "outputSpec": "共两行：第一行“面积=值”，第二行“周长=值”，均保留 2 位小数。",
+      "samples": [
+        { "stdin": "2\n", "stdout": "面积=12.57\n周长=12.57\n" }
+      ],
+      "tests": [
+        { "name": "半径 2", "stdin": "2\n", "stdout": "面积=12.57\n周长=12.57\n" },
+        { "name": "半径 1", "stdin": "1\n", "stdout": "面积=3.14\n周长=6.28\n" },
+        { "name": "半径 10", "stdin": "10\n", "stdout": "面积=314.16\n周长=62.83\n" },
+        { "name": "小数半径", "stdin": "2.5\n", "stdout": "面积=19.63\n周长=15.71\n" }
+      ],
+      "starter": "# 读入半径，计算面积和周长\n",
+      "solution": "r = float(input())\npi = 3.14159\nprint(f\"面积={pi * r * r:.2f}\")\nprint(f\"周长={2 * pi * r:.2f}\")\n",
+      "analysis": "面积公式为 πr²，周长公式为 2πr。用题目给定的 π 值，不要使用 math.pi，否则舍入结果可能不同。",
+      "hints": [
+        "面积 = π × r × r，周长 = 2 × π × r。",
+        "题目指定 π = 3.14159，请直接使用这个值。",
+        "两行输出都要保留两位小数。"
+      ],
+      "tags": ["数学计算", "格式化"],
+      "knowledge": ["float", "算术运算", "format"]
+    },
+    {
+      "id": "e03",
+      "chapter": "ch03",
+      "title": "判断奇偶数",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一个整数，判断它是奇数还是偶数。",
+      "inputSpec": "一行，一个整数 n（可能是负数）。",
+      "outputSpec": "输出“偶数”或“奇数”。",
+      "samples": [
+        { "stdin": "7\n", "stdout": "奇数\n" }
+      ],
+      "tests": [
+        { "name": "正奇数", "stdin": "7\n", "stdout": "奇数\n" },
+        { "name": "正偶数", "stdin": "12\n", "stdout": "偶数\n" },
+        { "name": "零", "stdin": "0\n", "stdout": "偶数\n" },
+        { "name": "负奇数", "stdin": "-9\n", "stdout": "奇数\n" },
+        { "name": "负偶数", "stdin": "-8\n", "stdout": "偶数\n" }
+      ],
+      "starter": "# 判断并输出奇偶性\n",
+      "solution": "n = int(input())\nif n % 2 == 0:\n    print(\"偶数\")\nelse:\n    print(\"奇数\")\n",
+      "analysis": "整数对 2 取余，余数为 0 是偶数，否则是奇数。Python 中负数取余结果仍为非负数，-9 % 2 等于 1，因此无需特殊处理。",
+      "hints": [
+        "用 n % 2 判断余数。",
+        "余数为 0 输出“偶数”，否则输出“奇数”。",
+        "也可以写成条件表达式一行输出。"
+      ],
+      "tags": ["分支", "取余"],
+      "knowledge": ["if-else", "%"]
+    },
+    {
+      "id": "e04",
+      "chapter": "ch03",
+      "title": "成绩等级评定",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一个百分制成绩（整数），按以下规则输出等级：90 分及以上为“优秀”，80 到 89 为“良好”，60 到 79 为“及格”，60 分以下为“不及格”。",
+      "inputSpec": "一行，一个 0 到 100 的整数。",
+      "outputSpec": "输出对应的等级文字。",
+      "samples": [
+        { "stdin": "85\n", "stdout": "良好\n" }
+      ],
+      "tests": [
+        { "name": "优秀边界", "stdin": "90\n", "stdout": "优秀\n" },
+        { "name": "良好", "stdin": "85\n", "stdout": "良好\n" },
+        { "name": "及格边界", "stdin": "60\n", "stdout": "及格\n" },
+        { "name": "不及格", "stdin": "59\n", "stdout": "不及格\n" },
+        { "name": "满分", "stdin": "100\n", "stdout": "优秀\n" }
+      ],
+      "starter": "# 根据分数输出等级\n",
+      "solution": "score = int(input())\nif score >= 90:\n    print(\"优秀\")\nelif score >= 80:\n    print(\"良好\")\nelif score >= 60:\n    print(\"及格\")\nelse:\n    print(\"不及格\")\n",
+      "analysis": "多分支按从高到低的顺序判断即可。因为前面的条件已经排除了更高分段，后面的 elif 只需要写下限。",
+      "hints": [
+        "使用 if-elif-else 多分支结构。",
+        "从 90 分开始往下判断，顺序不能乱。",
+        "注意 90、80、60 这几个边界值应归入较高等级。"
+      ],
+      "tags": ["多分支"],
+      "knowledge": ["if-elif-else"]
+    },
+    {
+      "id": "e05",
+      "chapter": "ch03",
+      "title": "1 到 n 求和",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入正整数 n，计算 1 + 2 + … + n 的和并输出。",
+      "inputSpec": "一行，一个正整数 n。",
+      "outputSpec": "一行，一个整数，表示累加和。",
+      "samples": [
+        { "stdin": "100\n", "stdout": "5050\n" }
+      ],
+      "tests": [
+        { "name": "n=1", "stdin": "1\n", "stdout": "1\n" },
+        { "name": "n=10", "stdin": "10\n", "stdout": "55\n" },
+        { "name": "n=100", "stdin": "100\n", "stdout": "5050\n" },
+        { "name": "n=1000", "stdin": "1000\n", "stdout": "500500\n" }
+      ],
+      "starter": "# 用循环或公式求和\n",
+      "solution": "n = int(input())\ntotal = 0\nfor i in range(1, n + 1):\n    total += i\nprint(total)\n",
+      "analysis": "range(1, n+1) 恰好包含 1 到 n。也可以直接用公式 n*(n+1)//2，注意使用整除避免浮点误差。",
+      "hints": [
+        "循环变量从 1 到 n，包含 n。",
+        "可以用累加器 total 保存结果。",
+        "也可以用等差数列公式 n*(n+1)//2。"
+      ],
+      "tags": ["循环", "累加"],
+      "knowledge": ["for", "range"]
+    },
+    {
+      "id": "e06",
+      "chapter": "ch03",
+      "title": "素数判断",
+      "difficulty": 2,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一个正整数 n，判断它是否为素数。素数是大于 1 且只能被 1 和自身整除的整数。",
+      "inputSpec": "一行，一个正整数 n。",
+      "outputSpec": "输出“是素数”或“不是素数”。",
+      "samples": [
+        { "stdin": "29\n", "stdout": "是素数\n" }
+      ],
+      "tests": [
+        { "name": "最小素数", "stdin": "2\n", "stdout": "是素数\n" },
+        { "name": "1 不是素数", "stdin": "1\n", "stdout": "不是素数\n" },
+        { "name": "合数", "stdin": "91\n", "stdout": "不是素数\n" },
+        { "name": "较大素数", "stdin": "97\n", "stdout": "是素数\n" },
+        { "name": "完全平方数", "stdin": "49\n", "stdout": "不是素数\n" }
+      ],
+      "starter": "# 判断素数，注意 1 和 2\n",
+      "solution": "n = int(input())\nif n < 2:\n    print(\"不是素数\")\nelse:\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            print(\"不是素数\")\n            break\n    else:\n        print(\"是素数\")\n",
+      "analysis": "只需尝试 2 到 √n 的因数。若找到因数即为合数并 break；循环完整结束说明没有因数，执行 for-else 输出“是素数”。1 要单独排除。",
+      "hints": [
+        "n 小于 2 时一定不是素数。",
+        "只需检查到 int(n ** 0.5) 即可。",
+        "可以用 for-else：找到因数时 break，否则执行 else。"
+      ],
+      "tags": ["循环", "for-else", "数学"],
+      "knowledge": ["range", "break", "for-else"]
+    },
+    {
+      "id": "e07",
+      "chapter": "ch02",
+      "title": "字符串反转",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一行字符串，把它反转后输出。",
+      "inputSpec": "一行字符串（可能包含空格和中文）。",
+      "outputSpec": "反转后的字符串。",
+      "samples": [
+        { "stdin": "Python二级\n", "stdout": "级二nohtyP\n" }
+      ],
+      "tests": [
+        { "name": "英文", "stdin": "hello\n", "stdout": "olleh\n" },
+        { "name": "中文", "stdin": "二级Python\n", "stdout": "nohtyP级二\n" },
+        { "name": "回文", "stdin": "level\n", "stdout": "level\n" },
+        { "name": "含空格", "stdin": "a b c\n", "stdout": "c b a\n" }
+      ],
+      "starter": "# 用切片反转字符串\n",
+      "solution": "s = input()\nprint(s[::-1])\n",
+      "analysis": "切片步长为 -1 时从右向左取字符，s[::-1] 即可得到反转字符串。",
+      "hints": [
+        "字符串支持切片。",
+        "把步长设为 -1 可以从右往左取。",
+        "一行代码即可完成。"
+      ],
+      "tags": ["字符串", "切片"],
+      "knowledge": ["切片", "字符串"]
+    },
+    {
+      "id": "e08",
+      "chapter": "ch02",
+      "title": "统计字母和数字",
+      "difficulty": 2,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一行字符串，统计其中英文字母和数字字符的个数，分两行输出。",
+      "inputSpec": "一行字符串。",
+      "outputSpec": "第一行“字母=个数”，第二行“数字=个数”。",
+      "samples": [
+        { "stdin": "abc123\n", "stdout": "字母=3\n数字=3\n" }
+      ],
+      "tests": [
+        { "name": "字母数字混合", "stdin": "abc123\n", "stdout": "字母=3\n数字=3\n" },
+        { "name": "含空格与符号", "stdin": "Hello, 2026!\n", "stdout": "字母=5\n数字=4\n" },
+        { "name": "纯中文", "stdin": "你好世界\n", "stdout": "字母=0\n数字=0\n" },
+        { "name": "纯字母", "stdin": "Python\n", "stdout": "字母=6\n数字=0\n" }
+      ],
+      "starter": "# 遍历字符并分类计数\n",
+      "solution": "s = input()\nletters = 0\ndigits = 0\nfor ch in s:\n    if ('a' <= ch <= 'z') or ('A' <= ch <= 'Z'):\n        letters += 1\n    elif '0' <= ch <= '9':\n        digits += 1\nprint(f\"字母={letters}\")\nprint(f\"数字={digits}\")\n",
+      "analysis": "用字符比较判断范围最稳妥。isdigit() 会把全角数字等也算进去，isalpha() 会把汉字也算作字母，因此这里用 ASCII 范围判断。",
+      "hints": [
+        "遍历字符串中的每个字符。",
+        "英文字母包括 a-z 和 A-Z 两段。",
+        "数字字符可以用 '0' <= ch <= '9' 判断。"
+      ],
+      "tags": ["字符串", "计数"],
+      "knowledge": ["for", "字符比较"]
+    },
+    {
+      "id": "e09",
+      "chapter": "ch06",
+      "title": "列表最大值与平均值",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入 n 个整数，输出其中的最大值和平均值。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个整数，用空格分隔。",
+      "outputSpec": "第一行“最大值=值”；第二行“平均值=值”，平均值保留 2 位小数。",
+      "samples": [
+        { "stdin": "4\n88 92 79 95\n", "stdout": "最大值=95\n平均值=88.50\n" }
+      ],
+      "tests": [
+        { "name": "常规数据", "stdin": "4\n88 92 79 95\n", "stdout": "最大值=95\n平均值=88.50\n" },
+        { "name": "单元素", "stdin": "1\n7\n", "stdout": "最大值=7\n平均值=7.00\n" },
+        { "name": "含负数", "stdin": "3\n-5 -2 -9\n", "stdout": "最大值=-2\n平均值=-5.33\n" },
+        { "name": "相同元素", "stdin": "3\n6 6 6\n", "stdout": "最大值=6\n平均值=6.00\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 解析数据并计算\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:1 + n]]\nprint(f\"最大值={max(nums)}\")\nprint(f\"平均值={sum(nums) / n:.2f}\")\n",
+      "analysis": "用 sys.stdin.read().split() 一次性读取所有数据，可以兼容数字分布在不同行的情况。切片取出前 n 个数，再使用 max 和 sum。",
+      "hints": [
+        "数据可能不在同一行，建议一次性读入全部输入。",
+        "用切片 data[1:1+n] 取出 n 个数字。",
+        "平均值 = 总和 / 个数。"
+      ],
+      "tags": ["列表", "统计"],
+      "knowledge": ["sys.stdin", "max", "sum"]
+    },
+    {
+      "id": "e10",
+      "chapter": "ch07",
+      "title": "字符出现次数统计",
+      "difficulty": 2,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一个由小写字母组成的单词，统计每个字符出现的次数，按字符第一次出现的先后顺序输出。",
+      "inputSpec": "一行，一个由小写字母组成的字符串。",
+      "outputSpec": "每行一个字符及其次数，格式为“字符:次数”。",
+      "samples": [
+        { "stdin": "banana\n", "stdout": "b:1\na:3\nn:2\n" }
+      ],
+      "tests": [
+        { "name": "banana", "stdin": "banana\n", "stdout": "b:1\na:3\nn:2\n" },
+        { "name": "全部相同", "stdin": "aaaa\n", "stdout": "a:4\n" },
+        { "name": "无重复", "stdin": "abc\n", "stdout": "a:1\nb:1\nc:1\n" },
+        { "name": "长单词", "stdin": "mississippi\n", "stdout": "m:1\ni:4\ns:4\np:2\n" }
+      ],
+      "starter": "# 用字典统计次数\n",
+      "solution": "word = input().strip()\ncounts = {}\nfor ch in word:\n    counts[ch] = counts.get(ch, 0) + 1\nfor ch, cnt in counts.items():\n    print(f\"{ch}:{cnt}\")\n",
+      "analysis": "字典的 get(ch, 0) + 1 是累计词频的固定写法。Python 3.7 及以后字典保持插入顺序，因此按第一次出现的顺序输出。",
+      "hints": [
+        "用字典保存“字符 → 次数”。",
+        "counts.get(ch, 0) 在字符不存在时返回 0。",
+        "遍历 counts.items() 即可按键的插入顺序输出。"
+      ],
+      "tags": ["字典", "词频"],
+      "knowledge": ["dict", "get", "items"]
+    },
+    {
+      "id": "e11",
+      "chapter": "ch07",
+      "title": "去重并排序",
+      "difficulty": 2,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入 n 个整数，去掉重复的数字后按从小到大的顺序输出。",
+      "inputSpec": "第一行一个整数 n；第二行 n 个整数。",
+      "outputSpec": "一行，去重并升序排列后的整数，用空格分隔。",
+      "samples": [
+        { "stdin": "6\n3 1 2 3 1 4\n", "stdout": "1 2 3 4\n" }
+      ],
+      "tests": [
+        { "name": "有重复", "stdin": "6\n3 1 2 3 1 4\n", "stdout": "1 2 3 4\n" },
+        { "name": "无重复", "stdin": "4\n9 7 8 6\n", "stdout": "6 7 8 9\n" },
+        { "name": "全部相同", "stdin": "5\n2 2 2 2 2\n", "stdout": "2\n" },
+        { "name": "含负数", "stdin": "5\n0 -3 5 -3 2\n", "stdout": "-3 0 2 5\n" }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 去重、排序并输出\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:1 + n]]\nresult = sorted(set(nums))\nprint(\" \".join(str(x) for x in result))\n",
+      "analysis": "set 自动去重，sorted 返回升序新列表。输出时要把整数转成字符串再用空格连接。",
+      "hints": [
+        "set(nums) 可以去掉重复元素。",
+        "sorted() 返回排序后的列表。",
+        "join 只能连接字符串，需要先 str() 转换。"
+      ],
+      "tags": ["集合", "排序"],
+      "knowledge": ["set", "sorted", "join"]
+    },
+    {
+      "id": "e12",
+      "chapter": "ch05",
+      "title": "计算阶乘",
+      "difficulty": 1,
+      "level": "basic",
+      "points": 15,
+      "statement": "读入一个非负整数 n，计算并输出 n 的阶乘（n!）。规定 0! = 1。",
+      "inputSpec": "一行，一个整数 n（0 ≤ n ≤ 20）。",
+      "outputSpec": "一行，n! 的整数结果。",
+      "samples": [
+        { "stdin": "5\n", "stdout": "120\n" }
+      ],
+      "tests": [
+        { "name": "0 的阶乘", "stdin": "0\n", "stdout": "1\n" },
+        { "name": "1 的阶乘", "stdin": "1\n", "stdout": "1\n" },
+        { "name": "5 的阶乘", "stdin": "5\n", "stdout": "120\n" },
+        { "name": "10 的阶乘", "stdin": "10\n", "stdout": "3628800\n" },
+        { "name": "20 的阶乘", "stdin": "20\n", "stdout": "2432902008176640000\n" }
+      ],
+      "starter": "# 用循环或递归计算阶乘\n",
+      "solution": "n = int(input())\nresult = 1\nfor i in range(2, n + 1):\n    result *= i\nprint(result)\n",
+      "analysis": "累乘器初始值为 1。n 为 0 或 1 时循环不执行，直接输出 1，正好满足 0! = 1 的规定。",
+      "hints": [
+        "累乘的初始值应设为 1，而不是 0。",
+        "从 2 乘到 n 即可。",
+        "也可以用递归 fact(n) = n * fact(n-1)。"
+      ],
+      "tags": ["循环", "累乘"],
+      "knowledge": ["for", "range", "递归"]
+    }
+  ]
+}

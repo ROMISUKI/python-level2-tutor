@@ -1,0 +1,135 @@
+{
+  "id": "ch08",
+  "module": "m4",
+  "order": 8,
+  "title": "文件与数据格式化",
+  "subtitle": "文件读写、一二维数据与 CSV",
+  "minutes": 50,
+  "objectives": [
+    "掌握 open() 的模式参数和编码参数",
+    "熟练使用 read、readline、readlines 读取文件",
+    "掌握 write、writelines 写入文件",
+    "理解 with 语句自动关闭文件的机制",
+    "能用 csv 模块读写二维数据"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "8.1 文件的打开与关闭",
+      "html": "<p>文件操作三步：<strong>打开 → 读写 → 关闭</strong>。打开文件用 <code>open(文件名, 模式, encoding=编码)</code>，关闭用 <code>f.close()</code>。文件使用完毕后必须关闭，否则可能丢失缓冲区中的数据。</p>"
+    },
+    {
+      "type": "table",
+      "title": "常用文件打开模式",
+      "head": ["模式", "含义", "文件不存在时", "是否清空原内容"],
+      "rows": [
+        ["r", "只读", "报 FileNotFoundError", "否"],
+        ["w", "只写", "创建新文件", "是"],
+        ["a", "追加", "创建新文件", "否，写在末尾"],
+        ["r+", "读写", "报错", "否"],
+        ["rb", "二进制只读", "报错", "否"],
+        ["wb", "二进制只写", "创建", "是"]
+      ]
+    },
+    {
+      "type": "warn",
+      "title": "w 模式会清空文件",
+      "html": "<p>用 <code>\"w\"</code> 打开一个已有文件，会立即清空原有内容。若想保留原内容并在末尾追加，必须使用 <code>\"a\"</code> 模式。这是操作题中非常容易失分的地方。</p>"
+    },
+    {
+      "type": "code",
+      "title": "写入并读取文件",
+      "code": "with open(\"demo.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"第一行\\n\")\n    f.write(\"第二行\\n\")\n\nwith open(\"demo.txt\", \"r\", encoding=\"utf-8\") as f:\n    content = f.read()\n\nprint(content)\nprint(repr(content))\n",
+      "note": "write() 不会自动换行，需要手动添加 \\n。读取后 content 中包含换行符。"
+    },
+    {
+      "type": "text",
+      "title": "8.2 三种读取方式",
+      "html": "<ul><li><code>f.read()</code>：读取全部内容，返回一个字符串；</li><li><code>f.readline()</code>：读取一行，返回字符串，包含行末的换行符；</li><li><code>f.readlines()</code>：读取所有行，返回列表，每个元素是一行。</li></ul><p>也可以直接 <code>for line in f:</code> 逐行遍历，这是处理大文件最常用的方式。</p>"
+    },
+    {
+      "type": "code",
+      "title": "三种读取方式对比",
+      "code": "with open(\"demo.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"apple\\nbanana\\ncherry\\n\")\n\nwith open(\"demo.txt\", \"r\", encoding=\"utf-8\") as f:\n    print(f.readline().strip())   # apple\n    print(f.readline().strip())   # banana\n\nwith open(\"demo.txt\", \"r\", encoding=\"utf-8\") as f:\n    lines = f.readlines()\nprint(lines)                       # ['apple\\n', 'banana\\n', 'cherry\\n']\nprint([line.strip() for line in lines])  # ['apple', 'banana', 'cherry']\n",
+      "note": "strip() 用来去掉行末换行符。直接 print(lines) 会看到 \\n 的转义形式。"
+    },
+    {
+      "type": "text",
+      "title": "8.3 写入与追加",
+      "html": "<p><code>f.write(s)</code> 把字符串 s 写入文件，返回写入的字符数；<code>f.writelines(seq)</code> 把一个字符串序列逐项写入，但<strong>不会自动添加换行</strong>。追加内容用 <code>\"a\"</code> 模式。</p>"
+    },
+    {
+      "type": "code",
+      "title": "追加写入",
+      "code": "with open(\"log.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.writelines([\"A\\n\", \"B\\n\"])\n\nwith open(\"log.txt\", \"a\", encoding=\"utf-8\") as f:\n    f.write(\"C\\n\")\n\nwith open(\"log.txt\", \"r\", encoding=\"utf-8\") as f:\n    print(f.read())\n",
+      "note": "第一次用 w 创建并写入 A、B；第二次用 a 在末尾追加 C。"
+    },
+    {
+      "type": "text",
+      "title": "8.4 with 语句",
+      "html": "<p><code>with open(...) as f:</code> 会在代码块结束时自动关闭文件，即使中途发生异常也能正确关闭。考试中推荐一律使用 with 写法。</p>"
+    },
+    {
+      "type": "code",
+      "title": "with 自动关闭",
+      "code": "with open(\"demo.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"hello\\n\")\n\nwith open(\"demo.txt\", \"r\", encoding=\"utf-8\") as f:\n    first = f.readline()\nprint(f.closed)   # True\nprint(first.strip())\n",
+      "note": "离开 with 代码块后文件已经关闭，不能再读写。"
+    },
+    {
+      "type": "text",
+      "title": "8.5 一维数据与二维数据",
+      "html": "<p><strong>一维数据</strong>是一行数据，例如一组分数，可以用逗号分隔存入文本文件，读取时用 <code>split()</code> 拆分。<strong>二维数据</strong>是表格数据，有行有列，通常用“列表的列表”表示：外层列表的每个元素是一行，内层列表的每个元素是一个单元格。</p>"
+    },
+    {
+      "type": "code",
+      "title": "一维数据的存取",
+      "code": "scores = [88, 92, 79, 95]\nwith open(\"scores.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\",\".join(str(x) for x in scores))\n\nwith open(\"scores.txt\", \"r\", encoding=\"utf-8\") as f:\n    text = f.read()\nprint(text)                       # 88,92,79,95\nprint([int(x) for x in text.split(\",\")])  # [88, 92, 79, 95]\n",
+      "note": "写入时要把数字转成字符串；读取后按分隔符拆分，再转回整数。"
+    },
+    {
+      "type": "code",
+      "title": "二维数据的存取",
+      "code": "rows = [[\"姓名\", \"成绩\"], [\"小明\", 92], [\"小红\", 88]]\nwith open(\"table.txt\", \"w\", encoding=\"utf-8\") as f:\n    for row in rows:\n        f.write(\",\".join(str(x) for x in row) + \"\\n\")\n\nwith open(\"table.txt\", \"r\", encoding=\"utf-8\") as f:\n    data = [line.strip().split(\",\") for line in f if line.strip()]\nprint(data)\n",
+      "note": "读取二维数据的典型写法：逐行读取 → 去空白 → 按分隔符拆分 → 组成列表的列表。"
+    },
+    {
+      "type": "text",
+      "title": "8.6 CSV 格式文件",
+      "html": "<p>CSV（逗号分隔值）是表格数据最常用的存储格式。Python 标准库 <code>csv</code> 提供了读写工具：</p><ul><li><code>csv.reader(f)</code>：返回迭代器，每次产出一行，行是字符串列表；</li><li><code>csv.writer(f)</code>：用 <code>writerow()</code> 写一行，用 <code>writerows()</code> 写多行。</li></ul><p>打开文件时建议加 <code>newline=\"\"</code>，避免在 Windows 上出现多余空行。</p>"
+    },
+    {
+      "type": "code",
+      "title": "CSV 读写",
+      "code": "import csv\n\nrows = [[\"姓名\", \"成绩\"], [\"小明\", \"92\"], [\"小红\", \"88\"]]\nwith open(\"students.csv\", \"w\", encoding=\"utf-8\", newline=\"\") as f:\n    writer = csv.writer(f)\n    writer.writerows(rows)\n\nwith open(\"students.csv\", \"r\", encoding=\"utf-8\", newline=\"\") as f:\n    reader = csv.reader(f)\n    for row in reader:\n        print(row)\n",
+      "note": "csv.reader 产出的每一行都是列表，元素是字符串；需要数值时要自行转换。"
+    },
+    {
+      "type": "tip",
+      "title": "本节速记",
+      "html": "<p>r 只读、w 清空重写、a 末尾追加；read 全部、readline 一行、readlines 全部行；with 自动关闭；CSV 用 reader/writer。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0803"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0812"
+    }
+  ],
+  "keypoints": [
+    "w 模式会清空原文件，a 模式在末尾追加",
+    "readline 保留行末换行符，通常要 strip()",
+    "writelines 不会自动添加换行",
+    "with 语句结束时自动关闭文件",
+    "CSV 用 csv.reader / csv.writer 读写",
+    "二维数据是列表的列表"
+  ],
+  "pitfalls": [
+    "用 w 模式打开想保留内容的文件导致数据丢失",
+    "读取行后忘记去掉换行符，导致比较失败",
+    "认为 writelines 会自动换行",
+    "用文本模式读写二进制文件"
+  ],
+  "summary": "文件题通常结合数据处理出现：读入 → 拆分 → 计算 → 输出。牢记三种模式的区别和 with 的用法，再掌握 CSV 的读写，就能完成大多数文件操作题。"
+}

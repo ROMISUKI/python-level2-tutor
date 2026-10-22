@@ -1,0 +1,280 @@
+{
+  "exercises": [
+    {
+      "id": "e25",
+      "chapter": "ch06",
+      "title": "学生成绩分析报告",
+      "difficulty": 3,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "读入 n 个学生的姓名和成绩，输出平均分、最高分学生、最低分学生和及格人数。成绩相同时取先输入的学生。",
+      "inputSpec": "第一行一个整数 n；接下来 n 行，每行一个姓名和一个整数成绩。",
+      "outputSpec": "四行：平均分=值（保留 2 位小数）、最高分=姓名:成绩、最低分=姓名:成绩、及格人数=值。",
+      "samples": [
+        {
+          "stdin": "4\n小明 61\n小红 95\n小刚 88\n小华 76\n",
+          "stdout": "平均分=80.00\n最高分=小红:95\n最低分=小明:61\n及格人数=4\n"
+        }
+      ],
+      "tests": [
+        {
+          "name": "常规数据",
+          "stdin": "4\n小明 61\n小红 95\n小刚 88\n小华 76\n",
+          "stdout": "平均分=80.00\n最高分=小红:95\n最低分=小明:61\n及格人数=4\n"
+        },
+        {
+          "name": "有人不及格",
+          "stdin": "3\nA 50\nB 90\nC 59\n",
+          "stdout": "平均分=66.33\n最高分=B:90\n最低分=A:50\n及格人数=1\n"
+        },
+        {
+          "name": "最高分并列取先输入",
+          "stdin": "3\n甲 90\n乙 90\n丙 70\n",
+          "stdout": "平均分=83.33\n最高分=甲:90\n最低分=丙:70\n及格人数=3\n"
+        },
+        {
+          "name": "单学生",
+          "stdin": "1\n小明 100\n",
+          "stdout": "平均分=100.00\n最高分=小明:100\n最低分=小明:100\n及格人数=1\n"
+        }
+      ],
+      "starter": "n = int(input())\nstudents = []\n# 读入数据并生成分析报告\n",
+      "solution": "n = int(input())\nstudents = []\nfor _ in range(n):\n    name, score = input().split()\n    students.append((name, int(score)))\n\naverage = sum(score for _, score in students) / n\ntop = max(students, key=lambda item: item[1])\nlow = min(students, key=lambda item: item[1])\npassed = sum(1 for _, score in students if score >= 60)\n\nprint(f\"平均分={average:.2f}\")\nprint(f\"最高分={top[0]}:{top[1]}\")\nprint(f\"最低分={low[0]}:{low[1]}\")\nprint(f\"及格人数={passed}\")\n",
+      "analysis": "先读入所有学生，再用生成器表达式求总分。max/min 配合 key 取出分最高的元组，并列时返回第一个。及格人数用条件计数。",
+      "hints": [
+        "把每个学生存成 (姓名, 成绩) 元组。",
+        "max(students, key=lambda x: x[1]) 可以取出最高分学生。",
+        "及格人数可以用 sum(1 for ... if ...) 统计。"
+      ],
+      "tags": ["列表", "统计", "排序"],
+      "knowledge": ["max", "min", "生成器", "f-string"]
+    },
+    {
+      "id": "e26",
+      "chapter": "ch07",
+      "title": "词频统计 Top N",
+      "difficulty": 3,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "读入一个整数 N 和一行由空格分隔的英文单词，统计每个单词出现的次数，输出出现次数最多的前 N 个单词；次数相同按单词字典序排列。",
+      "inputSpec": "第一行一个整数 N；第二行若干个小写英文单词，用空格分隔。",
+      "outputSpec": "每行一个“单词 次数”；若不同单词不足 N 个，则全部输出。",
+      "samples": [
+        {
+          "stdin": "3\napple banana apple cherry banana apple\n",
+          "stdout": "apple 3\nbanana 2\ncherry 1\n"
+        }
+      ],
+      "tests": [
+        {
+          "name": "常规 Top3",
+          "stdin": "3\napple banana apple cherry banana apple\n",
+          "stdout": "apple 3\nbanana 2\ncherry 1\n"
+        },
+        {
+          "name": "并列按字典序",
+          "stdin": "2\nb a c a b\n",
+          "stdout": "a 2\nb 2\n"
+        },
+        {
+          "name": "N 大于单词种类",
+          "stdin": "5\none two two\n",
+          "stdout": "two 2\none 1\n"
+        },
+        {
+          "name": "全部相同",
+          "stdin": "2\nhi hi hi\n",
+          "stdout": "hi 3\n"
+        }
+      ],
+      "starter": "n = int(input())\nwords = input().split()\n# 统计词频并输出前 n 名\n",
+      "solution": "n = int(input())\nwords = input().split()\ncounts = {}\nfor word in words:\n    counts[word] = counts.get(word, 0) + 1\nitems = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))\nfor word, count in items[:n]:\n    print(word, count)\n",
+      "analysis": "先用字典累计词频，再对 items 排序。排序键 (-次数, 单词) 同时实现“次数降序、单词升序”。切片 [:n] 处理不足 N 个的情况。",
+      "hints": [
+        "用字典统计每个单词的出现次数。",
+        "sorted 的 key 可以返回 (-次数, 单词)。",
+        "输出前 N 个用切片即可，不需要额外判断。"
+      ],
+      "tags": ["字典", "排序", "词频"],
+      "knowledge": ["dict", "sorted", "lambda"]
+    },
+    {
+      "id": "e27",
+      "chapter": "ch03",
+      "title": "区间素数统计",
+      "difficulty": 3,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "读入两个正整数 a 和 b（a ≤ b），输出区间 [a, b] 内的所有素数，并统计个数。",
+      "inputSpec": "一行，两个正整数 a 和 b。",
+      "outputSpec": "第一行输出所有素数，用空格分隔；若没有素数则输出空行。第二行输出“个数=值”。",
+      "samples": [
+        { "stdin": "10 20\n", "stdout": "11 13 17 19\n个数=4\n" }
+      ],
+      "tests": [
+        { "name": "10 到 20", "stdin": "10 20\n", "stdout": "11 13 17 19\n个数=4\n" },
+        { "name": "没有素数", "stdin": "1 1\n", "stdout": "\n个数=0\n" },
+        { "name": "包含 2", "stdin": "1 5\n", "stdout": "2 3 5\n个数=3\n" },
+        { "name": "大区间", "stdin": "90 110\n", "stdout": "97 101 103 107 109\n个数=5\n" }
+      ],
+      "starter": "a, b = map(int, input().split())\n# 找出区间内的素数\n",
+      "solution": "a, b = map(int, input().split())\n\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nprimes = [n for n in range(a, b + 1) if is_prime(n)]\nprint(\" \".join(str(n) for n in primes))\nprint(f\"个数={len(primes)}\")\n",
+      "analysis": "把素数判断封装成函数，主程序用列表推导式筛选区间。区间较大时，检查到 √n 可以显著减少循环次数。",
+      "hints": [
+        "先写一个 is_prime(n) 函数。",
+        "n 小于 2 时不是素数。",
+        "用列表推导式收集区间内的素数，再输出和计数。"
+      ],
+      "tags": ["函数", "素数", "列表推导式"],
+      "knowledge": ["def", "range", "列表推导式"]
+    },
+    {
+      "id": "e28",
+      "chapter": "ch08",
+      "title": "CSV 成绩单处理",
+      "difficulty": 3,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "当前目录下有一个 scores.csv 文件，第一行是表头 name,score，之后每行是一名学生的姓名和成绩。读入该文件，输出人数、平均分和最高分学生姓名。成绩相同时取文件中靠前的学生。",
+      "inputSpec": "无需键盘输入。测试环境会提供 scores.csv。",
+      "outputSpec": "三行：人数=值、平均分=值（保留 2 位小数）、最高分=姓名。",
+      "samples": [
+        {
+          "stdin": "",
+          "stdout": "人数=3\n平均分=85.00\n最高分=小明\n",
+          "files": { "scores.csv": "name,score\n小明,92\n小红,88\n小刚,75\n" }
+        }
+      ],
+      "tests": [
+        {
+          "name": "三名学生",
+          "files": { "scores.csv": "name,score\n小明,92\n小红,88\n小刚,75\n" },
+          "stdout": "人数=3\n平均分=85.00\n最高分=小明\n"
+        },
+        {
+          "name": "最高分并列取靠前",
+          "files": { "scores.csv": "name,score\nA,90\nB,90\nC,80\n" },
+          "stdout": "人数=3\n平均分=86.67\n最高分=A\n"
+        },
+        {
+          "name": "单个学生",
+          "files": { "scores.csv": "name,score\n小明,100\n" },
+          "stdout": "人数=1\n平均分=100.00\n最高分=小明\n"
+        },
+        {
+          "name": "小数平均",
+          "files": { "scores.csv": "name,score\n甲,80\n乙,81\n丙,82\n丁,83\n" },
+          "stdout": "人数=4\n平均分=81.50\n最高分=丁\n"
+        }
+      ],
+      "starter": "import csv\n\nwith open(\"scores.csv\", \"r\", encoding=\"utf-8\", newline=\"\") as f:\n    # 读取并处理\n    pass\n",
+      "solution": "import csv\n\nwith open(\"scores.csv\", \"r\", encoding=\"utf-8\", newline=\"\") as f:\n    rows = list(csv.DictReader(f))\n\nstudents = [(row[\"name\"], int(row[\"score\"])) for row in rows]\naverage = sum(score for _, score in students) / len(students)\ntop = max(students, key=lambda item: item[1])[0]\n\nprint(f\"人数={len(students)}\")\nprint(f\"平均分={average:.2f}\")\nprint(f\"最高分={top}\")\n",
+      "analysis": "csv.DictReader 把表头作为键，每行变成字典，取值更直观。把成绩转成整数后求平均和最大值。max 在并列时返回第一个，正好满足题目要求。",
+      "hints": [
+        "csv.DictReader 会按表头读取每列。",
+        "row[\"score\"] 是字符串，需要 int() 转换。",
+        "max 可以通过 key 指定比较依据。"
+      ],
+      "tags": ["CSV", "文件", "统计"],
+      "knowledge": ["csv", "DictReader", "max"]
+    },
+    {
+      "id": "e29",
+      "chapter": "ch06",
+      "title": "矩阵乘法",
+      "difficulty": 4,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "读入矩阵 A（n 行 m 列）和矩阵 B（m 行 p 列），计算并输出它们的乘积 C = A × B（n 行 p 列）。",
+      "inputSpec": "第一行三个整数 n、m、p；接下来 n 行是矩阵 A；再接下来 m 行是矩阵 B。所有元素为整数。",
+      "outputSpec": "共 n 行，每行 p 个整数，用空格分隔。",
+      "samples": [
+        {
+          "stdin": "2 3 2\n1 2 3\n4 5 6\n7 8\n9 10\n11 12\n",
+          "stdout": "58 64\n139 154\n"
+        }
+      ],
+      "tests": [
+        {
+          "name": "2x3 乘 3x2",
+          "stdin": "2 3 2\n1 2 3\n4 5 6\n7 8\n9 10\n11 12\n",
+          "stdout": "58 64\n139 154\n"
+        },
+        {
+          "name": "单位矩阵",
+          "stdin": "2 2 2\n1 2\n3 4\n1 0\n0 1\n",
+          "stdout": "1 2\n3 4\n"
+        },
+        {
+          "name": "1x1",
+          "stdin": "1 1 1\n5\n6\n",
+          "stdout": "30\n"
+        },
+        {
+          "name": "含负数",
+          "stdin": "1 2 1\n2 -3\n4\n5\n",
+          "stdout": "-7\n"
+        }
+      ],
+      "starter": "import sys\n\ndata = sys.stdin.read().split()\n# 读取矩阵 A、B 并计算乘积\n",
+      "solution": "import sys\n\ndata = sys.stdin.read().split()\nit = iter(data)\nn = int(next(it))\nm = int(next(it))\np = int(next(it))\nA = [[int(next(it)) for _ in range(m)] for _ in range(n)]\nB = [[int(next(it)) for _ in range(p)] for _ in range(m)]\n\nfor i in range(n):\n    row = []\n    for j in range(p):\n        total = 0\n        for k in range(m):\n            total += A[i][k] * B[k][j]\n        row.append(str(total))\n    print(\" \".join(row))\n",
+      "analysis": "矩阵乘法中 C[i][j] 等于 A 的第 i 行与 B 的第 j 列对应元素乘积之和。用迭代器依次读取数据可以避免手动计算下标。",
+      "hints": [
+        "C 的第 i 行第 j 列 = A 第 i 行与 B 第 j 列的点积。",
+        "需要三重循环：i、j、k。",
+        "输出时把每个整数转成字符串再 join。"
+      ],
+      "tags": ["二维列表", "矩阵", "嵌套循环"],
+      "knowledge": ["嵌套列表", "for", "矩阵乘法"]
+    },
+    {
+      "id": "e30",
+      "chapter": "ch07",
+      "title": "成绩排名与分段统计",
+      "difficulty": 4,
+      "level": "comprehensive",
+      "points": 20,
+      "statement": "读入 n 名学生的姓名和成绩，按成绩从高到低输出名次、姓名和成绩（成绩相同名次相同，后续名次跳号），最后输出各分数段人数。",
+      "inputSpec": "第一行一个整数 n；接下来 n 行，每行一个姓名和一个整数成绩。",
+      "outputSpec": "先输出 n 行排名，每行“名次 姓名 成绩”；再输出四行：优秀=人数（≥90）、良好=人数（80-89）、及格=人数（60-79）、不及格=人数（<60）。",
+      "samples": [
+        {
+          "stdin": "4\n小明 92\n小红 95\n小刚 92\n小华 80\n",
+          "stdout": "1 小红 95\n2 小刚 92\n2 小明 92\n4 小华 80\n优秀=3\n良好=1\n及格=0\n不及格=0\n"
+        }
+      ],
+      "tests": [
+        {
+          "name": "含并列名次",
+          "stdin": "4\n小明 92\n小红 95\n小刚 92\n小华 80\n",
+          "stdout": "1 小红 95\n2 小刚 92\n2 小明 92\n4 小华 80\n优秀=3\n良好=1\n及格=0\n不及格=0\n"
+        },
+        {
+          "name": "全部同分",
+          "stdin": "3\nC 85\nA 85\nB 85\n",
+          "stdout": "1 A 85\n1 B 85\n1 C 85\n优秀=0\n良好=3\n及格=0\n不及格=0\n"
+        },
+        {
+          "name": "分数段边界",
+          "stdin": "4\nA 90\nB 80\nC 60\nD 59\n",
+          "stdout": "1 A 90\n2 B 80\n3 C 60\n4 D 59\n优秀=1\n良好=1\n及格=1\n不及格=1\n"
+        },
+        {
+          "name": "单学生",
+          "stdin": "1\n小明 100\n",
+          "stdout": "1 小明 100\n优秀=1\n良好=0\n及格=0\n不及格=0\n"
+        }
+      ],
+      "starter": "n = int(input())\nstudents = []\n# 排序、计算名次并统计分数段\n",
+      "solution": "n = int(input())\nstudents = []\nfor _ in range(n):\n    name, score = input().split()\n    students.append((name, int(score)))\n\nstudents.sort(key=lambda item: (-item[1], item[0]))\nfor name, score in students:\n    rank = 1 + sum(1 for _, other in students if other > score)\n    print(rank, name, score)\n\nranges = {\"优秀\": 0, \"良好\": 0, \"及格\": 0, \"不及格\": 0}\nfor _, score in students:\n    if score >= 90:\n        ranges[\"优秀\"] += 1\n    elif score >= 80:\n        ranges[\"良好\"] += 1\n    elif score >= 60:\n        ranges[\"及格\"] += 1\n    else:\n        ranges[\"不及格\"] += 1\n\nfor label, count in ranges.items():\n    print(f\"{label}={count}\")\n",
+      "analysis": "先按分数降序、姓名升序排序。名次等于“分数严格高于自己的人数 + 1”，并列者名次相同且后续跳号。分数段用 if-elif 从高到低判断。",
+      "hints": [
+        "先按 (-成绩, 姓名) 排序。",
+        "名次 = 比自己分数高的人数 + 1。",
+        "分数段按 90、80、60 三个边界从高到低判断。"
+      ],
+      "tags": ["排序", "排名", "统计"],
+      "knowledge": ["sort", "lambda", "if-elif-else"]
+    }
+  ]
+}

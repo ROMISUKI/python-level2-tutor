@@ -1,0 +1,374 @@
+{
+  "chapter": "ch03",
+  "questions": [
+    {
+      "id": "q0301",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "range(1, 5) 生成的整数序列是：",
+      "options": [
+        "1, 2, 3, 4, 5",
+        "0, 1, 2, 3, 4",
+        "1, 3, 5",
+        "1, 2, 3, 4"
+      ],
+      "answer": 3,
+      "explanation": "range(a, b) 从 a 开始，到 b 之前结束，不包含 b。因此生成 1、2、3、4 共 4 个整数。",
+      "tags": [
+        "range"
+      ]
+    },
+    {
+      "id": "q0302",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "下列程序的输出结果是：\nfor i in range(3):\n    print(i, end=\"\")",
+      "code": "for i in range(3):\n    print(i, end=\"\")",
+      "options": [
+        "012",
+        "123",
+        "0123",
+        "0 1 2"
+      ],
+      "answer": 0,
+      "explanation": "range(3) 生成 0、1、2；end=\"\" 取消了换行，三个数字连续输出，得到 012。",
+      "tags": [
+        "for",
+        "range",
+        "print"
+      ]
+    },
+    {
+      "id": "q0303",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nfor i in range(1, 6):\n    if i == 3:\n        break\n    print(i, end=\"\")",
+      "code": "for i in range(1, 6):\n    if i == 3:\n        break\n    print(i, end=\"\")",
+      "options": [
+        "123",
+        "12",
+        "1245",
+        "45"
+      ],
+      "answer": 1,
+      "explanation": "i 为 1、2 时正常输出；i 等于 3 时执行 break，立即结束循环，后面的 4、5 不再执行，因此输出 12。",
+      "tags": [
+        "break"
+      ]
+    },
+    {
+      "id": "q0304",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序的输出结果是：\nfor i in range(1, 6):\n    if i % 2 == 0:\n        continue\n    print(i, end=\"\")",
+      "code": "for i in range(1, 6):\n    if i % 2 == 0:\n        continue\n    print(i, end=\"\")",
+      "options": [
+        "12345",
+        "246",
+        "135",
+        "13"
+      ],
+      "answer": 2,
+      "explanation": "continue 跳过本次循环剩余语句。偶数 2、4 被跳过，只输出奇数 1、3、5。",
+      "tags": [
+        "continue"
+      ]
+    },
+    {
+      "id": "q0305",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "关于 if-elif-else 多分支结构，下列说法正确的是：",
+      "options": [
+        "所有条件成立的分支都会执行",
+        "else 分支一定会执行",
+        "elif 可以单独使用，不需要 if",
+        "从上到下判断，最多只有一个分支被执行"
+      ],
+      "answer": 3,
+      "explanation": "多分支按顺序判断，遇到第一个成立的条件就执行对应语句块，然后跳出整个结构，因此最多执行一个分支。elif 必须跟在 if 后面。",
+      "tags": [
+        "if",
+        "多分支"
+      ]
+    },
+    {
+      "id": "q0306",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "已知 x = 7，表达式 \"奇数\" if x % 2 else \"偶数\" 的值是：",
+      "options": [
+        "\"奇数\"",
+        "\"偶数\"",
+        "True",
+        "7"
+      ],
+      "answer": 0,
+      "explanation": "条件表达式格式为 A if 条件 else B。x % 2 等于 1，为真，所以取 A，即 \"奇数\"。",
+      "tags": [
+        "条件表达式"
+      ]
+    },
+    {
+      "id": "q0307",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "执行下列程序后，count 的值是：\ncount = 0\nfor i in range(3):\n    for j in range(2):\n        count += 1",
+      "code": "count = 0\nfor i in range(3):\n    for j in range(2):\n        count += 1\nprint(count)",
+      "options": [
+        "3",
+        "6",
+        "5",
+        "9"
+      ],
+      "answer": 1,
+      "explanation": "外层循环 3 次，每次内层循环 2 次，总共执行 3 × 2 = 6 次，count 累加 6 次。",
+      "tags": [
+        "嵌套循环"
+      ]
+    },
+    {
+      "id": "q0308",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "执行下列程序，输出结果是：\ntotal = 0\nfor i in range(1, 101):\n    total += i\nprint(total)",
+      "code": "total = 0\nfor i in range(1, 101):\n    total += i\nprint(total)",
+      "options": [
+        "4950",
+        "10000",
+        "5050",
+        "10100"
+      ],
+      "answer": 2,
+      "explanation": "range(1, 101) 包含 1 到 100，累加结果为 100 × 101 / 2 = 5050。",
+      "tags": [
+        "累加",
+        "range"
+      ]
+    },
+    {
+      "id": "q0309",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "range(1, 10, 3) 生成的整数序列是：",
+      "options": [
+        "1, 2, 3",
+        "1, 4, 7, 10",
+        "3, 6, 9",
+        "1, 4, 7"
+      ],
+      "answer": 3,
+      "explanation": "从 1 开始，每次增加 3，且小于 10：1、4、7。下一个 10 不满足小于 10，因此不包含。",
+      "tags": [
+        "range",
+        "步长"
+      ]
+    },
+    {
+      "id": "q0310",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序执行后，输出结果是：\ni = 1\nwhile i <= 5:\n    i += 2\nprint(i)",
+      "code": "i = 1\nwhile i <= 5:\n    i += 2\nprint(i)",
+      "options": [
+        "7",
+        "5",
+        "6",
+        "1"
+      ],
+      "answer": 0,
+      "explanation": "i 依次变为 3、5、7。当 i=7 时条件 7<=5 不成立，循环结束，此时 i 的值是 7。",
+      "tags": [
+        "while"
+      ]
+    },
+    {
+      "id": "q0311",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "关于循环的 else 子句，下列说法正确的是：",
+      "options": [
+        "循环体一次都不执行时才运行 else",
+        "循环正常结束、没有被 break 中断时运行 else",
+        "循环被 break 中断时运行 else",
+        "for 循环不能带 else"
+      ],
+      "answer": 1,
+      "explanation": "for-else 和 while-else 中的 else 在循环正常结束（未执行 break）时运行。若被 break 提前中断，else 不执行。",
+      "tags": [
+        "for-else",
+        "break"
+      ]
+    },
+    {
+      "id": "q0312",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序运行后，输出结果是：\nn = 10\nwhile n > 0:\n    n -= 3\n    print(n, end=\" \")",
+      "code": "n = 10\nwhile n > 0:\n    n -= 3\n    print(n, end=\" \")",
+      "options": [
+        "10 7 4 1",
+        "7 4 1",
+        "7 4 1 -2",
+        "10 7 4"
+      ],
+      "answer": 2,
+      "explanation": "每轮先减 3 再输出：n=7、4、1、-2。n=-2 时条件不再成立，循环结束，因此输出 7 4 1 -2。",
+      "tags": [
+        "while",
+        "输出"
+      ]
+    },
+    {
+      "id": "q0313",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "执行下列程序，输出结果是：\ns = 0\nfor i in range(1, 10):\n    if i % 3 == 0:\n        continue\n    s += i\nprint(s)",
+      "code": "s = 0\nfor i in range(1, 10):\n    if i % 3 == 0:\n        continue\n    s += i\nprint(s)",
+      "options": [
+        "45",
+        "18",
+        "12",
+        "27"
+      ],
+      "answer": 3,
+      "explanation": "1 到 9 的总和是 45，其中 3、6、9 被 continue 跳过，减去 18，结果为 27。",
+      "tags": [
+        "continue",
+        "累加"
+      ]
+    },
+    {
+      "id": "q0314",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序的功能是：\nn = 17\nfor i in range(2, n):\n    if n % i == 0:\n        print(\"不是素数\")\n        break\nelse:\n    print(\"是素数\")",
+      "code": "n = 17\nfor i in range(2, n):\n    if n % i == 0:\n        print(\"不是素数\")\n        break\nelse:\n    print(\"是素数\")",
+      "options": [
+        "判断 n 是否为素数",
+        "求 n 的因数个数",
+        "求 1 到 n 的和",
+        "判断 n 是否为偶数"
+      ],
+      "answer": 0,
+      "explanation": "程序尝试用 2 到 n-1 的整数去除 n，若存在因数则不是素数并 break；若循环完整结束都没有因数，else 输出是素数。",
+      "tags": [
+        "素数",
+        "for-else"
+      ]
+    },
+    {
+      "id": "q0315",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "执行完下列循环后，变量 ch 的值是：\nfor ch in \"abc\":\n    pass",
+      "code": "for ch in \"abc\":\n    pass\nprint(ch)",
+      "options": [
+        "a",
+        "c",
+        "b",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "循环变量在循环结束后仍然存在，保存最后一次取到的值，因此 ch 是 \"c\"。",
+      "tags": [
+        "for",
+        "循环变量"
+      ]
+    },
+    {
+      "id": "q0316",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序输出结果是：\nnum = 1234\nwhile num > 0:\n    print(num % 10, end=\"\")\n    num //= 10",
+      "code": "num = 1234\nwhile num > 0:\n    print(num % 10, end=\"\")\n    num //= 10",
+      "options": [
+        "1234",
+        "432",
+        "4321",
+        "123"
+      ],
+      "answer": 2,
+      "explanation": "num % 10 每次取出当前个位，num //= 10 去掉个位，因此依次输出 4、3、2、1，得到 4321。",
+      "tags": [
+        "while",
+        "数字拆分"
+      ]
+    },
+    {
+      "id": "q0317",
+      "chapter": "ch03",
+      "difficulty": 1,
+      "stem": "判断整数 x 是偶数的条件表达式，正确的是：",
+      "options": [
+        "x % 2 = 0",
+        "x / 2 == 0",
+        "x // 2 == 0",
+        "x % 2 == 0"
+      ],
+      "answer": 3,
+      "explanation": "判断相等要用 ==。x % 2 == 0 表示 x 除以 2 的余数为 0，即偶数。单个 = 是赋值，会导致语法错误。",
+      "tags": [
+        "条件",
+        "运算符"
+      ]
+    },
+    {
+      "id": "q0318",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "执行下列程序，输出结果是：\nfor i in range(1, 4):\n    for j in range(1, 4):\n        if j == 2:\n            break\n        print(i, j)",
+      "code": "for i in range(1, 4):\n    for j in range(1, 4):\n        if j == 2:\n            break\n        print(i, j)",
+      "options": [
+        "输出 3 行",
+        "输出 6 行",
+        "输出 9 行",
+        "只输出 1 行"
+      ],
+      "answer": 0,
+      "explanation": "内层循环 j 从 1 开始，输出 (i,1) 后 j 变成 2，触发 break 跳出内层；外层 i 有 3 个值，因此共输出 3 行。break 只跳出内层循环。",
+      "tags": [
+        "嵌套循环",
+        "break"
+      ]
+    },
+    {
+      "id": "q0319",
+      "chapter": "ch03",
+      "difficulty": 3,
+      "stem": "下列程序用于输出 100 到 999 之间的水仙花数。横线处应填入：\nfor n in range(100, 1000):\n    a = n // 100\n    b = ____\n    c = n % 10\n    if a**3 + b**3 + c**3 == n:\n        print(n)",
+      "code": "for n in range(100, 1000):\n    a = n // 100\n    b = (n // 10) % 10\n    c = n % 10\n    if a**3 + b**3 + c**3 == n:\n        print(n, end=\" \")",
+      "options": [
+        "n % 10",
+        "(n // 10) % 10",
+        "n // 10",
+        "n % 100"
+      ],
+      "answer": 1,
+      "explanation": "水仙花数各位数字的立方和等于自身。a 是百位，c 是个位，b 应是十位：先 n // 10 去掉个位，再 % 10 取末位。",
+      "tags": [
+        "水仙花数",
+        "数字拆分"
+      ]
+    },
+    {
+      "id": "q0320",
+      "chapter": "ch03",
+      "difficulty": 2,
+      "stem": "下列程序执行后，输出结果是：\nx = 5\nwhile x:\n    print(x, end=\"\")\n    x -= 1",
+      "code": "x = 5\nwhile x:\n    print(x, end=\"\")\n    x -= 1",
+      "options": [
+        "43210",
+        "543210",
+        "54321",
+        "无限循环"
+      ],
+      "answer": 2,
+      "explanation": "非零整数在条件中视为 True。x 依次为 5、4、3、2、1 并输出，减到 0 时条件为假，循环结束。",
+      "tags": [
+        "while",
+        "真假值"
+      ]
+    }
+  ]
+}

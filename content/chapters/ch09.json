@@ -1,0 +1,140 @@
+{
+  "id": "ch09",
+  "module": "m4",
+  "order": 9,
+  "title": "标准库：turtle、random、time",
+  "subtitle": "绘图、随机数与时间处理",
+  "minutes": 45,
+  "objectives": [
+    "了解 turtle 库的坐标体系和常用绘图函数",
+    "掌握 random 库的随机数生成函数",
+    "掌握 time 库的时间获取、格式化与计时",
+    "能读懂使用标准库的短程序",
+    "了解 math、datetime 等常用标准库"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "9.1 turtle 库概述",
+      "html": "<p>turtle（海龟绘图）是 Python 标准库中的绘图模块。画布中心是坐标原点 (0, 0)，x 轴向右为正，y 轴向上为正。海龟有一个位置和一个朝向，通过前进、转向、抬笔、落笔等命令绘制图形。</p><p>使用前先 <code>import turtle</code>，结束时通常调用 <code>turtle.done()</code> 让窗口保持显示。</p>"
+    },
+    {
+      "type": "table",
+      "title": "turtle 常用函数",
+      "head": ["函数", "作用"],
+      "rows": [
+        ["forward(d) / fd(d)", "沿当前方向前进 d 像素"],
+        ["backward(d)", "后退 d 像素"],
+        ["right(angle) / left(angle)", "向右/向左转 angle 度"],
+        ["goto(x, y)", "移动到坐标 (x, y)"],
+        ["penup() / pendown()", "抬笔（移动不留痕）/ 落笔"],
+        ["pensize(w)", "设置画笔宽度"],
+        ["pencolor(color)", "设置画笔颜色"],
+        ["fillcolor(color)", "设置填充颜色"],
+        ["begin_fill() / end_fill()", "开始填充 / 结束填充"],
+        ["circle(r, extent)", "画半径为 r、角度为 extent 的圆弧"],
+        ["done()", "结束绘图，保持窗口"],
+        ["speed(n)", "设置绘制速度，0 最快"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "画一个正方形",
+      "code": "import turtle\n\nturtle.pensize(3)\nturtle.pencolor(\"blue\")\nfor i in range(4):\n    turtle.forward(100)\n    turtle.right(90)\nturtle.done()\n",
+      "note": "正方形每条边 100 像素，每次右转 90 度，循环 4 次回到起点。绘图程序运行后会弹出窗口，需手动关闭。",
+      "run": false
+    },
+    {
+      "type": "code",
+      "title": "画填充圆",
+      "code": "import turtle\n\nturtle.fillcolor(\"orange\")\nturtle.begin_fill()\nturtle.circle(60)\nturtle.end_fill()\nturtle.done()\n",
+      "note": "circle(60) 以海龟当前位置为起点画半径为 60 的圆。begin_fill 与 end_fill 之间的图形会被填充。",
+      "run": false
+    },
+    {
+      "type": "tip",
+      "title": "turtle 考点",
+      "html": "<p>考试一般不会要求完整默写绘图程序，而是给出代码判断图形或填空。重点记住：forward 前进、right 顺时针转、circle 画圆、penup/pendown 控制痕迹、begin_fill/end_fill 填充。</p>"
+    },
+    {
+      "type": "text",
+      "title": "9.2 random 库",
+      "html": "<p>random 库用于生成伪随机数。常用函数：</p><ul><li><code>random.random()</code>：生成 [0.0, 1.0) 之间的浮点数；</li><li><code>random.randint(a, b)</code>：生成 [a, b] 之间的整数，<strong>包含 b</strong>；</li><li><code>random.randrange(a, b, step)</code>：生成 [a, b) 之间的整数，<strong>不包含 b</strong>；</li><li><code>random.uniform(a, b)</code>：生成 [a, b] 之间的浮点数；</li><li><code>random.choice(seq)</code>：从序列中随机选一个元素；</li><li><code>random.sample(seq, k)</code>：不重复地随机选取 k 个元素，返回列表；</li><li><code>random.shuffle(lst)</code>：原地打乱列表，返回 None；</li><li><code>random.seed(n)</code>：设置随机种子，使结果可复现。</li></ul>"
+    },
+    {
+      "type": "code",
+      "title": "random 常用操作",
+      "code": "import random\n\nrandom.seed(1)              # 固定种子，便于复现\nprint(random.randint(1, 10))    # 1 到 10，包含 10\nprint(random.randrange(1, 10))  # 1 到 9，不包含 10\nprint(random.choice(\"abc\"))\nprint(random.sample([1, 2, 3, 4], 2))\n\nlst = [1, 2, 3, 4]\nresult = random.shuffle(lst)\nprint(result)   # None\nprint(lst)      # 顺序已被打乱\n",
+      "note": "shuffle 是原地打乱，不要写 lst = random.shuffle(lst)，否则 lst 会变成 None。"
+    },
+    {
+      "type": "warn",
+      "title": "randint 与 randrange 的边界",
+      "html": "<p><code>randint(1, 10)</code> 可能取到 1 和 10；<code>randrange(1, 10)</code> 只取 1 到 9。考试常在这里设置陷阱，看到“包含/不包含右端点”要立刻警觉。</p>"
+    },
+    {
+      "type": "text",
+      "title": "9.3 time 库",
+      "html": "<p>time 库提供时间获取、格式化和延时功能：</p><ul><li><code>time.time()</code>：返回当前时间戳（从 1970-01-01 起的秒数，浮点数），常用来计算程序耗时；</li><li><code>time.ctime()</code>：返回可读的时间字符串；</li><li><code>time.localtime()</code>：返回本地时间的结构体；</li><li><code>time.strftime(format, t)</code>：把时间结构格式化为字符串；</li><li><code>time.strptime(s, format)</code>：把字符串按格式解析为时间结构；</li><li><code>time.sleep(sec)</code>：暂停 sec 秒；</li><li><code>time.perf_counter()</code>：高精度计时器，适合测性能。</li></ul>"
+    },
+    {
+      "type": "table",
+      "title": "strftime 常用格式符",
+      "head": ["格式符", "含义", "示例"],
+      "rows": [
+        ["%Y", "四位年份", "2026"],
+        ["%m", "两位月份", "10"],
+        ["%d", "两位日期", "20"],
+        ["%H", "24 小时制小时", "14"],
+        ["%M", "分钟", "05"],
+        ["%S", "秒", "30"],
+        ["%A", "星期几（英文）", "Tuesday"]
+      ]
+    },
+    {
+      "type": "code",
+      "title": "时间格式化与计时",
+      "code": "import time\n\nnow = time.localtime()\nprint(time.strftime(\"%Y-%m-%d %H:%M:%S\", now))\nprint(f\"{now.tm_year}年{now.tm_mon:02d}月{now.tm_mday:02d}日\")\n\nstart = time.perf_counter()\ntime.sleep(0.1)\nend = time.perf_counter()\nprint(round(end - start, 2))   # 约 0.10\n",
+      "note": "strftime 的第一参数是格式字符串，第二参数是时间结构；不传第二参数时默认使用当前时间。格式字符串里的非 ASCII 字符在部分系统上会因本地编码报错，中文建议在 Python 层拼接。"
+    },
+    {
+      "type": "text",
+      "title": "9.4 其他常用标准库",
+      "html": "<p><code>math</code> 提供数学函数：<code>math.sqrt(16)</code> 得 4.0，<code>math.pi</code> 是圆周率，<code>math.ceil(3.2)</code> 得 4，<code>math.floor(3.8)</code> 得 3。<code>datetime</code> 提供日期时间类型，可用于日期加减、格式化等操作。</p><p>标准库随 Python 一起安装，直接用 <code>import 模块名</code> 即可，不需要额外安装。</p>"
+    },
+    {
+      "type": "code",
+      "title": "math 与 datetime",
+      "code": "import math\nfrom datetime import datetime, timedelta\n\nprint(math.sqrt(16), math.ceil(3.2), math.floor(3.8))\nprint(round(math.pi, 4))          # 3.1416\n\ntoday = datetime(2026, 10, 20)\nprint(today.strftime(\"%Y/%m/%d\"))  # 2026/10/20\nprint(today + timedelta(days=10))   # 2026-10-30 00:00:00\n",
+      "note": "from datetime import datetime 导入的是类，不是模块，调用方式为 datetime(...)。"
+    },
+    {
+      "type": "tip",
+      "title": "本节速记",
+      "html": "<p>turtle 前进 forward、右转 right、画圆 circle；random 的 randint 含右端点、randrange 不含；time.time 是时间戳，strftime 格式化，sleep 延时。</p>"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0904"
+    },
+    {
+      "type": "quiz",
+      "qid": "q0911"
+    }
+  ],
+  "keypoints": [
+    "turtle 原点在画布中心，right 是顺时针转",
+    "randint(a,b) 包含 b，randrange(a,b) 不包含 b",
+    "shuffle 原地打乱并返回 None",
+    "time.time() 返回时间戳，用于计算耗时",
+    "strftime 把时间格式化为字符串，strptime 相反",
+    "标准库无需安装，直接 import"
+  ],
+  "pitfalls": [
+    "把 random.shuffle 的返回值赋给列表",
+    "认为 randrange(1,10) 能取到 10",
+    "混淆 strftime 与 strptime 的方向",
+    "把 turtle.right 当成逆时针转"
+  ],
+  "summary": "标准库题以“读程序写结果”和“函数用途匹配”为主。记住每个库最常用的几个函数及其边界，就足以应付选择题。"
+}
