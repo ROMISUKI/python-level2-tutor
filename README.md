@@ -84,9 +84,12 @@ android\build\Python二级通关.apk
 
 ```text
 PythonLevel2Tutor-v1.0.0-win64.zip
+PythonLevel2Tutor-v1.0.0-android.apk
 ```
 
-解压后运行 `Python二级通关.exe`。首次启动会引导设置考试日期和每日练习目标。
+Windows 包解压后运行 `Python二级通关.exe`。首次启动会引导设置考试日期和每日练习目标。
+
+Android 包直接传到手机安装；首次安装需在系统设置中允许「安装未知来源应用」。SHA256 见 Release 中的 `.sha256` 文件。
 
 学习数据保存在：
 
