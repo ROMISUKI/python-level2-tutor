@@ -1125,28 +1125,57 @@ export const api = {
       version: VERSION,
       exported_at: nowISO(),
       settings: { ...db.settings },
-      qstate: db.qstate,
+      qstate: Object.values(db.qstate),
       attempts: db.attempts,
-      exstate: db.exstate,
-      exams: db.exams,
-      study_days: db.study_days,
-      chapter_progress: db.chapter_progress,
+      exstate: Object.values(db.exstate),
+      exams: db.exams.map((exam) => ({
+        ...exam,
+        detail: exam.detail ? JSON.stringify(exam.detail) : exam.detail,
+      })),
+      study_days: Object.entries(db.study_days).map(([day, row]) => ({
+        day,
+        seconds: row.seconds || 0,
+        answered: row.answered || 0,
+        correct: row.correct || 0,
+      })),
+      chapter_progress: Object.entries(db.chapter_progress).map(([cid, row]) => ({
+        cid,
+        read_at: row.read_at || null,
+        read_seconds: row.read_seconds || 0,
+        last_section: row.last_section || 0,
+      })),
     };
   },
 
   async importData(payload) {
     if (payload?.app !== "PythonLevel2Tutor") throw new Error("不是本程序导出的备份文件");
     await ensureContent();
+    const toObject = (value, key) => {
+      if (Array.isArray(value)) {
+        return Object.fromEntries(value.filter((row) => row && row[key]).map((row) => [row[key], row]));
+      }
+      return value || {};
+    };
+    const parseExam = (exam) => {
+      if (exam && typeof exam.detail === "string") {
+        try {
+          return { ...exam, detail: JSON.parse(exam.detail) };
+        } catch {
+          return { ...exam, detail: null };
+        }
+      }
+      return exam;
+    };
     db = {
       ...defaultDb(),
       ...payload,
       settings: { ...DEFAULT_SETTINGS, ...(payload.settings || {}) },
-      qstate: payload.qstate || {},
+      qstate: toObject(payload.qstate, "qid"),
       attempts: payload.attempts || [],
-      exstate: payload.exstate || {},
-      exams: payload.exams || [],
-      study_days: payload.study_days || {},
-      chapter_progress: payload.chapter_progress || {},
+      exstate: toObject(payload.exstate, "eid"),
+      exams: (payload.exams || []).map(parseExam),
+      study_days: toObject(payload.study_days, "day"),
+      chapter_progress: toObject(payload.chapter_progress, "cid"),
     };
     persist();
     return { ok: true };
