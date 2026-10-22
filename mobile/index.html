@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Python 二级">
+  <title>Python 二级通关</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./vendor/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/mobile.css">
+</head>
+<body>
+  <div class="app mobile-app">
+    <header class="mobile-top">
+      <button class="mobile-icon-btn" id="mobile-back" aria-label="返回" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      </button>
+      <div class="mobile-title" id="mobile-title">Python 二级通关</div>
+      <a class="mobile-icon-btn" href="#/settings" aria-label="设置">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>
+      </a>
+    </header>
+
+    <main class="main" id="main">
+      <div class="view" id="view" aria-live="polite"></div>
+    </main>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="主导航"></nav>
+  </div>
+
+  <div class="toast-root" id="toast-root"></div>
+  <div class="modal-root" id="modal-root"></div>
+
+  <script src="./vendor/codemirror/lib/codemirror.js"></script>
+  <script src="./vendor/codemirror/mode/python/python.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

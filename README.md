@@ -34,6 +34,22 @@
 | --- | --- |
 | ![考试](docs/screenshots/exam-result.png) | ![统计](docs/screenshots/stats.png) |
 
+## 手机版（PWA）
+
+同一套课程、题库、错题本、模考和统计，已提供可安装的手机版：
+
+```text
+https://romisuki.github.io/python-level2-tutor/
+```
+
+- **Android / Chrome**：打开后点右上角菜单 → “安装应用”或“添加到主屏幕”。
+- **iPhone / Safari**：点底部分享按钮 → “添加到主屏幕”。
+- 安装后以独立窗口启动，课程和题库离线可用；代码题使用浏览器内的 Python 运行时（Pyodide），首次运行需加载约 13 MB。
+
+| 手机首页 | 手机答题 |
+| --- | --- |
+| ![手机首页](docs/mobile-screenshots/home.png) | ![手机答题](docs/mobile-screenshots/practice.png) |
+
 ## 下载使用
 
 从 [Releases](https://github.com/ROMISUKI/python-level2-tutor/releases) 下载：
