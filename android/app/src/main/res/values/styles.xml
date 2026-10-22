@@ -6,6 +6,7 @@
         <item name="android:navigationBarColor">@color/app_nav</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
         <item name="android:colorAccent">@color/app_primary</item>
     </style>
 </resources>
